@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "conflict-files-obsidian-git.md",
+                "file": "ss.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "conflict-files-obsidian-git"
+              "title": "ss"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "conflict-files-obsidian-git.md",
+                "file": "ss.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура conflict-files-obsidian-git"
+              "title": "Структура ss"
             }
           }
         ],
@@ -172,9 +172,11 @@
   },
   "active": "2461d0a8530dbf0f",
   "lastOpenFiles": [
-    "жопа.md",
-    "conflict-files-obsidian-git.md",
+    "Linux.md",
+    "ss.md",
     "Промт для чатагпт.md",
+    "conflict-files-obsidian-git.md",
+    "жопа.md",
     "Labs writeups/Easy Labs/U. I. High School.md"
   ]
 }
