@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "жопа.md",
+                "file": "Linux.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "жопа"
+              "title": "Linux"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "жопа.md",
+                "file": "Linux.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура жопа"
+              "title": "Структура Linux"
             }
           }
         ],
@@ -172,8 +172,11 @@
   },
   "active": "00d142caf37df4ed",
   "lastOpenFiles": [
-    "жопа.md",
     "Промт для чатагпт.md",
+    "conflict-files-obsidian-git.md",
+    "жопа.md",
+    "Без названия.base",
+    "Без названия 1.base",
     "Labs writeups/Easy Labs/U. I. High School.md"
   ]
 }
