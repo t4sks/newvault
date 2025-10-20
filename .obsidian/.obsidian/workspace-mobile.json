@@ -1,0 +1,152 @@
+{
+  "main": {
+    "id": "5ca0b05efc2108e5",
+    "type": "split",
+    "children": [
+      {
+        "id": "1c77a87f30b3334a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "edfba10659faaf6b",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "Новая вкладка"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bf403753cd7e9d6d",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "1b1fe2844bf87efd",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "alphabetical",
+            "autoReveal": false
+          },
+          "icon": "lucide-folder-closed",
+          "title": "Файловый менеджер"
+        }
+      },
+      {
+        "id": "adef3aaffdd64c61",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          },
+          "icon": "lucide-search",
+          "title": "Поиск"
+        }
+      },
+      {
+        "id": "c3f4d8c76a85e11a",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-tags",
+          "title": "Теги"
+        }
+      },
+      {
+        "id": "73d016bef8dce024",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {},
+          "icon": "lucide-bookmark",
+          "title": "Закладки"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "eceb9f7e65f9ab2b",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "780c8b43aa778f8f",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-coming-in",
+          "title": "Обратные ссылки"
+        }
+      },
+      {
+        "id": "bb71c019448bbb76",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-going-out",
+          "title": "Исходящие ссылки"
+        }
+      },
+      {
+        "id": "f16c427478917e48",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "followCursor": false,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-list",
+          "title": "Структура"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "bases:Создать новую базу": false
+    }
+  },
+  "active": "edfba10659faaf6b",
+  "lastOpenFiles": []
+}
