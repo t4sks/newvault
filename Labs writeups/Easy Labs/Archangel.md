@@ -43,8 +43,18 @@ results:
 ```shell
 
 ```
-we find endpoints `test.php` 
+we find endpoints `robots.txt` `test.php` 
+`robots.txt`:
+![[Pasted image 20251021180716.png]]
+we find endpoint `test.php agian`
 ![[Pasted image 20251021133706.png]]
 we have button and nothing interesting in html or another data, lets click
 ![[Pasted image 20251021134016.png]]
-we find new endpoint with strange way, must explorer more
+we find new endpoint with strange way, must explorer more because "Control is an ilussion"
+try ti get a cod of mrrobots.php
+```URL
+
+http://
+
+```
+
