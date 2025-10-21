@@ -37,10 +37,11 @@ firs domen what i saw it's in mail mafialive.thm, add in `/etc/hosts`
 ![[Pasted image 20251021132655.png]]
 next lets check this endpoint with feroxbuster 
 ```shell
-
+feroxbuster -u http://mafialive.thm/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html,txt,bak,zip,tar,conf,inc -t 200 -s 200,204,301,302,403
 ```
 results:
 ```shell
+
 ```
 we find endpoints `test.php` 
 ![[Pasted image 20251021133706.png]]
