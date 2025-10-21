@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ss.md",
+                "file": "Labs writeups/Easy Labs/Archangel.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ss"
+              "title": "Archangel"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "ss.md",
+                "file": "Labs writeups/Easy Labs/Archangel.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура ss"
+              "title": "Структура Archangel"
             }
           }
         ],
@@ -172,11 +172,12 @@
   },
   "active": "2461d0a8530dbf0f",
   "lastOpenFiles": [
+    "Labs writeups/Easy Labs/U. I. High School.md",
+    "ss.md",
+    "Tools/Github programs Linux.md",
     "Linux.md",
     "Промт для чатагпт.md",
-    "ss.md",
     "conflict-files-obsidian-git.md",
-    "жопа.md",
-    "Labs writeups/Easy Labs/U. I. High School.md"
+    "жопа.md"
   ]
 }
