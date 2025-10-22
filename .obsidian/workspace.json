@@ -20,6 +20,20 @@
               "icon": "lucide-file",
               "title": "Archangel"
             }
+          },
+          {
+            "id": "0139b8b8316c4bed",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Labs writeups/Easy Labs/Archangel.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Archangel"
+            }
           }
         ]
       }
@@ -172,21 +186,30 @@
   },
   "active": "2461d0a8530dbf0f",
   "lastOpenFiles": [
+    "Tools/Shells.md",
+    "Labs writeups/Easy Labs/Archangel.md",
+    "Theory/links on useful data.md",
+    "Tools/Check if suck.md",
+    "images/Pasted image 20251022173325.png",
+    "images/Pasted image 20251022172704.png",
+    "images/Pasted image 20251022172531.png",
+    "images/Pasted image 20251022181738.png",
+    "images/Pasted image 20251022181711.png",
+    "images/Pasted image 20251022175542.png",
+    "images/Pasted image 20251022174838.png",
+    "images/Pasted image 20251022174724.png",
+    "images/Pasted image 20251022173730.png",
+    "images/Pasted image 20251022173643.png",
+    "Tools/Scripts for Escalate.md",
+    "Tools/SSTIMap.md",
+    "Tools/HashCat.md",
+    "Tools/GoBuster.md",
+    "Tools/Github programs Linux.md",
+    "Tools/ffuf.md",
+    "Tools/Feroxbuster.md",
     "Labs writeups/Easy Labs/Picle Rick.md",
     "Labs writeups/Easy Labs/U. I. High School.md",
-    "Pasted image 20251021183733.png",
-    "images/Pasted image 20251021183733.png",
-    "images/Pasted image 20251021180716.png",
-    "Pasted image 20251021134016.png",
-    "Pasted image 20251021133706.png",
-    "Pasted image 20251021131422.png",
-    "Pasted image 20251021130511.png",
-    "Labs writeups/Easy Labs/Archangel.md",
-    "Pasted image 20251021132655.png",
-    "Pasted image 20251021180716.png",
-    "Tools/Feroxbuster.md",
     "ss.md",
-    "Tools/Github programs Linux.md",
     "Linux.md",
     "Промт для чатагпт.md",
     "conflict-files-obsidian-git.md",
