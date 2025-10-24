@@ -35,8 +35,7 @@
               "title": "HashCat"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -124,13 +123,46 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tools/HashCat.md",
+                "file": "Tools/Shells.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура HashCat"
+              "title": "Структура Shells"
+            }
+          },
+          {
+            "id": "ce1de84b4dac3ddc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Tools/Shells.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Обратные ссылки для Shells"
+            }
+          },
+          {
+            "id": "8fb9c258f1e70d5a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Tools/Shells.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Исходящие ссылки из Shells"
             }
           }
         ]
@@ -152,10 +184,10 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "62e2fd39e79137c2",
+  "active": "5943ba0a989c8890",
   "lastOpenFiles": [
-    "Tools/John the ripper.md",
     "Tools/HashCat.md",
+    "Tools/John the ripper.md",
     "Tools/Github programs Linux.md",
     "Tools/Сканеры/Feroxbuster.md",
     "Labs writeups/Easy Labs/GLITCH.md",
