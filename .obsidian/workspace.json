@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Сканеры/Feroxbuster.md",
+                "file": "Tools/HashCat.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Feroxbuster"
+              "title": "HashCat"
             }
           }
         ],
@@ -104,39 +104,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "40b0e50c507d5da0",
-            "type": "leaf",
-            "state": {
-              "type": "backlink",
-              "state": {
-                "file": "ваыф.md",
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical",
-                "showSearch": false,
-                "searchQuery": "",
-                "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-coming-in",
-              "title": "Обратные ссылки для ваыф"
-            }
-          },
-          {
-            "id": "0f16203533e74f3b",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "file": "ваыф.md",
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              },
-              "icon": "links-going-out",
-              "title": "Исходящие ссылки из ваыф"
-            }
-          },
-          {
             "id": "f1a0fc1c6fb8753b",
             "type": "leaf",
             "state": {
@@ -157,21 +124,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Tools/Сканеры/Feroxbuster.md",
+                "file": "Tools/HashCat.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Структура Feroxbuster"
+              "title": "Структура HashCat"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -187,6 +154,10 @@
   },
   "active": "62e2fd39e79137c2",
   "lastOpenFiles": [
+    "Tools/John the ripper.md",
+    "Tools/HashCat.md",
+    "Tools/Github programs Linux.md",
+    "Tools/Сканеры/Feroxbuster.md",
     "Labs writeups/Easy Labs/GLITCH.md",
     "Tools/Shells.md",
     "Theory/usage find in linux.md",
@@ -195,15 +166,12 @@
     "Pasted image 20251023233519.png",
     "Pasted image 20251023233438.png",
     "Tools/Scripts for Escalate.md",
-    "Tools/HashCat.md",
-    "Tools/Github programs Linux.md",
     "Tools/NetCat.md",
     "images/Pasted image 20251023211633.png",
     "images/Pasted image 20251023214912.png",
     "images/Pasted image 20251023212645.png",
     "images/Pasted image 20251023212449.png",
     "images/Pasted image 20251023212346.png",
-    "Tools/Сканеры/Feroxbuster.md",
     "Labs writeups/Easy Labs/Archangel.md",
     "images/Pasted image 20251023210326.png",
     "images/Pasted image 20251023211007.png",
