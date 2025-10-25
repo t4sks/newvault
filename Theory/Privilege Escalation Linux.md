@@ -153,6 +153,7 @@ after this stepe u can log in `su mamotrax`
 how to find capabilites: 
 ```shell
 getcap -r / 2>/dev/null   # find capabilities in system
+find / -perm -4000 2>/dev/null
 ```
 <mark style="background: #FFF3A3A6;">example</mark> with vim:
 1. find whit vim use capability: 

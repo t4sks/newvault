@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/Easy Labs/Archangel.md",
+                "file": "Theory/Privilege Escalation Linux.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Archangel"
+              "title": "Privilege Escalation Linux"
             }
           },
           {
@@ -186,15 +186,16 @@
   },
   "active": "5943ba0a989c8890",
   "lastOpenFiles": [
+    "Tools/Shells.md",
+    "Theory/Privilege Escalation Linux.md",
+    "Labs writeups/Easy Labs/Archangel.md",
     "Labs writeups/Easy Labs/GLITCH.md",
     "Labs writeups/Easy Labs/Picle Rick.md",
     "Labs writeups/Easy Labs/U. I. High School.md",
-    "Labs writeups/Easy Labs/Archangel.md",
     "images/Pasted image 20251023234150.png",
     "Tools/Сканеры/ffuf.md",
     "Tools/Searchsploit.md",
     "Tools/Wappalyzer.md",
-    "Tools/Shells.md",
     "Tools/HashCat.md",
     "Tools/John the ripper.md",
     "Tools/Github programs Linux.md",
@@ -221,7 +222,6 @@
     "Tools/Check if suck.md",
     "Theory/Usage find in Windows.md",
     "Theory/Sites what can help when u hacking something.md",
-    "Theory/Privilege Escalation Windows.md",
-    "Theory/Privilege Escalation Linux.md"
+    "Theory/Privilege Escalation Windows.md"
   ]
 }
