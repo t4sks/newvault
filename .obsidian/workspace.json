@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/Easy Labs/Publisher.md",
+                "file": "Labs writeups/Easy Labs/4Publisher.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Publisher"
+              "title": "4Publisher"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/HashCat.md",
+                "file": "Theory/Privilege Escalation Linux.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "HashCat"
+              "title": "Privilege Escalation Linux"
             }
           }
         ]
@@ -186,42 +186,41 @@
   },
   "active": "5943ba0a989c8890",
   "lastOpenFiles": [
-    "Tools/Shells.md",
-    "Labs writeups/Easy Labs/Publisher.md",
     "Theory/Privilege Escalation Linux.md",
-    "Theory/Privilege Escalation Windows.md",
+    "Labs writeups/Easy Labs/4Publisher.md",
+    "Pasted image 20251026193820.png",
+    "Tools/GoodReverseShell.md",
+    "Pasted image 20251026193612.png",
+    "Pasted image 20251026193607.png",
+    "Pasted image 20251026192747.png",
+    "Pasted image 20251026192625.png",
     "Tools/HashCat.md",
     "Tools/John the ripper.md",
     "Tools/NetCat.md",
     "Tools/Scripts for Escalate.md",
     "Tools/Searchsploit.md",
-    "Tools/GoodReverseShell.md",
-    "Tools/Github programs Linux.md",
+    "Tools/Shells.md",
     "Tools/Сканеры/Feroxbuster.md",
+    "Pasted image 20251026190427.png",
+    "Pasted image 20251026185951.png",
+    "Pasted image 20251026185726.png",
+    "Labs writeups/Easy Labs/3GLITCH.md",
+    "Labs writeups/Easy Labs/2Archangel.md",
+    "Labs writeups/Easy Labs/1U. I. High School.md",
+    "Labs writeups/Easy Labs/0Picle Rick.md",
+    "Theory/Privilege Escalation Windows.md",
+    "Tools/Github programs Linux.md",
     "Tools/Сканеры/ffuf.md",
     "Tools/Сканеры/GoBuster.md",
     "Tools/Сканеры/NMAP.md",
     "Tools/Сканеры/SSTIMap.md",
-    "Labs writeups/Easy Labs/Archangel.md",
-    "Labs writeups/Easy Labs/GLITCH.md",
-    "Labs writeups/Easy Labs/Picle Rick.md",
-    "Labs writeups/Easy Labs/U. I. High School.md",
     "images/Pasted image 20251023234150.png",
     "Tools/Wappalyzer.md",
     "Theory/usage find in linux.md",
     "images/Pasted image 20251023233519.png",
-    "images/Pasted image 20251023233438.png",
-    "images/Pasted image 20251023211633.png",
-    "images/Pasted image 20251023214912.png",
-    "images/Pasted image 20251023212645.png",
-    "images/Pasted image 20251023212449.png",
-    "images/Pasted image 20251023212346.png",
-    "images/Pasted image 20251023210326.png",
-    "images/Pasted image 20251023211007.png",
     "Tools/Сканеры",
     "Промт для чатагпт.md",
     "Linux.md",
-    "ss.md",
-    "Tools/Check if suck.md"
+    "ss.md"
   ]
 }
