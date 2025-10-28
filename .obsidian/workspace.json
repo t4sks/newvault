@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Shells.md",
+                "file": "Labs writeups/Easy Labs/4Publisher.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Shells"
+              "title": "4Publisher"
             }
           },
           {
@@ -45,8 +45,7 @@
               "title": "Граф"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -195,22 +194,22 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "31a42584f6cd1941",
+  "active": "62e2fd39e79137c2",
   "lastOpenFiles": [
+    "Labs writeups/Easy Labs/5Heartbleed.md",
+    "Labs writeups/Easy Labs/4Publisher.md",
     "Tools/Shells.md",
+    "Theory/Privilege Escalation Linux.md",
     "Tools/NetCat.md",
     "Tools/John the ripper.md",
     "Tools/HashCat.md",
     "Tools/GoodReverseShell.md",
-    "Theory/Privilege Escalation Linux.md",
     "Tools/Check if suck.md",
     "Tools/Github programs Linux.md",
-    "Labs writeups/Easy Labs/4Publisher.md",
     "Theory/Privilege Escalation Windows.md",
     "Tools/Scripts for Escalate.md",
     "Tools/Searchsploit.md",
     "Labs writeups/Medium Labs/fsdf.md",
-    "Labs writeups/Easy Labs/5Heartbleed.md",
     "Labs writeups/Medium Labs",
     "Tools/Сканеры/Feroxbuster.md",
     "Tools/Сканеры/ffuf.md",
