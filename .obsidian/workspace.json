@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Shells.md",
+                "file": "Labs writeups/Medium Labs/fsdf.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Shells"
+              "title": "fsdf"
             }
           },
           {
@@ -201,10 +201,10 @@
   },
   "active": "3cc6397a1245b33c",
   "lastOpenFiles": [
+    "Tools/Shells.md",
     "Tools/GoodReverseShell.md",
     "Tools/Github programs Linux.md",
     "Tools/Check if suck.md",
-    "Tools/Shells.md",
     "Tools/Searchsploit.md",
     "Tools/Scripts for Escalate.md",
     "Theory/Privilege Escalation Linux.md",
