@@ -19,3 +19,4 @@ ffuf -u 'http://10.201.82.109/assets/index.php?FUZZ=id' -ac -mc all -t 200 -w /u
 ```shell
 $ ffuf -u 'http://ip/' -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -H "Host: FUZZ.ip" -mc all -t 200 
 ```
+`-H` - задать host
