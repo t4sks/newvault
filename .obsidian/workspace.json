@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Сканеры/ffuf.md",
+                "file": "Labs writeups/Medium Labs/Rabbit hole.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ffuf"
+              "title": "Rabbit hole"
             }
           },
           {
@@ -186,6 +186,10 @@
   },
   "active": "3cc6397a1245b33c",
   "lastOpenFiles": [
+    "Tools/jwt_tool.md",
+    "Labs writeups/Medium Labs/Rabbit hole.md",
+    "Tools/Сканеры/ffuf.md",
+    "Tools/Сканеры/Feroxbuster.md",
     "Методология веб пентеста/1 шаг.md",
     "images/Pasted image 20251102153931.png",
     "Labs writeups/Easy Labs/6Creative.md",
@@ -198,7 +202,6 @@
     "images/Pasted image 20251102161229.png",
     "images/Pasted image 20251102161024.png",
     "images/Pasted image 20251102155550.png",
-    "Tools/Сканеры/ffuf.md",
     "Labs writeups/Easy Labs/2Archangel.md",
     "Методология веб пентеста/0Методология веб пентеста.md",
     "Tools/Shells.md",
@@ -207,7 +210,6 @@
     "Методология веб пентеста",
     "Labs writeups/Easy Labs/5Heartbleed.md",
     "Labs writeups/Medium Labs/0Oh my web Server.md",
-    "Tools/Сканеры/Feroxbuster.md",
     "Tools/GoodReverseShell.md",
     "Tools/Github programs Linux.md",
     "Tools/Check if suck.md",
@@ -222,7 +224,6 @@
     "Labs writeups/Easy Labs/1U. I. High School.md",
     "Labs writeups/Easy Labs/0Picle Rick.md",
     "Tools/Сканеры/GoBuster.md",
-    "Tools/Сканеры/NMAP.md",
     "Tools/Сканеры"
   ]
 }
