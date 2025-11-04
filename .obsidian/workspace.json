@@ -27,15 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Методология веб пентеста/1 шаг.md",
+                "file": "Tools/Сканеры/ffuf.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1 шаг"
+              "title": "ffuf"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -184,13 +185,13 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "3cc6397a1245b33c",
+  "active": "31a42584f6cd1941",
   "lastOpenFiles": [
-    "Tools/jwt_tool.md",
+    "Методология веб пентеста/1 шаг.md",
     "Labs writeups/Medium Labs/Rabbit hole.md",
+    "Tools/jwt_tool.md",
     "Tools/Сканеры/ffuf.md",
     "Tools/Сканеры/Feroxbuster.md",
-    "Методология веб пентеста/1 шаг.md",
     "images/Pasted image 20251102153931.png",
     "Labs writeups/Easy Labs/6Creative.md",
     "images/Pasted image 20251102170230.png",
