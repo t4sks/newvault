@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/Medium Labs/Rabbit hole.md",
+                "file": "Labs writeups/Medium Labs/1Rabbit hole.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Rabbit hole"
+              "title": "1Rabbit hole"
             }
           },
           {
@@ -35,8 +35,7 @@
               "title": "GoodReverseShell"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -185,16 +184,21 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "31a42584f6cd1941",
+  "active": "3cc6397a1245b33c",
   "lastOpenFiles": [
-    "Tools/Github programs Linux.md",
+    "Tools/GoodReverseShell.md",
+    "Labs writeups/Medium Labs/1Rabbit hole.md",
     "Tools/Shells.md",
+    "Theory/Privilege Escalation Linux.md",
+    "Theory/Privilege Escalation Windows.md",
+    "Tools/Проверки для web чтобы вызывать ошибки.md",
+    "Tools/Check if suck.md",
+    "Tools/Github programs Linux.md",
     "Tools/Searchsploit.md",
     "Tools/Scripts for Escalate.md",
     "Tools/NetCat.md",
     "Tools/jwt_tool.md",
     "Tools/Сканеры/ffuf.md",
-    "Labs writeups/Medium Labs/1Rabbit hole.md",
     "Методология веб пентеста/1 шаг.md",
     "Tools/Сканеры/Feroxbuster.md",
     "images/Pasted image 20251102153931.png",
@@ -215,16 +219,11 @@
     "Методология веб пентеста",
     "Labs writeups/Easy Labs/5Heartbleed.md",
     "Labs writeups/Medium Labs/0Oh my web Server.md",
-    "Tools/GoodReverseShell.md",
-    "Tools/Check if suck.md",
-    "Theory/Privilege Escalation Linux.md",
     "Tools/John the ripper.md",
     "Tools/HashCat.md",
-    "Theory/Privilege Escalation Windows.md",
     "Labs writeups/Medium Labs",
     "Labs writeups/Easy Labs/1U. I. High School.md",
     "Labs writeups/Easy Labs/0Picle Rick.md",
-    "Tools/Сканеры/GoBuster.md",
     "Tools/Сканеры"
   ]
 }
