@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/Medium Labs/1Rabbit hole.md",
+                "file": "Tools/GoodReverseShell.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1Rabbit hole"
+              "title": "GoodReverseShell"
             }
           },
           {
@@ -186,9 +186,11 @@
   },
   "active": "3cc6397a1245b33c",
   "lastOpenFiles": [
-    "Tools/GoodReverseShell.md",
-    "Labs writeups/Medium Labs/1Rabbit hole.md",
     "Tools/Shells.md",
+    "Tools/Wappalyzer.md",
+    "Labs writeups/Medium Labs/1Rabbit hole.md",
+    "Tools/jwt_tool.md",
+    "Tools/GoodReverseShell.md",
     "Theory/Privilege Escalation Linux.md",
     "Theory/Privilege Escalation Windows.md",
     "Tools/Проверки для web чтобы вызывать ошибки.md",
@@ -197,7 +199,6 @@
     "Tools/Searchsploit.md",
     "Tools/Scripts for Escalate.md",
     "Tools/NetCat.md",
-    "Tools/jwt_tool.md",
     "Tools/Сканеры/ffuf.md",
     "Методология веб пентеста/1 шаг.md",
     "Tools/Сканеры/Feroxbuster.md",
@@ -223,7 +224,6 @@
     "Tools/HashCat.md",
     "Labs writeups/Medium Labs",
     "Labs writeups/Easy Labs/1U. I. High School.md",
-    "Labs writeups/Easy Labs/0Picle Rick.md",
     "Tools/Сканеры"
   ]
 }
