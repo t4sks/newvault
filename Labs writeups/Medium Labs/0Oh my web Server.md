@@ -57,7 +57,8 @@ THM{eacffefe1d2aafcc15e70dc2f07f7ac1}
 ```
 after i dont kniw what to do next and i thin what if im in docker and i find
 ```shell
-root@4a70924bafa0:/root# ifconfig eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500 inet 172.17.0.2 netmask 255.255.0.0 broadcast 172.17.255.255 ether 02:42:ac:11:00:02 txqueuelen 0 (Ethernet) RX packets 966 bytes 65304 (63.7 KiB) RX errors 0 dropped 0 overruns 0 frame 0 TX packets 602 bytes 106152 (103.6 KiB) TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0 lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536 inet 127.0.0.1 netmask 255.0.0.0 loop txqueuelen 1000 (Local Loopback) RX packets 0 bytes 0 (0.0 B) RX errors 0 dropped 0 overruns 0 frame 0 TX packets 0 bytes 0 (0.0 B) TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+root@4a70924bafa0:/root# ifconfig 
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST> mtu 1500 inet 172.17.0.2 netmask 255.255.0.0 broadcast 172.17.255.255 ether 02:42:ac:11:00:02 txqueuelen 0 (Ethernet) RX packets 966 bytes 65304 (63.7 KiB) RX errors 0 dropped 0 overruns 0 frame 0 TX packets 602 bytes 106152 (103.6 KiB) TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0 lo: flags=73<UP,LOOPBACK,RUNNING> mtu 65536 inet 127.0.0.1 netmask 255.0.0.0 loop txqueuelen 1000 (Local Loopback) RX packets 0 bytes 0 (0.0 B) RX errors 0 dropped 0 overruns 0 frame 0 TX packets 0 bytes 0 (0.0 B) TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
 ```
 and we see what we in container, after find open port in main machine its `5986`
 and we have RCE for this port because its open, use exploit for this CVE-2021-38647

