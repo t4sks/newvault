@@ -191,3 +191,29 @@ HOP RTT       ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 487.81 seconds
 ```
+
+
+```shell
+ nc 10.10.131.185 1337
+Hey stranger, I'm Ollie, protector of panels, lover of deer antlers.
+
+What is your name? Ollie
+What's up, Ollie! It's been a while. What are you here for? exploit
+Ya' know what? Ollie. If you can answer a question about me, I might have something for you.
+
+
+What breed of dog am I? I'll make it a multiple choice question to keep it easy: Bulldog, Husky, Duck or Wolf? Bulldog
+You are correct! Let me confer with my trusted colleagues; Benny, Baxter and Connie...
+Please hold on a minute
+Ok, I'm back.
+After a lengthy discussion, we've come to the conclusion that you are the right person for the job.Here are the credentials for our administration panel.
+
+                    Username: admin
+
+                    Password: OllieUnixMontgomery!
+
+PS: Good luck and next time bring some treats!
+
+```
+
+
