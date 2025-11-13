@@ -1,4 +1,4 @@
-фуззинг веба работает заменяя слово `FUZZ` в URL 
+acфуззинг веба работает заменяя слово `FUZZ` в URL 
 общий синтаксис 
 ```shell
 ffuf -u "http://site.com/page.php?FUZZ=value" -w /path/to/wordlist.txt

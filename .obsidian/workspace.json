@@ -34,9 +34,21 @@
               "icon": "lucide-file",
               "title": "ffuf"
             }
+          },
+          {
+            "id": "a3e8354b732afa4e",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.10.3"
+              },
+              "icon": "lucide-book-up",
+              "title": "примечания к выпуску 1.10.3"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -185,7 +197,7 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "75e7648fb44ff2f8",
+  "active": "a3e8354b732afa4e",
   "lastOpenFiles": [
     "Tools/GoodReverseShell.md",
     "Промт для чатагпт.md",
