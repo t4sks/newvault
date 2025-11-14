@@ -27,28 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Сканеры/ffuf.md",
+                "file": "Tools/GoodReverseShell.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ffuf"
-            }
-          },
-          {
-            "id": "a3e8354b732afa4e",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.10.3"
-              },
-              "icon": "lucide-book-up",
-              "title": "примечания к выпуску 1.10.3"
+              "title": "GoodReverseShell"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -197,8 +185,9 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "a3e8354b732afa4e",
+  "active": "75e7648fb44ff2f8",
   "lastOpenFiles": [
+    "Tools/Сканеры/ffuf.md",
     "Tools/GoodReverseShell.md",
     "Промт для чатагпт.md",
     "Labs writeups/Medium Labs/0Oh my web Server.md",
@@ -224,7 +213,6 @@
     "Tools/Wappalyzer.md",
     "Tools/NetCat.md",
     "Tools/HashCat.md",
-    "Tools/Сканеры/ffuf.md",
     "Tools/Сканеры/Feroxbuster.md",
     "0images/Pasted image 20251107184137.png",
     "Tools/Check if suck.md",
