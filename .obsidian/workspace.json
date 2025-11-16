@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/Easy Labs/4Publisher.md",
+                "file": "Tools/GoodReverseShell.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4Publisher"
+              "title": "GoodReverseShell"
             }
           },
           {
@@ -186,8 +186,10 @@
   },
   "active": "17ee307d7524d389",
   "lastOpenFiles": [
-    "Labs writeups/Easy Labs/5Heartbleed.md",
+    "Tools/Github programs Linux.md",
+    "Tools/fast search/Bash commands.md",
     "Labs writeups/Easy Labs/4Publisher.md",
+    "Labs writeups/Easy Labs/5Heartbleed.md",
     "Labs writeups/Easy Labs/6Creative.md",
     "Labs writeups/Medium Labs/2Ollie.md",
     "Labs writeups/Medium Labs/1Rabbit hole.md",
@@ -197,7 +199,6 @@
     "Промт для чатагпт.md",
     "Labs writeups/Medium Labs/0Oh my web Server.md",
     "Theory/Privilege Escalation Linux.md",
-    "Tools/fast search/Bash commands.md",
     "Tools/fast search",
     "Linux.md",
     "Python/Start.md",
@@ -214,7 +215,6 @@
     "Tools/Scripts for Escalate.md",
     "Tools/pspy64.md",
     "Tools/NetCat.md",
-    "Tools/jwt_tool.md",
     "0images/Pasted image 20251109190528.png",
     "0images/Pasted image 20251109190710.png",
     "0images/Pasted image 20251107184137.png",

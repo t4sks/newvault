@@ -3,6 +3,10 @@
 # Нажми CTRL+Z, чтобы приостановить shell
 stty raw -echo; fg
 # нажми Enter
+#потом надо использовать либо
+script /dev/null -c bash
+#либо
+python3 -c 'import pty; pty.spawn("/bin/bash")'#перебор версий питон тоже норм
 ```
 ---
 from Bash
