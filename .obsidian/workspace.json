@@ -35,7 +35,8 @@
               "title": "1Rabbit hole"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -184,8 +185,9 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "17ee307d7524d389",
+  "active": "75e7648fb44ff2f8",
   "lastOpenFiles": [
+    "Tools/GoodReverseShell.md",
     "Tools/Github programs Linux.md",
     "Tools/fast search/Bash commands.md",
     "Labs writeups/Easy Labs/4Publisher.md",
@@ -195,7 +197,6 @@
     "Labs writeups/Medium Labs/1Rabbit hole.md",
     "Labs writeups/Easy Labs/2Archangel.md",
     "Labs writeups/Easy Labs/1U. I. High School.md",
-    "Tools/GoodReverseShell.md",
     "Промт для чатагпт.md",
     "Labs writeups/Medium Labs/0Oh my web Server.md",
     "Theory/Privilege Escalation Linux.md",
