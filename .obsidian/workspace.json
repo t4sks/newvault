@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/HTB/Без названия.md",
+                "file": "Labs writeups/HTB/Desires.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Без названия"
+              "title": "Desires"
             }
           }
         ],
@@ -187,8 +187,10 @@
   },
   "active": "75e7648fb44ff2f8",
   "lastOpenFiles": [
+    "Pasted image 20251121171035.png",
+    "ZZZimages/Pasted image 20251121170945.png",
     "Tools/Сканеры/Feroxbuster.md",
-    "Labs writeups/HTB/Без названия.md",
+    "Labs writeups/HTB/Desires.md",
     "Labs writeups/HTB",
     "Labs writeups/THM",
     "Tools/Сканеры/ffuf.md",
@@ -217,15 +219,13 @@
     "Методология веб пентеста/0Методология веб пентеста.md",
     "Tools/Searchsploit.md",
     "Tools/Wappalyzer.md",
-    "Tools/Shells.md",
-    "0images/Pasted image 20251109190528.png",
-    "0images/Pasted image 20251109190710.png",
-    "0images/Pasted image 20251107184137.png",
-    "0images/Pasted image 20251106213944.png",
-    "0images/Pasted image 20251106213414.png",
-    "0images/Pasted image 20251106211618.png",
-    "0images/Pasted image 20251106211510.png",
-    "0images/Pasted image 20251106211029.png",
+    "ZZZimages/Pasted image 20251109190528.png",
+    "ZZZimages/Pasted image 20251109190710.png",
+    "ZZZimages/Pasted image 20251107184137.png",
+    "ZZZimages/Pasted image 20251106213944.png",
+    "ZZZimages/Pasted image 20251106213414.png",
+    "ZZZimages/Pasted image 20251106211618.png",
+    "ZZZimages/Pasted image 20251106211510.png",
     "Методология веб пентеста",
     "Labs writeups/THM/Medium Labs",
     "Tools/Сканеры"
