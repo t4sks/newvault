@@ -27,28 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Сканеры/SSTIMap.md",
+                "file": "Labs writeups/HTB/Easy Labs/Dark Runes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SSTIMap"
-            }
-          },
-          {
-            "id": "9611e43950b9efac",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.10.6"
-              },
-              "icon": "lucide-book-up",
-              "title": "примечания к выпуску 1.10.6"
+              "title": "Dark Runes"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -197,8 +185,15 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "9611e43950b9efac",
+  "active": "75e7648fb44ff2f8",
   "lastOpenFiles": [
+    "Pasted image 20251128184131.png",
+    "Pasted image 20251128180531.png",
+    "Pasted image 20251128172726.png",
+    "Pasted image 20251128172629.png",
+    "Tools/Сканеры/SSTIMap.md",
+    "Labs writeups/HTB/Easy Labs/Dark Runes.md",
+    "Labs writeups/HTB/Easy Labs",
     "Tools/GoodReverseShell.md",
     "Tools/Github programs Linux.md",
     "Tools/HashCat.md",
@@ -206,9 +201,8 @@
     "Tools/Сканеры/Feroxbuster.md",
     "Tools/Сканеры/GoBuster.md",
     "Tools/Сканеры/NMAP.md",
-    "Tools/Сканеры/SSTIMap.md",
     "Tools/fast search/Bash commands.md",
-    "Labs writeups/HTB/Desires.md",
+    "Labs writeups/HTB/Easy Labs/Desires.md",
     "Pasted image 20251121193655.png",
     "Pasted image 20251121171035.png",
     "ZZZimages/Pasted image 20251121170945.png",
@@ -231,13 +225,8 @@
     "My Daily Journal/Pasted image 20250918153401.png",
     "My Daily Journal/First note in obsidian.md",
     "My Daily Journal/2025-09-20.md",
-    "Labs writeups/THM/Easy Labs/3GLITCH.md",
-    "Labs writeups/THM/Easy Labs/0Picle Rick.md",
     "ZZZimages/Pasted image 20251109190528.png",
     "ZZZimages/Pasted image 20251109190710.png",
-    "ZZZimages/Pasted image 20251107184137.png",
-    "ZZZimages/Pasted image 20251106213944.png",
-    "ZZZimages/Pasted image 20251106213414.png",
     "Методология веб пентеста",
     "Labs writeups/THM/Medium Labs",
     "Tools/Сканеры"
