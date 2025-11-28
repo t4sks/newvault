@@ -27,16 +27,28 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/HTB/Desires.md",
+                "file": "Tools/Сканеры/SSTIMap.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Desires"
+              "title": "SSTIMap"
+            }
+          },
+          {
+            "id": "9611e43950b9efac",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.10.6"
+              },
+              "icon": "lucide-book-up",
+              "title": "примечания к выпуску 1.10.6"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -185,20 +197,24 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "75e7648fb44ff2f8",
+  "active": "9611e43950b9efac",
   "lastOpenFiles": [
+    "Tools/GoodReverseShell.md",
+    "Tools/Github programs Linux.md",
+    "Tools/HashCat.md",
+    "Tools/Сканеры/ffuf.md",
+    "Tools/Сканеры/Feroxbuster.md",
+    "Tools/Сканеры/GoBuster.md",
+    "Tools/Сканеры/NMAP.md",
+    "Tools/Сканеры/SSTIMap.md",
+    "Tools/fast search/Bash commands.md",
+    "Labs writeups/HTB/Desires.md",
     "Pasted image 20251121193655.png",
     "Pasted image 20251121171035.png",
     "ZZZimages/Pasted image 20251121170945.png",
-    "Tools/Сканеры/Feroxbuster.md",
-    "Labs writeups/HTB/Desires.md",
     "Labs writeups/HTB",
     "Labs writeups/THM",
-    "Tools/Сканеры/ffuf.md",
     "Labs writeups/THM/Medium Labs/1Rabbit hole.md",
-    "Tools/GoodReverseShell.md",
-    "Tools/Github programs Linux.md",
-    "Tools/fast search/Bash commands.md",
     "Labs writeups/THM/Easy Labs/4Publisher.md",
     "Labs writeups/THM/Easy Labs/5Heartbleed.md",
     "Labs writeups/THM/Easy Labs/6Creative.md",
@@ -217,15 +233,11 @@
     "My Daily Journal/2025-09-20.md",
     "Labs writeups/THM/Easy Labs/3GLITCH.md",
     "Labs writeups/THM/Easy Labs/0Picle Rick.md",
-    "Методология веб пентеста/0Методология веб пентеста.md",
-    "Tools/Searchsploit.md",
-    "Tools/Wappalyzer.md",
     "ZZZimages/Pasted image 20251109190528.png",
     "ZZZimages/Pasted image 20251109190710.png",
     "ZZZimages/Pasted image 20251107184137.png",
     "ZZZimages/Pasted image 20251106213944.png",
     "ZZZimages/Pasted image 20251106213414.png",
-    "ZZZimages/Pasted image 20251106211618.png",
     "Методология веб пентеста",
     "Labs writeups/THM/Medium Labs",
     "Tools/Сканеры"
