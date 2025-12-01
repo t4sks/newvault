@@ -20,4 +20,12 @@ https://insecure-website.com/login/home.jsp?admin=true
 https://insecure-website.com/login/home.jsp?role=1
 ```
 
-
+Повышение привилегий основанное на контроле доступа
+Вертикальное - повышения с юзера до админа
+Горизонтальное - переход от юзер к юзеру
+Пример:
+```
+https://insecure-website.com/myaccount?id=123
+```
+меняем значение айди получаем другого пользователя
+это пример: <mark style="background: #BBFABBA6;">insecure direct object reference (IDOR)</mark> - небезопасная прямая ссылка на объект
