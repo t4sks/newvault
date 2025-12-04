@@ -43,16 +43,9 @@ feroxbuster -u http://gavel.htb -w /usr/share/seclists/Discovery/Web-Content/raf
 301      GET        9l       28w      309c http://gavel.htb/includes => http://gavel.htb/includes/
 200      GET       84l      301w     4485c http://gavel.htb/register.php
 200      GET      222l     1037w    13984c http://gavel.htb/index.php
-200      GET        7l     1030w    84378c http://gavel.htb/assets/vendor/bootstrap/js/bootstrap.bundle.min.js
-200      GET        2l     1294w    89501c http://gavel.htb/assets/vendor/jquery/jquery.min.js
-200      GET       58l      108w     1274c http://gavel.htb/assets/vendor/fontawesome-free/package.json
-200      GET      266l     1319w   187333c http://gavel.htb/assets/img/certificate.jpg
-200      GET      324l     2559w   196986c http://gavel.htb/assets/img/scroll.jpg
-200      GET    11299l    22157w   212581c http://gavel.htb/assets/css/sb-admin-2.css
 301      GET        9l       28w      307c http://gavel.htb/assets => http://gavel.htb/assets/
 302      GET        0l        0w        0c http://gavel.htb/admin.php => index.php
 200      GET      102l      397w     3798c http://gavel.htb/assets/items.json
-200      GET        7l       33w     1265c http://gavel.htb/assets/js/sb-admin-2.min.js
 302      GET        0l        0w        0c http://gavel.htb/logout.php => index.php
 200      GET     4422l    25758w  1976010c http://gavel.htb/assets/img/welcome.png
 200      GET      222l     1035w    14008c http://gavel.htb/
