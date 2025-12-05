@@ -1,0 +1,217 @@
+{
+  "userAdmonitions": {
+    "payload": {
+      "type": "payload",
+      "color": "255, 140, 0",
+      "icon": {
+        "name": "bug",
+        "type": "font-awesome"
+      }
+    },
+    "exploit": {
+      "type": "exploit",
+      "color": "255, 90, 90",
+      "icon": {
+        "name": "skull-crossbones",
+        "type": "font-awesome"
+      }
+    },
+    "vuln": {
+      "type": "vuln",
+      "color": "220, 20, 60",
+      "icon": {
+        "name": "exclamation-triangle",
+        "type": "font-awesome"
+      }
+    },
+    "detect": {
+      "type": "detect",
+      "color": "0, 160, 255",
+      "icon": {
+        "name": "search",
+        "type": "font-awesome"
+      }
+    },
+    "fix": {
+      "type": "fix",
+      "color": "0, 180, 120",
+      "icon": {
+        "name": "shield-alt",
+        "type": "font-awesome"
+      }
+    },
+    "enum": {
+      "type": "enum",
+      "color": "0, 120, 255",
+      "icon": {
+        "name": "network-wired",
+        "type": "font-awesome"
+      }
+    },
+    "recon": {
+      "type": "recon",
+      "color": "0, 100, 220",
+      "icon": {
+        "name": "globe",
+        "type": "font-awesome"
+      }
+    },
+    "osint": {
+      "type": "osint",
+      "color": "60, 140, 220",
+      "icon": {
+        "name": "search-plus",
+        "type": "font-awesome"
+      }
+    },
+    "creds": {
+      "type": "creds",
+      "color": "255, 200, 0",
+      "icon": {
+        "name": "key",
+        "type": "font-awesome"
+      }
+    },
+    "privesc": {
+      "type": "privesc",
+      "color": "186, 85, 211",
+      "icon": {
+        "name": "level-up-alt",
+        "type": "font-awesome"
+      }
+    },
+    "lateral": {
+      "type": "lateral",
+      "color": "147, 112, 219",
+      "icon": {
+        "name": "sitemap",
+        "type": "font-awesome"
+      }
+    },
+    "loot": {
+      "type": "loot",
+      "color": "0, 200, 180",
+      "icon": {
+        "name": "box-open",
+        "type": "font-awesome"
+      }
+    },
+    "host": {
+      "type": "host",
+      "color": "100, 149, 237",
+      "icon": {
+        "name": "server",
+        "type": "font-awesome"
+      }
+    },
+    "db": {
+      "type": "db",
+      "color": "72, 209, 204",
+      "icon": {
+        "name": "database",
+        "type": "font-awesome"
+      }
+    },
+    "log": {
+      "type": "log",
+      "color": "160, 160, 160",
+      "icon": {
+        "name": "file-alt",
+        "type": "font-awesome"
+      }
+    },
+    "cmd": {
+      "type": "cmd",
+      "color": "120, 120, 120",
+      "icon": {
+        "name": "terminal",
+        "type": "font-awesome"
+      }
+    },
+    "tool": {
+      "type": "tool",
+      "color": "105, 105, 105",
+      "icon": {
+        "name": "wrench",
+        "type": "font-awesome"
+      }
+    },
+    "todo": {
+      "type": "todo",
+      "color": "255, 215, 0",
+      "icon": {
+        "name": "clipboard-check",
+        "type": "font-awesome"
+      }
+    },
+    "tip": {
+      "type": "tip",
+      "color": "255, 255, 102",
+      "icon": {
+        "name": "lightbulb",
+        "type": "font-awesome"
+      }
+    },
+    "risk-high": {
+      "type": "risk-high",
+      "color": "178, 34, 34",
+      "icon": {
+        "name": "fire",
+        "type": "font-awesome"
+      }
+    },
+    "risk-medium": {
+      "type": "risk-medium",
+      "color": "255, 140, 0",
+      "icon": {
+        "name": "exclamation-circle",
+        "type": "font-awesome"
+      }
+    },
+    "risk-low": {
+      "type": "risk-low",
+      "color": "46, 139, 87",
+      "icon": {
+        "name": "arrow-circle-down",
+        "type": "font-awesome"
+      }
+    },
+    "labnote": {
+      "type": "labnote",
+      "color": "130, 130, 130",
+      "icon": {
+        "name": "sticky-note",
+        "type": "font-awesome"
+      }
+    },
+    "opsec": {
+      "type": "opsec",
+      "color": "70, 130, 180",
+      "icon": {
+        "name": "user-secret",
+        "type": "font-awesome"
+      }
+    }
+  },
+  "syntaxHighlight": false,
+  "copyButton": true,
+  "version": "10.3.2",
+  "autoCollapse": false,
+  "defaultCollapseType": "open",
+  "injectColor": true,
+  "parseTitles": true,
+  "dropShadow": true,
+  "hideEmpty": false,
+  "open": {
+    "admonitions": true,
+    "icons": true,
+    "other": true,
+    "advanced": false
+  },
+  "icons": [],
+  "useFontAwesome": true,
+  "rpgDownloadedOnce": false,
+  "msDocConverted": false,
+  "useSnippet": false,
+  "snippetPath": "custom-admonitions.590093"
+}

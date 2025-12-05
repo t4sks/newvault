@@ -1,7 +1,16 @@
 
 [[Linux]] [[2025-09-20]] [[Scripts for Escalate]] 
 **Goal: take information about system and find vectors of escalate privilege**  
+## Оглавление
+[[#Main commands for first steps]]
+[[#Escalate from sudo]]
+[[#Escalate with SUID files]]
+[[#Linux capabilities]]
+[[#Crontab usage]]
+[[#Privilege from path - shit use in last]]
+[[#NFS - privilege]]
 
+---
 #### Main commands for first steps
 
 <mark style="background: #BBFABBA6;">System information:</mark>
