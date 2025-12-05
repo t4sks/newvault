@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/HTB/Medium Labs/0Gavel.md",
+                "file": "Types of vulnerabilities/SQL Injection/2SQL injection UNION attacks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0Gavel"
+              "title": "2SQL injection UNION attacks"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/3SSRF.md",
+                "file": "Labs writeups/HTB/Medium Labs/0Gavel.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3SSRF"
+              "title": "0Gavel"
             }
           }
         ]
@@ -186,9 +186,13 @@
   },
   "active": "17ee307d7524d389",
   "lastOpenFiles": [
-    "Tools/Сканеры/Feroxbuster.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/3SSRF.md",
+    "Types of vulnerabilities/SQL Injection/1Detect SQL injection.md",
+    "Types of vulnerabilities/SQL Injection/2SQL injection UNION attacks.md",
     "Labs writeups/HTB/Medium Labs/0Gavel.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/3SSRF.md",
+    "Types of vulnerabilities/SQL Injection/0Определение.md",
+    "Types of vulnerabilities/SQL Injection",
+    "Tools/Сканеры/Feroxbuster.md",
     "Tools/HashCat.md",
     "Tools/Searchsploit.md",
     "Labs writeups/HTB/Medium Labs",
@@ -214,15 +218,12 @@
     "Types of vulnerabilities/Server Side Vulnerabilities/2Authentication vulnerabilities.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/1Access Control - контроль доступа.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/0Path traversal.md",
-    "Labs writeups/HTB/Easy Labs/2Conversor.md",
     "Types of vulnerabilities/Server Side Vulnerabilities",
     "ZZZimages/Pasted image 20251128203539.png",
     "ZZZimages/Pasted image 20251128202929.png",
     "ZZZimages/Pasted image 20251128202825.png",
     "ZZZimages/Pasted image 20251128202707.png",
     "ZZZimages/Pasted image 20251128202416.png",
-    "Labs writeups/HTB/Easy Labs/1Dark Runes.md",
-    "Labs writeups/HTB/Easy Labs/0Desires.md",
     "ZZZimages/Pasted image 20251128201618.png",
     "ZZZimages/Pasted image 20251128201244.png",
     "Labs writeups/HTB/Easy Labs",
@@ -230,7 +231,6 @@
     "Labs writeups/THM",
     "Tools/fast search",
     "Методология веб пентеста",
-    "Labs writeups/THM/Medium Labs",
-    "Tools/Сканеры"
+    "Labs writeups/THM/Medium Labs"
   ]
 }
