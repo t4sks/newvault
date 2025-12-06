@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Карта Уязвимостей.md",
+                "file": "Types of vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Карта Уязвимостей"
+              "title": "Все о бд при использовании SQL атак"
             }
           }
         ],
@@ -187,10 +187,15 @@
   },
   "active": "913cd6e8594d187f",
   "lastOpenFiles": [
-    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
-    "Types of vulnerabilities/Карта Уязвимостей.md",
     "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
+    "Types of vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
+    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
     "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
+    "Types of vulnerabilities/Карта раздела.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/3SSRF.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/2Authentication vulnerabilities.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/1Access Control - контроль доступа.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/0Path traversal.md",
     "pentest.json",
     "Новый текстовый документ.txt",
     "Без названия 1",
@@ -213,12 +218,7 @@
     "Методология веб пентеста/1 шаг.md",
     "Промт для чатагпт.md",
     "Linux.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/0Path traversal.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/1Access Control - контроль доступа.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/2Authentication vulnerabilities.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/3SSRF.md",
     "комментари.md",
-    "комментарии.md",
     "Types of vulnerabilities/SQL Injection",
     "Labs writeups/HTB/Medium Labs",
     "Tools/Shells",
