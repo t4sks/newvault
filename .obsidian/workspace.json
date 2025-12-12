@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Shells/GoodReverseShell.md",
+                "file": "Labs writeups/HTB/Medium Labs/0Gavel.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GoodReverseShell"
+              "title": "0Gavel"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/HTB/Medium Labs/0Gavel.md",
+                "file": "Theory/Privilege Escalation Linux.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0Gavel"
+              "title": "Privilege Escalation Linux"
             }
           }
         ]
@@ -186,11 +186,13 @@
   },
   "active": "4aa15f867b1ad1a9",
   "lastOpenFiles": [
+    "Tools/Shells/GoodReverseShell.md",
+    "Theory/Privilege Escalation Linux.md",
+    "Labs writeups/HTB/Medium Labs/0Gavel.md",
     "Theory/usage find in linux.md",
     "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
     "Types of vulnerabilities/SQL Injection/Blind SQL injection - слепое внедрение.md",
     "Labs writeups/THM/Medium Labs/1Rabbit hole.md",
-    "Labs writeups/HTB/Medium Labs/0Gavel.md",
     "Labs writeups/THM/Medium Labs/0Oh my web Server.md",
     "Labs writeups/THM/Easy Labs/6Creative.md",
     "Labs writeups/THM/Easy Labs/5Heartbleed.md",
@@ -216,8 +218,6 @@
     "Без названия",
     "Без названия.canvas",
     "Без названия.base",
-    "Theory/Privilege Escalation Linux.md",
-    "Theory/OWASP API.md",
     "Types of vulnerabilities/SQL Injection",
     "Labs writeups/HTB/Medium Labs",
     "Tools/Shells",

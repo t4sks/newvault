@@ -61,3 +61,7 @@ feroxbuster -u http://gavel.htb -w /usr/share/seclists/Discovery/Web-Content/raf
 [####################] - 0s    270000/270000  1356784/s http://gavel.htb/assets/js/ => Directory listing (add --scan-dir-listings to scan)
 [####################] - 7s    270000/270000  38012/s http://gavel.htb/assets/vendor/jquery-easing/ => Directory listing (add --scan-dir-listings to scan)
 [####################] - 5m    270000/270000  871/s   http://gavel.htb/rules/
+
+
+---
+интересный файл /opt/gavel/gaveled

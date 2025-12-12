@@ -136,6 +136,9 @@ sudo LD_PRELOAD=/home/username/shell.so find         # run find with injected li
 how it works: sudo start find with root after `LD_PRELOAD` send lib to execute and first start `_init()` and start root bash
 #### Escalate with SUID files 
 find files with SUID: 
+```
+find / -perm -4000
+```
 1. <mark style="background: #BBFABBA6;">example</mark> with `nano`
 read /etc/shadow and /etc/passwd, make copy on kali shadow.txt and passwd.txt after use `unshadow`:  
 ```shell
