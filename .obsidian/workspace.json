@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Shells/GoodReverseShell.md",
+                "file": "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GoodReverseShell"
+              "title": "SQL injection UNION attacks"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Labs writeups/HTB/Medium Labs/0Gavel.md",
+                "file": "Types of vulnerabilities/SQL Injection/Error-based SQL injection - SQL атака на основе ошибок.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0Gavel"
+              "title": "Error-based SQL injection - SQL атака на основе ошибок"
             }
           }
         ],
@@ -187,7 +187,12 @@
   },
   "active": "913cd6e8594d187f",
   "lastOpenFiles": [
+    "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
     "Tools/Shells/GoodReverseShell.md",
+    "Types of vulnerabilities/SQL Injection/Error-based SQL injection - SQL атака на основе ошибок.md",
+    "Types of vulnerabilities/SQL Injection/Blind SQL injection - слепое внедрение.md",
+    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
+    "Types of vulnerabilities/Карта раздела.md",
     "Labs writeups/HTB/Medium Labs/0Gavel.md",
     "Tools/HashCat.md",
     "ZZZimages/Pasted image 20251214195524.png",
@@ -196,10 +201,8 @@
     "ZZZimages/Pasted image 20251213193855.png",
     "ZZZimages/Pasted image 20251213193732.png",
     "ZZZimages/Pasted image 20251213193638.png",
-    "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
     "Theory/Privilege Escalation Linux.md",
     "Theory/usage find in linux.md",
-    "Types of vulnerabilities/SQL Injection/Blind SQL injection - слепое внедрение.md",
     "Labs writeups/THM/Medium Labs/1Rabbit hole.md",
     "Labs writeups/THM/Medium Labs/0Oh my web Server.md",
     "Labs writeups/THM/Easy Labs/6Creative.md",
@@ -210,11 +213,8 @@
     "Tools/Сканеры/ffuf.md",
     "Tools/Сканеры/Feroxbuster.md",
     "Tools/Сканеры/GoBuster.md",
-    "Types of vulnerabilities/SQL Injection/Error-based SQL injection - SQL атака на основе ошибок.md",
     "Types of vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
     "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
-    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
-    "Types of vulnerabilities/Карта раздела.md",
     "Theory/Проверки для web чтобы вызывать ошибки.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/3SSRF.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/2Authentication vulnerabilities.md",
