@@ -27,16 +27,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/SQL Injection/Blind SQL с использованием OAST.md",
+                "file": "Types of vulnerabilities/SQL Injection/Решение Лаб.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Blind SQL с использованием OAST"
+              "title": "Решение Лаб"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -185,12 +184,13 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "913cd6e8594d187f",
+  "active": "4aa15f867b1ad1a9",
   "lastOpenFiles": [
+    "Types of vulnerabilities/SQL Injection/Решение Лаб.md",
     "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
+    "Types of vulnerabilities/SQL Injection/Blind SQL с использованием OAST.md",
     "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
     "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
-    "Types of vulnerabilities/SQL Injection/Blind SQL с использованием OAST.md",
     "Types of vulnerabilities/Карта раздела.md",
     "Types of vulnerabilities/SQL Injection/Error-based SQL injection - SQL атака на основе ошибок.md",
     "Types of vulnerabilities/SQL Injection/Blind SQL injection - слепое внедрение.md",
@@ -218,7 +218,6 @@
     "Tools/Сканеры/Feroxbuster.md",
     "Tools/Сканеры/GoBuster.md",
     "Theory/Проверки для web чтобы вызывать ошибки.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/3SSRF.md",
     "pentest.json",
     "Новый текстовый документ.txt",
     "Без названия 1",
