@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
+                "file": "План обучения/План обучения.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Возникновение уязвимости такого типа и понимание эксплуатации"
+              "title": "План обучения"
             }
           },
           {
@@ -199,8 +199,12 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "7f5c1166686e228b",
+  "active": "4318a9b3814450dd",
   "lastOpenFiles": [
+    "План обучения/Заметки по обучению и прогресс.md",
+    "План обучения/План обучения.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
+    "План обучения",
     "Types of vulnerabilities/File Upload vulnerabilities/Варианты атак.md",
     "Types of vulnerabilities/SQL Injection/Внедрение SQL в разлинчых контекстах.md",
     "Types of vulnerabilities/SQL Injection/Использование Blind SQL injection для временных задержек.md",
@@ -215,7 +219,6 @@
     "Types of vulnerabilities/SQL Injection/Blind SQL injection - слепое внедрение.md",
     "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
     "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
-    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
     "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
     "Types of vulnerabilities/SQL Injection/Решение Лаб.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/0Path traversal.md",
@@ -232,12 +235,9 @@
     "ZZZimages/Pasted image 20251213193855.png",
     "ZZZimages/Pasted image 20251213193732.png",
     "ZZZimages/Pasted image 20251213193638.png",
-    "Theory/Privilege Escalation Linux.md",
-    "Theory/usage find in linux.md",
     "pentest.json",
     "Новый текстовый документ.txt",
     "Без названия 1",
-    "Без названия",
     "Без названия.canvas",
     "Без названия.base",
     "Types of vulnerabilities/SQL Injection",
