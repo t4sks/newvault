@@ -14,4 +14,4 @@ SELECT * FROM users WHERE username = 'admin' AND password = 'password'
 SELECT * FROM users WHERE username = 'admin@juice-sh.op'-- ' AND password = 'password'
 ```
 Login Jim и Login **Bender** проходятся аналогично, хотя по факту можно и другими путями 
-**C помощью SQLmap**
+**C помощью [[SQLmap]]**

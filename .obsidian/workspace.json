@@ -50,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -199,13 +199,16 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "913cd6e8594d187f",
+  "active": "7f5c1166686e228b",
   "lastOpenFiles": [
-    "Home Laboratory/OWASP juice-shop/OWASP juice-shop задания.md",
-    "Tools/SQLmap.md",
-    "Types of vulnerabilities/SQL Injection/Использование Blind SQL injection для временных задержек.md",
-    "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
     "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
+    "Tools/SQLmap.md",
+    "Tools/Сканеры/NMAP.md",
+    "ZZZimages/Pasted image 20260106165950.png",
+    "Types of vulnerabilities/SQL Injection/Blind SQL с использованием OAST.md",
+    "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
+    "Home Laboratory/OWASP juice-shop/OWASP juice-shop задания.md",
+    "Types of vulnerabilities/SQL Injection/Использование Blind SQL injection для временных задержек.md",
     "Types of vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
     "Types of vulnerabilities/SQL Injection/Error-based SQL injection - SQL атака на основе ошибок.md",
     "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
@@ -227,9 +230,7 @@
     "Tools/Сканеры/Feroxbuster.md",
     "Home Laboratory",
     "План обучения/Заметки по обучению и прогресс.md",
-    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
     "План обучения",
-    "Types of vulnerabilities/File Upload vulnerabilities/Варианты атак.md",
     "Types of vulnerabilities/File Upload vulnerabilities",
     "ZZZimages/Pasted image 20251214195524.png",
     "ZZZimages/Pasted image 20251214194643.png",
@@ -246,7 +247,6 @@
     "Labs writeups/HTB/Medium Labs",
     "My Daily Journal/Pasted image 20250918153401.png",
     "My Daily Journal/Pasted image 20250918153425.png",
-    "ZZZimages/Pasted image 20251202162756.png",
-    "ZZZimages/Pasted image 20251128203539.png"
+    "ZZZimages/Pasted image 20251202162756.png"
   ]
 }
