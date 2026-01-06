@@ -14,4 +14,9 @@ SELECT * FROM users WHERE username = 'admin' AND password = 'password'
 SELECT * FROM users WHERE username = 'admin@juice-sh.op'-- ' AND password = 'password'
 ```
 Login Jim и Login **Bender** проходятся аналогично, хотя по факту можно и другими путями 
-**C помощью [[SQLmap]]**
+
+
+
+
+SELECT * FROM Products WHERE ((name LIKE '%%' OR description LIKE '%%') AND deletedAt IS NULL) ORDER BY name
+'%1%' ) OR 1=1/* %'

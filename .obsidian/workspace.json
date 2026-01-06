@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
+                "file": "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SQL injection UNION attacks"
+              "title": "Detect SQL injection"
             }
           },
           {
@@ -50,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -199,19 +199,19 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "7f5c1166686e228b",
+  "active": "913cd6e8594d187f",
   "lastOpenFiles": [
-    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
+    "Home Laboratory/OWASP juice-shop/OWASP juice-shop задания.md",
     "Tools/SQLmap.md",
+    "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
+    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
+    "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
     "Tools/Сканеры/NMAP.md",
     "ZZZimages/Pasted image 20260106165950.png",
     "Types of vulnerabilities/SQL Injection/Blind SQL с использованием OAST.md",
-    "Types of vulnerabilities/SQL Injection/SQL injection UNION attacks.md",
-    "Home Laboratory/OWASP juice-shop/OWASP juice-shop задания.md",
     "Types of vulnerabilities/SQL Injection/Использование Blind SQL injection для временных задержек.md",
     "Types of vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
     "Types of vulnerabilities/SQL Injection/Error-based SQL injection - SQL атака на основе ошибок.md",
-    "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
     "План обучения/План обучения.md",
     "Tools/NetCat.md",
     "Theory/уязвимости которые следует проверять при работе с токенами.md",
