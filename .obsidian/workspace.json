@@ -41,15 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/SQLmap.md",
+                "file": "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SQLmap"
+              "title": "Возникновение уязвимости такого типа и понимание эксплуатации"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -198,14 +199,18 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "4aa15f867b1ad1a9",
+  "active": "913cd6e8594d187f",
   "lastOpenFiles": [
+    "Types of vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
+    "Home Laboratory/OWASP juice-shop.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Варианты атак.md",
+    "Tools/SQLmap.md",
+    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
+    "Tools/Сканеры/ffuf.md",
     "Tools/Сканеры/Feroxbuster.md",
     "План обучения/План обучения.md",
     "План обучения/Заметки по обучению и прогресс.md",
-    "Home Laboratory/OWASP juice-shop задания.md",
-    "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
-    "Tools/SQLmap.md",
     "Home Laboratory/0Оглавление.md",
     "Types of vulnerabilities/SQL Injection/Внедрение SQL в разлинчых контекстах.md",
     "Types of vulnerabilities/SQL Injection/Detect SQL injection.md",
@@ -223,10 +228,6 @@
     "Tools/HashCat.md",
     "Tools/Github programs Linux.md",
     "Tools/fast search/Bash commands.md",
-    "Tools/Shells/Shells.md",
-    "Tools/Shells/GoodReverseShell.md",
-    "Theory/Шаги для взлома веба.md",
-    "Theory/Управления сессиями cookie или tokens.md",
     "Home Laboratory/OWASP juice-shop",
     "Home Laboratory",
     "План обучения",
