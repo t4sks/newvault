@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
+                "file": "План обучения/План обучения.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Карта раздела Types Of Vulnerabilities in Web"
+              "title": "План обучения"
             }
           },
           {
@@ -49,8 +49,7 @@
               "title": "links on useful data"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -199,11 +198,12 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "7f5c1166686e228b",
+  "active": "4aa15f867b1ad1a9",
   "lastOpenFiles": [
-    "Theory/links on useful data.md",
-    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
+    "План обучения/Заметки по обучению и прогресс.md",
     "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
+    "Theory/links on useful data.md",
     "Tools/Сканеры/ffuf.md",
     "Home Laboratory/OWASP juice-shop.md",
     "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
@@ -226,7 +226,6 @@
     "Tools/Shells/GoodReverseShell.md",
     "Tools/Shells/Shells.md",
     "Tools/fast search/Bash commands.md",
-    "Tools/Сканеры/SSTIMap.md",
     "ZZZimages/Pasted image 20260106165950.png",
     "Home Laboratory/OWASP juice-shop",
     "Home Laboratory",
