@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
+                "file": "Types of vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Возникновение уязвимости такого типа и понимание эксплуатации"
+              "title": "0Определение File upload vulnerabilities"
             }
           },
           {
@@ -41,15 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Theory/links on useful data.md",
+                "file": "Types of vulnerabilities/File Upload vulnerabilities/Как предотвратить.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "links on useful data"
+              "title": "Как предотвратить"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -106,7 +107,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 327.5
   },
   "right": {
     "id": "9da9fc69eb610090",
@@ -198,12 +199,18 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "4aa15f867b1ad1a9",
+  "active": "913cd6e8594d187f",
   "lastOpenFiles": [
+    "Types of vulnerabilities/File Upload vulnerabilities/Загрузка файлов с помощью PUT.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Как предотвратить.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости File upload.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Гонки потоков при загрузку файлов.md",
+    "Theory/links on useful data.md",
+    "Types of vulnerabilities/File Upload vulnerabilities/Использование уязвимости без RCE.md",
+    "План обучения/План обучения.md",
     "План обучения/Заметки по обучению и прогресс.md",
     "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
-    "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости такого типа и понимание эксплуатации.md",
-    "Theory/links on useful data.md",
     "Tools/Сканеры/ffuf.md",
     "Home Laboratory/OWASP juice-shop.md",
     "Types of vulnerabilities/SQL Injection/0Определение SQL Injection.md",
@@ -220,12 +227,6 @@
     "Tools/pspy64.md",
     "Tools/NetCat.md",
     "Tools/jwt_tool.md",
-    "Tools/John the ripper.md",
-    "Tools/HashCat.md",
-    "Tools/Github programs Linux.md",
-    "Tools/Shells/GoodReverseShell.md",
-    "Tools/Shells/Shells.md",
-    "Tools/fast search/Bash commands.md",
     "ZZZimages/Pasted image 20260106165950.png",
     "Home Laboratory/OWASP juice-shop",
     "Home Laboratory",
