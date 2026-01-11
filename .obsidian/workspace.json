@@ -49,7 +49,8 @@
               "title": "OWASP juice-shop"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -198,13 +199,14 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "4aa15f867b1ad1a9",
+  "active": "913cd6e8594d187f",
   "lastOpenFiles": [
+    "Types of vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
+    "Tools/SQLmap.md",
     "План обучения/План обучения.md",
     "Home Laboratory/OWASP juice-shop.md",
     "Types of vulnerabilities/File Upload vulnerabilities/Как предотвратить.md",
     "Types of vulnerabilities/File Upload vulnerabilities/Загрузка файлов с помощью PUT.md",
-    "Types of vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
     "Types of vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости File upload.md",
     "Types of vulnerabilities/File Upload vulnerabilities/Гонки потоков при загрузку файлов.md",
     "Theory/links on useful data.md",
@@ -221,7 +223,6 @@
     "Home Laboratory/0Оглавление.md",
     "Tools/Scripts for Escalate.md",
     "Tools/Searchsploit.md",
-    "Tools/SQLmap.md",
     "Tools/Wappalyzer.md",
     "Tools/pspy64.md",
     "Tools/NetCat.md",
