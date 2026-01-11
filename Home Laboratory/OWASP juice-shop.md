@@ -50,3 +50,29 @@ Exfiltrate the entire DB schema definition via SQL Injection.
 ```
 добавил UNION и поугадывал количество возвращаемых столбцов, в итоге получил все записи из этой таблицы
 
+
+
+
+
+
+
+
+
+        "id": "table",
+        "name": "Products",
+        "description": "Products",
+        "price": 7,
+        "deluxePrice": "CREATE TABLE `Products` 
+        (`id` INTEGER PRIMARY KEY AUTOINCREMENT,
+         `name` VARCHAR(255),
+          `description` VARCHAR(255),
+           `price` DECIMAL,
+           `deluxePrice` DECIMAL,
+           `image` VARCHAR(255),
+           `createdAt` DATETIME NOT NULL,
+           `updatedAt` DATETIME NOT NULL,
+           `deletedAt` DATETIME)",
+        "image": null,
+        "createdAt": null,
+        "updatedAt": null,
+        "deletedAt": null
