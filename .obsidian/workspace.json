@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Path Traversal/0Определение Path traversal.md",
+                "file": "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0Определение Path traversal"
+              "title": "Карта раздела Types Of Vulnerabilities in Web"
             }
           },
           {
@@ -200,9 +200,11 @@
   },
   "active": "4aa15f867b1ad1a9",
   "lastOpenFiles": [
-    "Types of vulnerabilities/Server Side Vulnerabilities/Path Traversal/0Определение Path traversal.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
     "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
+    "План обучения/План обучения.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
+    "Home Laboratory/0Оглавление.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Path Traversal/0Определение Path traversal.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities",
     "Types of vulnerabilities/Server Side Vulnerabilities/1Access Control - контроль доступа.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/2Authentication vulnerabilities.md",
@@ -214,7 +216,6 @@
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Гонки потоков при загрузку файлов.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости File upload.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
-    "План обучения/План обучения.md",
     "Types of vulnerabilities/Без названия.md",
     "Tools/SQLmap.md",
     "Home Laboratory/OWASP juice-shop.md",
@@ -227,7 +228,6 @@
     "Theory/уязвимости которые следует проверять при работе с токенами.md",
     "Theory/Управления сессиями cookie или tokens.md",
     "Theory/Проверки для web чтобы вызывать ошибки.md",
-    "Home Laboratory/0Оглавление.md",
     "ZZZimages/Pasted image 20260106165950.png",
     "Home Laboratory/OWASP juice-shop",
     "Home Laboratory",
