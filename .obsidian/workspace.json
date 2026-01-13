@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
+                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0Определение Authentication vulnerabilities"
+              "title": "Уязвимость входа по паролю"
             }
           },
           {
@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
+                "file": "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Внедрение SQL в разлинчых контекстах.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Карта раздела Types Of Vulnerabilities in Web"
+              "title": "Внедрение SQL в разлинчых контекстах"
             }
           },
           {
@@ -200,9 +200,14 @@
   },
   "active": "4aa15f867b1ad1a9",
   "lastOpenFiles": [
+    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Внедрение SQL в разлинчых контекстах.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/0Определение SQL Injection.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Detect SQL injection.md",
     "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
     "План обучения/План обучения.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
     "Home Laboratory/0Оглавление.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Path Traversal/0Определение Path traversal.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities",
@@ -222,12 +227,7 @@
     "Theory/links on useful data.md",
     "План обучения/Заметки по обучению и прогресс.md",
     "Tools/Сканеры/ffuf.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/0Определение SQL Injection.md",
     "Theory/HTTP authentication.md",
-    "Theory/Шаги для взлома веба.md",
-    "Theory/уязвимости которые следует проверять при работе с токенами.md",
-    "Theory/Управления сессиями cookie или tokens.md",
-    "Theory/Проверки для web чтобы вызывать ошибки.md",
     "ZZZimages/Pasted image 20260106165950.png",
     "Home Laboratory/OWASP juice-shop",
     "Home Laboratory",
