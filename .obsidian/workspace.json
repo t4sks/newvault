@@ -22,6 +22,18 @@
             }
           },
           {
+            "id": "c752a5c82dc82c8c",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "примечания к выпуску 1.11.4"
+            }
+          },
+          {
             "id": "7f5c1166686e228b",
             "type": "leaf",
             "state": {
@@ -49,7 +61,8 @@
               "title": "OWASP juice-shop"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -198,7 +211,7 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "4aa15f867b1ad1a9",
+  "active": "c752a5c82dc82c8c",
   "lastOpenFiles": [
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
