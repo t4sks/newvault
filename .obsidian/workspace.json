@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/0Определение SQL Injection.md",
+                "file": "План обучения/План обучения.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0Определение SQL Injection"
+              "title": "План обучения"
             }
           },
           {
@@ -200,17 +200,17 @@
   },
   "active": "4aa15f867b1ad1a9",
   "lastOpenFiles": [
+    "Home Laboratory/OWASP juice-shop.md",
+    "Home Laboratory/0Оглавление.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/0Определение SQL Injection.md",
     "Tools/SQLmap.md",
-    "Home Laboratory/OWASP juice-shop.md",
+    "План обучения/План обучения.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Внедрение SQL в разлинчых контекстах.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Detect SQL injection.md",
     "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
-    "План обучения/План обучения.md",
-    "Home Laboratory/0Оглавление.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Path Traversal/0Определение Path traversal.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities",
     "Types of vulnerabilities/Server Side Vulnerabilities/1Access Control - контроль доступа.md",
