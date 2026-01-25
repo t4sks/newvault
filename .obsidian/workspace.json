@@ -34,9 +34,21 @@
               "icon": "lucide-file",
               "title": "Уязвимости в многофакторной аутентификации"
             }
+          },
+          {
+            "id": "d9aaf6cf1c446507",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.5"
+              },
+              "icon": "lucide-book-up",
+              "title": "примечания к выпуску 1.11.5"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -185,7 +197,7 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "913cd6e8594d187f",
+  "active": "d9aaf6cf1c446507",
   "lastOpenFiles": [
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимости в многофакторной аутентификации.md",
