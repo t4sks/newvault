@@ -41,16 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимости в многофакторной аутентификации.md",
+                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Уязвимости в многофакторной аутентификации"
+              "title": "0Определение Authentication vulnerabilities"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -199,12 +199,13 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "913cd6e8594d187f",
+  "active": "ccfc82d088495e06",
   "lastOpenFiles": [
-    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимости в многофакторной аутентификации.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Защита механизмов аутентификации.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Другие механизмы аутентификации.md",
-    "План обучения/План обучения.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимости в многофакторной аутентификации.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
+    "План обучения/План обучения.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
     "My Daily Journal/Pasted image 20250918153401.png",
     "My Daily Journal/Pasted image 20250918153425.png",
@@ -230,7 +231,6 @@
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Гонки потоков при загрузку файлов.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости File upload.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
-    "Types of vulnerabilities/Без названия.md",
     "ZZZimages/Pasted image 20260106165950.png",
     "Home Laboratory/OWASP juice-shop",
     "Home Laboratory",
