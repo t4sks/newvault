@@ -283,7 +283,7 @@ $col = "`" . str_replace("`", "", $sortItem) . "`";
 $stmt = $pdo->prepare("SELECT $col FROM inventory WHERE user_id = ? ORDER BY item_name ASC");
         $stmt->execute([$userId]);
 ```
-по факту ин нашего параметра `$sortItem` мы получаем пусть параметр `x` тогда после первой строчки будет
+по факту из нашего параметра `$sortItem` мы получаем пусть параметр `x` тогда после первой строчки будет
 ```sql
 $col = "`x`"
 ```

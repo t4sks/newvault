@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Shells/Shells.md",
+                "file": "Labs writeups/HTB/Medium Labs/Browsed.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Shells"
+              "title": "Browsed"
             }
           }
         ],
@@ -201,9 +201,15 @@
   },
   "active": "ccfc82d088495e06",
   "lastOpenFiles": [
+    "Python/Start.md",
+    "Theory/Проверки для web чтобы вызывать ошибки.md",
+    "Theory/Управления сессиями cookie или tokens.md",
+    "Labs writeups/HTB/Medium Labs/Browsed.md",
+    "ZZZimages/Pasted image 20260130135557.png",
+    "Labs writeups/HTB/Medium Labs/0Gavel.md",
+    "Tools/Shells/Shells.md",
     "Theory/Privilege Escalation Linux.md",
     "Tools/Shells/GoodReverseShell.md",
-    "Tools/Shells/Shells.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости File upload.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Гонки потоков при загрузку файлов.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Загрузка файлов с помощью PUT.md",
@@ -224,11 +230,6 @@
     "My Daily Journal/First note in obsidian.md",
     "My Daily Journal/2025-09-20.md",
     "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
-    "Tools/SQLmap.md",
-    "Home Laboratory/OWASP juice-shop.md",
-    "Home Laboratory/0Оглавление.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/0Определение SQL Injection.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Внедрение SQL в разлинчых контекстах.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities",
     "Types of vulnerabilities/Server Side Vulnerabilities/Path Traversal",
     "ZZZimages/Pasted image 20260106165950.png",
@@ -246,7 +247,6 @@
     "Новый текстовый документ.txt",
     "Без названия 1",
     "Без названия.canvas",
-    "Без названия.base",
-    "ZZZimages/Pasted image 20251202162756.png"
+    "Без названия.base"
   ]
 }
