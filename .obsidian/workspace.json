@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Tools/Shells/GoodReverseShell.md",
+                "file": "Tools/Shells/Shells.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "GoodReverseShell"
+              "title": "Shells"
             }
           }
         ],
@@ -201,14 +201,15 @@
   },
   "active": "ccfc82d088495e06",
   "lastOpenFiles": [
+    "Theory/Privilege Escalation Linux.md",
+    "Tools/Shells/GoodReverseShell.md",
+    "Tools/Shells/Shells.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости File upload.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Гонки потоков при загрузку файлов.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Загрузка файлов с помощью PUT.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Использование уязвимости без RCE.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Как предотвратить File Upload.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
-    "Tools/Shells/Shells.md",
-    "Tools/Shells/GoodReverseShell.md",
     "Tools/Сканеры/ffuf.md",
     "Tools/Сканеры/GoBuster.md",
     "Tools/Сканеры/NMAP.md",
@@ -228,7 +229,6 @@
     "Home Laboratory/0Оглавление.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/0Определение SQL Injection.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Внедрение SQL в разлинчых контекстах.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/SQL Injection/Все о бд при использовании SQL атак.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities",
     "Types of vulnerabilities/Server Side Vulnerabilities/Path Traversal",
     "ZZZimages/Pasted image 20260106165950.png",
