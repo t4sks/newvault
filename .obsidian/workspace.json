@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/OS command injection/0Определение Commmand Injection.md",
+                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities/0Определение Business logic vulnerabilities.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0Определение Commmand Injection"
+              "title": "0Определение Business logic vulnerabilities"
             }
           }
         ],
@@ -201,8 +201,12 @@
   },
   "active": "ccfc82d088495e06",
   "lastOpenFiles": [
-    "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities/Примеры уязвимостей.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities/0Определение Business logic vulnerabilities.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/OS command injection/0Определение Commmand Injection.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities",
+    "Types of vulnerabilities/Карта раздела Types Of Vulnerabilities in Web.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/0Определение Authentication vulnerabilities.md",
     "Tools/Shells/GoodReverseShell.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/OS command injection",
@@ -226,10 +230,7 @@
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Загрузка файлов с помощью PUT.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Использование уязвимости без RCE.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Как предотвратить File Upload.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/0Определение File upload vulnerabilities.md",
     "Tools/Сканеры/GoBuster.md",
-    "Tools/Сканеры/NMAP.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Защита механизмов аутентификации.md",
     "My Daily Journal/Pasted image 20250918153401.png",
     "My Daily Journal/Pasted image 20250918153425.png",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities",
@@ -246,7 +247,6 @@
     "ZZZimages/Pasted image 20251213193732.png",
     "pentest.json",
     "Новый текстовый документ.txt",
-    "Без названия 1",
     "Без названия.canvas"
   ]
 }
