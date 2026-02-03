@@ -1,7 +1,9 @@
 ## Оглавление
 [[#Чрезмерное доверие к средствам на стороне клиента]]
 	[[#Lab Excessive trust in client-side controls]]
-	
+[[#Отсутствие обработки нетипичного ввода]]
+	[[#High-level logic vulnerability]]
+	[[#Low-level logic flaw]]
 
 ---
 ## Чрезмерное доверие к средствам на стороне клиента
@@ -40,3 +42,10 @@ if ($transferAmount <= $currentBalance) {
 Это поможет выявить слабую валидацию, которая позволяет манипулировать приложением необычными способами. Помните что если вы нашли на целевом сайте одну форму которая небезопасно обрабатывает нетипичный ввод, скорее всего другие формы имеют те же проблемы
 ### High-level logic vulnerability 
 Здесь необходимо купить куртку только в отличии от предыдущей работы, тут нет цены, но мы можем играться с количеством делая товар отрицательным, тем самым убирая цену в -, то есть если мы закажем куртку и уравновесим ее отрицательными товарами то сможем заказать потому что общая цена опустится нижу тогда получим что укладываемся в наш лимит и заказываем
+### Low-level logic flaw 
+здесь нет ограничений на количество товаров, по факту я могу заказывать 99 товаров за раз и смотреть за их переполнением и поэтому возникает уязвимость которая дает переполнение баланса, то есть сначала мы уходим в огромную цену, после переполнения в огромный минус и компенсируем его до тех пор пока не найдем ту сумму по которой мы сможем купить, Intruder это автоматизирует 
+
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@dontwannacry.com.@exploit-0aeb0057039bc71482db2e7a015d00ca.exploit-server.net
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@dontwannacry.com.@exploit-0aeb0057039bc71482db2e7a015d00ca.exploit-server.net
