@@ -9,6 +9,13 @@
 	[[#Доверенные пользователи не всегда останутся доверенными]]
 		[[#Пример Lab Inconsistent security controls]]
 	[[#Пользователи не всегда будут предоставлять обязательный ввод]]
+		[[#Insufficient workflow validation]]
+		[[#Authentication bypass via flawed state machine]]
+[[#Изъяны специфичные для предметной области]]
+	[[#Пример Lab Flawed enforcement of business rules]]
+	[[#Пример Infinite money logic flaw]]
+	[[#Предоставление оракула шифрования]]
+		[[#Пример Lab Authentication bypass via encryption oracle]]
 
 ---
 ## Чрезмерное доверие к средствам на стороне клиента
@@ -125,3 +132,5 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 ## Несоответствия парсера адресов электронной почты 
 Некоторые сайты парсят адреса электронной почты чтобы извлечь домен и определить к какой организации принадлежит владелец адреса
+
+Invalid email address: sssssssssadministrator:1770195909430     
