@@ -27,30 +27,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities/Примеры уязвимостей для Business Logic Vulnerabilities.md",
+                "file": "Tools/Сканеры/ffuf.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Примеры уязвимостей для Business Logic Vulnerabilities"
-            }
-          },
-          {
-            "id": "ccfc82d088495e06",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Другие механизмы аутентификации.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Другие механизмы аутентификации"
+              "title": "ffuf"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -199,12 +185,13 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "ccfc82d088495e06",
+  "active": "913cd6e8594d187f",
   "lastOpenFiles": [
+    "Labs writeups/HTB/Easy Labs/Facts.md",
+    "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities/Примеры уязвимостей для Business Logic Vulnerabilities.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Другие механизмы аутентификации.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Защита механизмов аутентификации.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимости в многофакторной аутентификации.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities/Примеры уязвимостей для Business Logic Vulnerabilities.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/OS command injection/0Определение Commmand Injection.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Уязвимость входа по паролю.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Bisiness logic vulnerabilities/0Определение Business logic vulnerabilities.md",
@@ -230,7 +217,6 @@
     "Theory/Privilege Escalation Linux.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Возникновение уязвимости File upload.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Гонки потоков при загрузку файлов.md",
-    "Types of vulnerabilities/Server Side Vulnerabilities/File Upload vulnerabilities/Загрузка файлов с помощью PUT.md",
     "My Daily Journal/Pasted image 20250918153401.png",
     "My Daily Journal/Pasted image 20250918153425.png",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities",
