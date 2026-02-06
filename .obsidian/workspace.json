@@ -50,7 +50,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -199,7 +199,7 @@
       "bases:Создать новую базу": false
     }
   },
-  "active": "913cd6e8594d187f",
+  "active": "ccfc82d088495e06",
   "lastOpenFiles": [
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Другие механизмы аутентификации.md",
     "Types of vulnerabilities/Server Side Vulnerabilities/Authentication vulnerabilities/Защита механизмов аутентификации.md",
