@@ -3,6 +3,16 @@
 
 ---
 # Оглавление
+[[#Последствия SSRF]]
+[[#Распространенные атаки SSRF]]
+[[#Атаки SSRF на сервер]]
+[[#Пример Lab Basic SSRF against the local server]]
+[[#Атаки SSRF на другие бэкенд системы]]
+[[#Пример Lab Basic SSRF against another back-end system]]
+[[#Обход типичных защит от SSRF]]
+[[#SSRF с фильтрами ввода на основе черного списка]]
+[[#Пример Lab SSRF with whitelist-based input filter]]
+[[#Обход фильтров SSRF через Open Redirect]]
 
 ---
 
@@ -108,3 +118,4 @@ Content-Length: 118
 stockApi=http://weliketoshop.net/product/nextProduct?currentProductId=6&path=http://192.168.0.68/admin
 ```
 Данная SSRF работает потому что приложение сначала проверяет что переданный URL в параметре StockAPI находится на разрешенном домене, что по факту так и есть, затем приложение запрашивает указанный URL, что инициализирует Open Redirect. Приложение следует переадресации и выполняет запрос к внешнему URL, что инициирует Open Redirect, приложение следует переадресация и выполняет запрос к внутреннему URL по выбору атакующего 
+## Пример Lab: SSRF with filter bypass via open redirection vulnerability
