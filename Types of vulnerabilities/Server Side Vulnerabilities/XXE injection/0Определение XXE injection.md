@@ -3,8 +3,31 @@
 
 ---
 # Оглавление
-
-
+[[#Возникновение уязвимости XXE]]
+[[#Типы атак XXE]]
+[[#Эксплуатация XXE для извлечения файлов]]
+	[[#Пример Lab Exploiting XXE using external entities to retrieve files]]
+[[#Эксплуатация XXE для выполнения SSRF атак]]
+	[[#Пример Lab Exploiting XXE to perform SSRF attacks]]
+[[#Слепые XXE уязвимости]]
+[[#Обнаружение слепой XXE с использованием OAST]]
+	[[#Пример Lab Blind XXE with out-of-band interaction]]
+	[[#Пример Lab Blind XXE with out-of-band interaction via XML parameter entities]]
+[[#Эксплуатация слепой XXE для внеполосной эксфильтрации данных]]
+	[[#Пример Lab Exploiting blind XXE to exfiltrate data using a malicious external DTD]]
+[[#Эксплуатация слепой XXE для извлечения данных через сообщения об ошибках]]
+	[[#Пример Lab Exploiting blind XXE to retrieve data via error messages]]
+[[#Эксплуатация слепой XXE путем повторного использования локального DTD]]	
+[[#Поиск существующего DTD для повторного использования]]
+	[[#Пример Lab Exploiting XXE to retrieve data by repurposing a local DTD]]
+[[#Как найти скрытую поверхность атаки для XXE инъекций]]
+[[#Атаки XInclude]]
+	[[#Пример Lab Exploiting XInclude to retrieve files]]
+[[#Атаки XXE через загрузку файла]]
+	[[#Пример Lab Exploiting XXE via image file upload]]
+[[#Атаки XXE через модифицированный тип содержимого]]
+[[#Как находить и тестировать XXE уязвимости]]
+[[#Как предотвратить XXE-уязвимости]]
 
 ---
 
