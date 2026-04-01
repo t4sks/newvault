@@ -103,5 +103,27 @@ DELETE /api/user/[Username String]
 - Воспользоваться различиями в логике обработки. Например API может быть безопасным при обработке в формате JSON, но уязвимым к внедрению при работе с XML
 
 Чтобы изменить тип содержимого модифицируйте заголовок `Content-Type`, а затем соответствующим образом переформатируйте тело запроса. Вы можете использовать расширение `Content type converter`, чтобы автоматически конвертировать данные в запросах между XML и JSON
-# Пример 
+# Пример Lab: Finding and exploiting an unused API endpoint
+Для решения лабораторной я воспользовался расширением `JSLinkFinder`, которое выдало эндоинт следующего плана: `/api/products/1/price`А так же js документ где содержится 
 
+```JS
+const loadPricing = (productId) => {
+    const url = new URL(location);
+    fetch(`//${url.host}/api/products/${encodeURIComponent(productId)}/price`)
+        .then(res => res.json())
+        .then(handleResponse(getAddToCartForm()));
+};
+```
+
+что тоже указывает на этот URL, для него необходимо исследовать типы запросов которые он может принимать, для этого воспользуемся Intruder и используем предложенный лист http verbs, далее заметим что на все запросы кроме `GET` и `PATCH` сервер ответ 405, а на `PATCH` 401, и сказал что мы не авторизованы, заходим и получаем на метод `PATCH`, далее после авторизации и отправки запроса получим следующее 
+
+```HTTP
+HTTP/2 400 Bad Request
+Content-Type: application/json; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+Content-Length: 93
+
+{"type":"ClientError","code":400,"error":"Only 'application/json' Content-Type is supported"}
+```
+
+меняем `Content-Type` на `application/json` и добавляем {"price":0} после чего нам приходит 200 и мы спокойно можем купить нашу куртку за 0$
