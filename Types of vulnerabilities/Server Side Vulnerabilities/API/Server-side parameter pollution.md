@@ -100,4 +100,78 @@ GET /users/search?name=peter&name=carlos&publicProfile=true
 - Node.js / express учитывает только первый параметр и в итоге поиск будет по peter и результат не изменится
 
 Если удается переопределить исходный параметр, это может дать возможности для эксплуатации. Например можно добавить `name=administrator` и это иногда позволяет войти в систему как пользователь `administrator`
-# Пример 
+# Пример Lab: Exploiting server-side parameter pollution in a query string
+Для решения необходимо использовать эндпоинт `/forgot-password` в котором мы проверяем через внедрение символов, может ли мы что то сделать, для начала проверим что нам вернет `#` в поле username, 
+
+```HTTP
+POST /forgot-password HTTP/2
+Host: 0a3300a704d48d10801e1c4200070018.web-security-academy.net
+Cookie: session=GNg77mprWSSZRNlVb5DwiHU1CyyVllkQ
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://0a3300a704d48d10801e1c4200070018.web-security-academy.net/forgot-password
+Content-Type: x-www-form-urlencoded
+Content-Length: 63
+Origin: https://0a3300a704d48d10801e1c4200070018.web-security-academy.net
+Sec-Fetch-Dest: empty
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-origin
+Priority: u=0
+Te: trailers
+
+csrf=3CVxcVU3upFOe6VJqjUpdPR3zqeAAaUF&username=administrator%23
+
+HTTP/2 400 Bad Request
+Content-Type: application/json; charset=utf-8
+X-Frame-Options: SAMEORIGIN
+Content-Length: 33
+
+{"error": "Field not specified."}
+```
+
+Поле не определено при этом если, значит при обрезании запроса пропадает какой то параметр который влияет на отображение, пробуем `&` и получим что параметр не поддерживается, при этом если указать потом параметр `username=что угодно` он все равно вернет валидный ответ, а когда после второго параметра ставим `#` тогда опять ошибка с тем что какое то поле не определено, поэтому нужно попробовать перебрать этот параметр, с помощью интрудера, и получим что этот параметр `field`, причем он возвращает содержимое, тогда нужно найти то что нам надо вернуть, тут я сдался и подсмотрел райтап, там указан файл js и на нем мы найдем параметр на фронтенде `reset_token` он вероятнее всего есть и на api поэтому укажем его и нам вернет токен, после чего сбрасываем пароль и заходим под admnistratot и удаляем нашего carlos
+
+---
+# Проверка загрязнения параметров в REST путях
+В RESTfil API имена и значения параметров могут размещаться не в строке запроса а прямо в пути URL. Например путь: 
+
+```
+text/api/users/123
+```
+
+Можно разложить так:
+
+- `/api` это корневой API эндпоинт
+- `/users` ресурс, в данном примере пользователи
+- `/123` параметр, здесь идентификатор конкретного пользователя
+
+Представим приложение которое позволяет редактировать профили пользователей по их имени. Запросы отправляются на такой эндпоинт:
+
+```
+GET /edit_profile.php?name=peter
+```
+
+Это приводит к следующему запросу на стороне сервера:
+
+```
+GET /api/private/users/peter
+```
+
+Злоумышленник может попытаться манипулировать параметрами в пути URL на стороне сервера, чтобы эксплуатировать API. Для проверки добавьте последовательности path traversal, изменяющие параметры, и наблюдайте за реакцией приложения
+
+Можно отправить URL `peter/../admin` в качестве значения в параметре `name`: 
+
+```
+GET /edit_profile.php?name=peter%2f..%2fadmin
+```
+
+Это может привести к следующему запросу на стороне сервера: 
+
+```
+GET /api/private/users/peter/../admin
+```
+
+Если серверный клиент или бэкенд API нормализует путь, он может разрешиться в `/api/private/users/admin`
+# Пример Lab: Exploiting server-side parameter pollution in a REST URL
