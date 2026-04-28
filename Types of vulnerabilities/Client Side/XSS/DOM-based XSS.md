@@ -217,7 +217,22 @@ eval('var data = "reflected string"');
 ```
 # Пример Reflected DOM XSS 
 
-ДОДЕЛАТЬ
+в этой работе мы можем контролировать параметр `searchTerm`, если обойдем фильтр, далее так как наша строка попадает в `eval`
+
+```js
+ if (this.readyState == 4 && this.status == 200) {
+            eval('var searchResultsObj = ' + this.responseText);
+            displaySearchResults(searchResultsObj);
+        }
+```
+
+по факту получаем, что если сможем вырваться из `searchTerm` тогда сможем выполнить код, для этого изначально в `searchTerm`: `{"results":[],"searchTerm":"123"}` для того чтобы сбежать используем `\"` после чего получим что `{"results":[],"searchTerm":"\\""}` и у нас получилось вырваться за пределы строки, теперь необходимо понимать  как работает js чтобы продвинуться дальше. После побега необходимо корректно закрыть выражение то есть `}` а уже до нее можно вставлять payload, по факту мы получаем присваивание в eval, поэтому выполним js код как арифметическое выражение, тогда в итоге это будет выглядеть как то так
+
+```js
+var searchResultsObj = {"results":[],"searchTerm":"\\"+alert(1)}//"}
+```
+
+так же сработает и с `-` и с `+`
 
 ---
 
@@ -228,3 +243,52 @@ element.innerHTML = comment.author
 ```
 
 # Пример Stored DOM XSS
+уязвимость находится в функции которая должна защищать от XSS, но такая санитизация слабая
+
+```js
+function escapeHTML(html) {
+        return html.replace('<', '&lt;').replace('>', '&gt;');
+    }
+```
+
+в результате оно удаляет не рекурсивно, а только первый встреченный объект в результате мы можем просто дописать `<>` перед объектом и далее уже наш payload, после чего получим решение.
+
+---
+# Какие sinks могут приводить к DOM XSS уязвимостям?
+Ниже приведены некоторые из основных sinks, которые могут приводить к DOM XSS уязвимостям
+
+```js
+document.write()
+document.writeln()
+document.domain
+element.innerHTML
+element.outerHTML
+element.insertAdjacentHTML
+element.onevent
+```
+
+Следующие функции jQuery так же являются sinks, которые могут приводить к DOM XSS уязвимостям
+
+```
+add()
+after()
+append()
+animate()
+insertAfter()
+insertBefore()
+before()
+html()
+prepend()
+replaceAll()
+replaceWith()
+wrap()
+wrapInner()
+wrapAll()
+has()
+constructor()
+init()
+index()
+jQuery.parseHTML()
+$.parseHTML()
+```
+
