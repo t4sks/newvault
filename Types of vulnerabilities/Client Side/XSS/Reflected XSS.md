@@ -1,4 +1,11 @@
+[[#Что такое Reflected XSS]]
+	[[#Пример Lab Reflected XSS into HTML context with nothing encoded]]
+[[#Влияние атак Reflected XSS]]
+[[#Разновидности Reflected XSS]]
+[[#Как находить и тестировать уязвимости Reflected XSS]]
+[[#Частые вопросы по отраженному XSS]]
 
+---
 # Что такое Reflected XSS
 Reflected XSS возникает тогда, когда приложение получает данные в HTTP-запросе и включает эти данные в непосредственный ответ небезопасным образом.
 

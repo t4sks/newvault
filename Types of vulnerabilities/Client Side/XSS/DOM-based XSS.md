@@ -1,3 +1,24 @@
+[[#Что такое DOM-based XSS]]
+[[#Как тестировать DOM-based XSS]]
+[[#Тестирование HTML-приемников (sinks)]]
+[[#Тестирование приемников, исполняющих JavaScript код]]
+[[#Тестирование DOM XSS с DOM Invader]]
+[[#Эксплуатация DOM XSS с разными источниками и приемниками]]
+	[[#Пример Lab DOM XSS in `document.write` sink using source `location.search`]]
+	[[#Пример Lab DOM XSS in `document.write` sink using source `location.search` inside a select element]]
+	[[#Пример Lab DOM XSS in `innerHTML` sink using source `location.search`]]
+[[#Источники и приемники в сторонних зависимостях]]
+[[#DOM XSS в jQuery]]
+	[[#Пример DOM XSS in jQuery anchor href attribute sink using location.search source]]
+	[[#Пример Lab DOM XSS in jQuery selector sink using a hashchange event]]
+[[#DOM XSS в AngularJS]]
+	[[#Пример Lab DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded]]
+[[#DOM XSS в сочетании с отраженными и хранимыми данными]]
+	[[#Пример Reflected DOM XSS]]
+	[[#Пример Stored DOM XSS]]
+[[#Какие sinks могут приводить к DOM XSS уязвимостям?]]
+
+---
 # Что такое DOM-based XSS
 Уязвимости типа DOM-based XSS обычно возникают когда JavaScript получает данные из источника, контролируемого атакующим( например из URL ), и передает их в приемник, поддерживающий динамическое выполнение кода -такие как `eval()` или `innerHTML`. Это позволяет атакующим запускать произвольный javaScript что зачастую дает им возможность перехватывать учетные записи пользователей 
 

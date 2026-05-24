@@ -1,3 +1,10 @@
+[[#Что такое Stored XSS]]
+[[#Пример Lab Stored XSS into HTML context with nothing encoded]]
+[[#Влияние атак Stored XSS]]
+[[#Stored XSS в различных контекстах]]
+[[#Как находить и тестировать уязвимости Stored XSS]]
+
+---
 # Что такое Stored XSS 
 Stored XSS так же известный как second-order или persistent XSS возникает, когда приложение получает данные из недоверенного источника и затем включает эти данные в своих последующих HTTP ответах в небезопасной форме
 
