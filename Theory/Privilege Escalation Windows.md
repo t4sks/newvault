@@ -23,7 +23,7 @@ C:\Windows\system32\sysprep.inf
 C:\Windows\system32\sysprep\sysprep.xml
 ```
 
-exaple what can be in the file:
+example what can be in the file:
 ```cmd
 <Credentials>
     <Username>Administrator</Username>
@@ -40,7 +40,7 @@ type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\Conso
 <mark style="background: #D00C0CA6;">ATTENTION - use only in cmd!!</mark> because powershell think what %userprofile% it's variable
 
 #### Saved accounts
-windiws can save users data and after use it, to show this data use command:
+windows can save users data and after use it, to show this data use command:
 ```cmd
 cmdkey /list
 ```
