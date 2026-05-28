@@ -55,3 +55,5 @@ C:\Windows\System32\inetsrv\w3wp.exe
 3. Вы просто не до конца понимаете оповещение и нуждаетесь в помощи более опытных аналитиков 
 
 ---
+# playbook для **Unusual Login Location Workbook** 
+![[Pasted image 20260528201947.png]]
