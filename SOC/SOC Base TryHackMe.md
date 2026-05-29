@@ -91,4 +91,5 @@ SIEM - Security Information and Event managment system
 - /var/log/apache - логи апачи
 
 ---
-# Splunk SIEM 
+# SOAR
+Система которая объединяет все имнструменты сока в одном приложении и позволяет работать только в нем
