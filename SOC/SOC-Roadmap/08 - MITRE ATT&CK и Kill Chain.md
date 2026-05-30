@@ -7,101 +7,144 @@ section: 08
 
 [[00 - SOC Junior Roadmap (BiZone)]]
 
-> Это каркас мышления SOC-аналитика. Учить первым после баз ОС.
+> **Лаба.** Тут лаба = сайт attack.mitre.org + ATT&CK Navigator (браузер). Практика: бери любую атаку из своих разделов (LSASS-дамп, Kerberoasting) и раскладывай по тактикам/техникам. Это каркас мышления SOC — учи первым после баз ОС.
+>
+> **Формат:** 📖 читать · 🛠 трогать · 💬 промпт мне.
+
+---
 
 ## Cyber Kill Chain (Lockheed Martin)
 
 - [ ] 1. Reconnaissance — разведка
 - [ ] 2. Weaponization — создание нагрузки
-- [ ] 3. Delivery — доставка (фишинг, USB и т.д.)
-- [ ] 4. Exploitation — эксплуатация уязвимости
-- [ ] 5. Installation — закрепление (см. persistence)
+- [ ] 3. Delivery — доставка (фишинг, USB)
+- [ ] 4. Exploitation — эксплуатация
+- [ ] 5. Installation — закрепление
 - [ ] 6. Command & Control — связь с C2
-- [ ] 7. Actions on Objectives — достижение цели (эксфильтрация, шифрование)
-- [ ] Понимать: на каждом этапе свои детекты и точки разрыва цепочки
+- [ ] 7. Actions on Objectives — цель (эксфильтрация, шифрование)
+- [ ] На каждом этапе — свои детекты и точки разрыва
+
+📖 **Читать:** Habr (Panda) «Что такое Cyber Kill Chain» https://habr.com/ru/company/panda/blog/327488/ ; Habr (SecurityVision) «Как выстраивать килчейн» https://habr.com/ru/companies/securityvison/articles/777790/
+
+🛠 **Потрогать:** Возьми сценарий «фишинг → макрос → PowerShell → C2 → кража данных» и распиши, какой этап Kill Chain соответствует каждому шагу и где его можно разорвать.
+
+💬 **Промпт мне:** «Дай мне реальный сценарий атаки и попроси разложить по 7 этапам Kill Chain. Потом проверь и покажи, где на каждом этапе SOC может разорвать цепочку».
+
+---
 
 ## MITRE ATT&CK
 
-- [ ] Что это: база знаний TTP (Tactics, Techniques, Procedures) реальных атак
-- [ ] Отличие Tactic / Technique / Sub-technique / Procedure
+- [ ] Что это: база TTP реальных атак
+- [ ] Tactic / Technique / Sub-technique / Procedure
 - [ ] Матрицы: Enterprise, Mobile, ICS
-- [ ] ID-нотация: TA000x (тактика), Txxxx (техника), Txxxx.xxx (саб-техника)
+- [ ] ID: TA000x (тактика), Txxxx (техника), Txxxx.xxx (саб)
 
-### Тактики Enterprise (выучить порядок и смысл)
+📖 **Читать:** Энциклопедия Касперского https://encyclopedia.kaspersky.ru/glossary/mitre-attack/ ; Blue Team Cookbook (MITRE для SOC) https://vasilisa-l.gitbook.io/blue-team-cookbook/soc/mitre-attack ; Habr «Обзор тактик разведки» https://habr.com/ru/articles/954656/
 
-- [ ] TA0043 Reconnaissance
-- [ ] TA0042 Resource Development
-- [ ] TA0001 Initial Access (напр. T1566 Phishing)
-- [ ] TA0002 Execution (T1059 Command/Scripting Interpreter)
-- [ ] TA0003 Persistence (T1053 Scheduled Task, T1547 Boot/Logon Autostart)
-- [ ] TA0004 Privilege Escalation
-- [ ] TA0005 Defense Evasion (T1027 Obfuscation, T1070 Indicator Removal)
-- [ ] TA0006 Credential Access (T1003 OS Credential Dumping)
-- [ ] TA0007 Discovery
-- [ ] TA0008 Lateral Movement (T1021 Remote Services)
-- [ ] TA0009 Collection
-- [ ] TA0011 Command and Control (T1071, T1572 Tunneling)
-- [ ] TA0010 Exfiltration
-- [ ] TA0040 Impact (T1486 Ransomware)
+🛠 **Потрогать:**
+```
+1. Открой attack.mitre.org → выбери технику T1003 (OS Credential Dumping)
+2. Прочитай: саб-техники, Detection, Mitigations, какие группы используют
+3. Открой ATT&CK Navigator → создай layer → подсвети техники, которые ты
+   уже понимаешь по детекту (из разделов 01/04/09)
+```
+Задание: для 5 атак из своих разделов найди их Technique ID на сайте MITRE и запиши тактику.
+
+💬 **Промпт мне:** «Объясни разницу Tactic/Technique/Sub-technique/Procedure на конкретном примере (например T1059.001). И покажи, как читать страницу техники на attack.mitre.org».
+
+### Тактики Enterprise
+- [ ] TA0043 Reconnaissance, TA0042 Resource Development, TA0001 Initial Access, TA0002 Execution, TA0003 Persistence, TA0004 Privilege Escalation, TA0005 Defense Evasion, TA0006 Credential Access, TA0007 Discovery, TA0008 Lateral Movement, TA0009 Collection, TA0011 C2, TA0010 Exfiltration, TA0040 Impact
+
+💬 **Промпт мне:** «Прогони меня по 14 тактикам Enterprise по порядку: ты называешь тактику, я говорю что это и пример техники, ты проверяешь».
+
+---
 
 ## Связки техника → детект (тренировать)
 
-- [ ] T1003.001 LSASS dump → Sysmon EID 10 доступ к lsass
-- [ ] T1053.005 Scheduled Task → Event 4698 / Sysmon
+- [ ] T1003.001 LSASS dump → Sysmon EID 10
+- [ ] T1053.005 Scheduled Task → Event 4698
 - [ ] T1059.001 PowerShell → Event 4104
-- [ ] T1547.001 Run keys → Sysmon EID 13 (registry)
+- [ ] T1547.001 Run keys → Sysmon EID 13
 - [ ] T1021.001 RDP → Event 4624 type 10
 - [ ] T1486 Ransomware → массовое изменение файлов
+
+🛠 **Потрогать:** Возьми Sigma-репозиторий ([[10 - СЗИ и детект]]) и найди правила с тегами этих техник — увидишь реальную детект-логику.
+
+💬 **Промпт мне:** «Сделай мне колоду из 20 карточек техника↔детект: с одной стороны Technique ID, с другой — артефакт/EventID. Прогоняй меня по ним вразнобой».
+
+---
 
 ## Сопутствующее
 
 - [ ] MITRE D3FEND (контрмеры)
 - [ ] Detection engineering: Sigma-правила, маппинг на ATT&CK
-- [ ] Покрытие детектами (ATT&CK Navigator — тепловая карта)
+- [ ] ATT&CK Navigator — карта покрытия
+
+---
 
 ## Progress
 
-- [ ] Раздел MITRE / Kill Chain пройден полностью
+- [ ] Раздел MITRE/Kill Chain пройден полностью
+- [ ] Разложил свои атаки по тактикам на сайте MITRE
+- [ ] Поработал в ATT&CK Navigator
+
+---
+
+## 🔭 Связь со следующими шагами
+
+- **→ Blueteam (твоя цель):** ATT&CK — язык всей профессии. Detection engineering, threat hunting, отчёты TI — всё мапится на матрицу. Дальше: писать Sigma по технике, строить карту покрытия в Navigator.
+- **→ Все направления:** ATT&CK — общий язык между red и blue. Пентестер описывает находки техниками, аналитик детектит техники. Знание матрицы обязательно везде.
 
 ---
 
 ## 🧪 Тест для повторения
 
 > [!question]- 1. Перечисли 7 этапов Cyber Kill Chain.
-> Reconnaissance → Weaponization → Delivery → Exploitation → Installation → Command & Control → Actions on Objectives. На каждом этапе свои детекты; цель защиты — разорвать цепочку как можно раньше.
+> Reconnaissance → Weaponization → Delivery → Exploitation → Installation → Command & Control → Actions on Objectives. Цель защиты — разорвать цепочку как можно раньше.
 
-> [!question]- 2. Разница между Tactic, Technique, Procedure в ATT&CK.
-> Tactic — «зачем» (цель этапа, напр. Persistence, TA0003). Technique — «как» (способ достижения, напр. T1053 Scheduled Task). Procedure — конкретная реализация техники конкретным актором/инструментом.
+> [!question]- 2. Разница Tactic / Technique / Procedure.
+> Tactic — «зачем» (цель этапа, напр. Persistence TA0003). Technique — «как» (способ, напр. T1053 Scheduled Task). Procedure — конкретная реализация техники актором/инструментом.
 
-> [!question]- 3. К какой тактике относится OS Credential Dumping и какой её ID?
-> Tactic: Credential Access (TA0006). Technique: T1003 (OS Credential Dumping), саб-техника LSASS Memory — T1003.001, DCSync — T1003.006.
+> [!question]- 3. К какой тактике относится OS Credential Dumping и её ID?
+> Credential Access (TA0006), техника T1003. Саб: LSASS Memory — T1003.001, DCSync — T1003.006.
 
-> [!question]- 4. Сопоставь технику T1059.001 с детектом.
-> T1059.001 — PowerShell (тактика Execution). Детект: Event 4104 (ScriptBlock logging), 4103 (module), Sysmon EID 1 на powershell.exe с подозрительными аргументами (-enc, IEX, DownloadString).
+> [!question]- 4. Сопоставь T1059.001 с детектом.
+> T1059.001 — PowerShell (тактика Execution). Детект: Event 4104 (ScriptBlock), 4103 (module), Sysmon EID 1 на powershell.exe с подозрительными аргументами.
 
-> [!question]- 5. Зачем SOC-аналитику ATT&CK Navigator?
-> Визуализация покрытия детектами по матрице (тепловая карта): видно, какие техники закрыты правилами, а какие — слепые зоны. Помогает приоритизировать разработку детектов и оценивать зрелость мониторинга.
+> [!question]- 5. Зачем ATT&CK Navigator?
+> Визуализация покрытия детектами (тепловая карта матрицы): видно, какие техники закрыты правилами, а какие — слепые зоны. Приоритизация разработки детектов.
 
-> [!question]- 6. Что такое Sigma и как связана с ATT&CK?
-> Sigma — открытый формат правил детекта для логов (конвертируется под разные SIEM). Правила маркируются тегами ATT&CK (techniqueID), что позволяет маппить детекты на матрицу и измерять покрытие.
+> [!question]- 6. Что такое Sigma и связь с ATT&CK?
+> Открытый формат правил детекта, конвертируется под SIEM. Правила тегируются Technique ID → маппинг детектов на матрицу, измерение покрытия.
+
+> [!question]- 7. Назови 5 тактик Enterprise по порядку атаки.
+> Initial Access → Execution → Persistence → Privilege Escalation → Defense Evasion → Credential Access → Discovery → Lateral Movement → Collection → C2 → Exfiltration → Impact.
+
+> [!question]- 8. Чем Kill Chain отличается от ATT&CK?
+> Kill Chain — линейная модель из 7 этапов (высокоуровневая, последовательная). ATT&CK — детальная матрица из тактик и сотен конкретных техник, не строго линейная (техники переиспользуются на разных этапах).
+
+> [!question]- 9. Что такое MITRE D3FEND?
+> База контрмер (defensive countermeasures), дополняющая ATT&CK: для атакующих техник описывает защитные меры. Помогает связать «что детектим» с «как защищаемся».
+
+> [!question]- 10. Что такое Resource Development в ATT&CK?
+> TA0042 — этап, где атакующий готовит ресурсы до атаки: покупает домены/серверы, создаёт малварь, аккаунты, инфраструктуру C2. Предшествует Initial Access.
+
+> [!question]- 11. Что такое процедура (procedure) на примере?
+> Конкретная реализация техники. Напр. техника T1003.001 (LSASS dump), а процедура — «группа APT29 использует comsvcs.dll MiniDump». Один и тот же приём, разные конкретные исполнения.
+
+> [!question]- 12. Как SOC использует ATT&CK в ежедневной работе?
+> Размечает алерты техниками, строит отчёты/дашборды по покрытию, приоритизирует разработку детектов по слепым зонам, описывает инциденты единым языком, мапит TI-отчёты на свою инфраструктуру.
 
 ---
 
-## 📚 Источники для подготовки
+## 📚 Все источники раздела (сводно)
 
-**MITRE ATT&CK**
-- Энциклопедия Касперского — Что такое MITRE ATT&CK (тактики/техники, матрицы): https://encyclopedia.kaspersky.ru/glossary/mitre-attack/
-- SecurityVision — MITRE в кибербезопасности: матрица ATT&CK, CVE, CWE, стратегии SOC: https://www.securityvision.ru/info/mitre/
-- Blue Team Cookbook — MITRE ATT&CK, Cyber Kill Chain, UKC (для blue team / SOC, читать целиком): https://vasilisa-l.gitbook.io/blue-team-cookbook/soc/mitre-attack
-- Habr — MITRE ATT&CK: обзор тактик разведки (как читать матрицу на примере): https://habr.com/ru/articles/954656/
-
-**Cyber Kill Chain**
-- Habr (Panda) — Что такое Cyber Kill Chain и зачем в стратегии защиты: https://habr.com/ru/company/panda/blog/327488/
-- Habr (SecurityVision) — Как научиться выстраивать килчейн (7 этапов): https://habr.com/ru/companies/securityvison/articles/777790/
-- Habr — Атака как кейс: ATT&CK + D3FEND + Kill Chain + CVSS (сквозной пример): https://habr.com/ru/articles/909562/
-
-**Официальные базы**
+- Энциклопедия Касперского — MITRE ATT&CK: https://encyclopedia.kaspersky.ru/glossary/mitre-attack/
+- Blue Team Cookbook — MITRE для SOC: https://vasilisa-l.gitbook.io/blue-team-cookbook/soc/mitre-attack
+- Habr — обзор тактик разведки: https://habr.com/ru/articles/954656/
+- Habr (Panda) — Cyber Kill Chain: https://habr.com/ru/company/panda/blog/327488/
+- Habr (SecurityVision) — выстраивание килчейна: https://habr.com/ru/companies/securityvison/articles/777790/
 - MITRE ATT&CK: https://attack.mitre.org/
-- ATT&CK Navigator (карта покрытия детектами): https://mitre-attack.github.io/attack-navigator/
-- Sigma rules (детект-правила с маппингом на ATT&CK): https://github.com/SigmaHQ/sigma
-- Mindmap от друзей: https://xmind.app/m/WwtB/#
+- ATT&CK Navigator: https://mitre-attack.github.io/attack-navigator/
+- Sigma: https://github.com/SigmaHQ/sigma
+- Mindmap (друзья): https://xmind.app/m/WwtB/#
