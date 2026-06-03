@@ -289,3 +289,4 @@ Switch(config)# monitor session 1 destination interface fastEthernet0/2
 
 ### The Internet Protocol Flow Information Export (IPFIX)
 Можно считать приемником NetFlow, NetFlow изначально был проприетарным протоколом Cisco. Только начиная с 9 версии Cisco добавила поддержку шаблонов. В сотрудничестве с Cisco и другими производителями IETF создала IPFIX и выпустила его как независимый от производителя стандарт. Он предлагает функции аналогичные NetFlow, но обеспечивает большую гибкость в настройке того какие поля следует захватывать
+
