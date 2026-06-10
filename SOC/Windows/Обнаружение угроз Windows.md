@@ -125,7 +125,6 @@ C:\Windows\System32\explorer.exe
 ├── C:\Windows\ImmersiveControlPanel\SystemSettings.exe [...] // Access settings panel ├── C:\Windows\system32\notepad.exe C:\...\secrets.txt // Read a text file 
 └── C:\Windows\system32\taskmgr.exe // Run Task Manager
 ```
-
 ## Обнаружение разведки 
 первый потенциальный признак обнаружения это найди команду которая помогает в разведке а лучше множество команд которые запущены в короткий период времени. Вы увидите их как Process Creation который отображаются с ID 1 или как новые строчки в истории powershell. 
 
