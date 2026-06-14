@@ -61,4 +61,3 @@ Command prompt: certutil -hashfile bl0gger.exe SHA256
 PowerShell: Get-Filehash -Algorithm SHA256 bl0gger.exe
 ```
 
-64?v2.4.2.exe
