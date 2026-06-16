@@ -3,4 +3,7 @@
 - Sysmon view - GUI инструмент для визуализации логов sysmon
 - chainsaw - анализатор логов винды в командной строке 
 
-afafdadf
+process.parent.pid : 	
+4672
+
+
