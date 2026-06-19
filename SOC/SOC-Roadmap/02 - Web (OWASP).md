@@ -47,7 +47,15 @@ section: 02
 
 ## OWASP Top 10 — 2021 (знать обе)
 
-- [ ] A01 Broken Access Control, A02 Cryptographic Failures, A03 Injection, A04 Insecure Design, A05 Security Misconfiguration, A06 Vulnerable Components, A07 Identification/Auth Failures, A08 Software/Data Integrity, A09 Logging/Monitoring Failures, A10 SSRF
+- [ ] A01 Broken Access Control, 
+- [ ] A02 Cryptographic Failures, 
+- [ ] A03 Injection, A04 Insecure Design, 
+- [ ] A05 Security Misconfiguration, 
+- [ ] A06 Vulnerable Components, 
+- [ ] A07 Identification/Auth Failures, 
+- [ ] A08 Software/Data Integrity, 
+- [ ] A09 Logging/Monitoring Failures, 
+- [ ] A10 SSRF
 
 📖 **Читать:** Habr «как менялись риски 2017 vs 2021» https://habr.com/ru/companies/webmonitorx/articles/974954/ ; OWASP офиц. https://owasp.org/www-project-top-ten/
 
