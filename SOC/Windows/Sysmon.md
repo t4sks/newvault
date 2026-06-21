@@ -112,3 +112,9 @@ EventID CreateRemoteThread это событие которое отслежив
 ```
 
 Фрагмент выше исключает все события с запросом `.microsoft.com` устраняя шум в среде.
+
+# Hunting Metasploit
+[Malware Common Ports Spreadsheet](https://docs.google.com/spreadsheets/d/17pSTDNpa0sf6pHeRhusvWG6rThciE8CsXTSlDUAZDy) 
+
+## Hunting Network Connections
+Первое что мы будем искать это 
