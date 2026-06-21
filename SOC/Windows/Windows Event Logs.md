@@ -24,3 +24,6 @@
 3. Get-WinEvent
 
 
+Cheatsheet по Windows Logging [The Windows Logging Cheat Sheet (Windows 7 - Windows 2012)](https://static1.squarespace.com/static/552092d5e4b0661088167e5c/t/580595db9f745688bc7477f6/1476761074992/Windows+Logging+Cheat+Sheet_ver_Oct_2016.pdf)
+[шпаргалка по event id](https://www.socinvestigation.com/most-common-windows-event-ids-to-hunt-mind-map/#:~:text=Event%20ID%201102%2C%20Whenever%20Windows,the%20log%20file%20was%20cleared.)
+
