@@ -1,4 +1,4 @@
-[[Windows]] [[Powershell]] [[cmd.exe]] 
+[[Windows Внутрянка]] [[Powershell]] [[cmd.exe]] 
 #### Little Theory about win 
 Users in win 
 <mark style="background: #FFF3A3A6;">Admins</mark> - max privilege, can change parametrs of system and can rwe every files
