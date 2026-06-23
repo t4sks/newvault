@@ -1,3 +1,15 @@
+Символ ">" обозначает родительские отношения процесса `System (Parent) > smss.exe (Child)`
+
+- System
+- System > smss.exe
+- csrss.exe
+- wininit.exe
+- wininit.exe > services.exe
+- wininit.exe > services.exe > svchost.exe
+- lsass.exe
+- winlogon.exe
+- explorer.exe
+
 # System
 PID процесса всегда равен 4!!!
 

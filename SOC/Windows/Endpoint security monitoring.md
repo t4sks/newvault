@@ -1,14 +1,3 @@
-Символ ">" обозначает родительские отношения процесса `System (Parent) > smss.exe (Child)`
-
-- System
-- System > smss.exe
-- csrss.exe
-- wininit.exe
-- wininit.exe > services.exe
-- wininit.exe > services.exe > svchost.exe
-- lsass.exe
-- winlogon.exe
-- explorer.exe
 
 # SysInternals 
 Инструменты Sysinternals представляют собой набор из более чем 70 инструментов для windows. Каждый из инструментов относится к одной из следующих категорий:
