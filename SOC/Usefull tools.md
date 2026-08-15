@@ -3,5 +3,10 @@
 - Sysmon view - GUI инструмент для визуализации логов sysmon
 - chainsaw - анализатор логов винды в командной строке 
 - https://www.abuseipdb.com - сайт для проверки IP
+- https://who.is - сайт для проверки IP
+- https://bazaar.abuse.ch - база знаний о malware
+- https://www.virustotal.com - база знаний malware
+- https://threatfox.abuse.ch/browse/ - база знаний domains
+
 
 
