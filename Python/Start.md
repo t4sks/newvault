@@ -37,7 +37,7 @@ for dir in directories:
         print("Valid directory:", dir_enum)
 
 ```
-ебырь хэшей
+
 ```python
 import hashlib
 import pyfiglet
