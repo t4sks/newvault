@@ -60,3 +60,12 @@
 - запускать любой файл `.msi` от SYSTEM если обе политики(`HKCU` и `HKLM`) выставлены в 1 независимо от прав текущего пользователя `HKLM\SOFWARE\Policies\Microsoft\Windows\Installer` 
 - Modife imagePath для изменения ключа службы, мы можем изменить адрес службы на свой бинарник `HKLM\SYSTEm\CurrentControlSet\Services\<service>`
 - Unquoted servicepath - если ImagePath без кавычек и содержит пробелы, Windows пытается интерпретировать каждый пробел как разделитель, если у атакующего есть право на запись в одну из промежуточных каталогов то просто кладет туда файл с нужным именем 
+- UAC Bypass - с помощью fodhelper.exe который при старте читает `HKCU\Sofware\Classes\ms-settings\Shell\Open\command`, чтобы обработать протокол `ms-settings` так в `HKCU` а не в `HKLM` то мы можем его изменить заставив выполнить наш бинарник с `high` уровнем целостности
+5 Defence Evasion
+- Отключение логирования Powershell `HKLM\SOFWARE\Microsoft\Windows\Powershell\ScriptBlickLogging` 
+- Отключение AMSI через реестр, сканирует скрипты (Powershell, VBA, JS) перед выполнением на предмет вредоносного содержимого. 
+- Изменение автозагрузки под нестандартные ключи: 
+	- `HKLM\SOFWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders` - в ветке хранится путь к папке автозагрузка, если изменить значение Common Startup на произвольную директорию то система автоматически выполнит все исполняемые файлы в директории
+	- `HKCU\Enviroment\UserInitMPLogonScript` - если изменить параметр то после успешного входа в систему выполнится скрипт `bat, exe, cmd, vbs`
+	- `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit` - можем дописать в параметре значения через запятую и процесс Winlogon.exe запустит внедренный бинарник
+	- `HKLM\SYSTEM\CurrentControlSet\Control\SessionManager\BootExecute` - содержит список Native API которые запускаются smss.exe, на самых ранних стадиях загрузки Windows 
