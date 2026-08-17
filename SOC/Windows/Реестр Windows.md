@@ -58,7 +58,7 @@
 - Можно создавать задачи для планировщика задач через реестр: `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks` 
 4 Privilege Escalation
 - запускать любой файл `.msi` от SYSTEM если обе политики(`HKCU` и `HKLM`) выставлены в 1 независимо от прав текущего пользователя `HKLM\SOFWARE\Policies\Microsoft\Windows\Installer` 
-- Modife imagePath для изменения ключа службы, мы можем изменить адрес службы на свой бинарник `HKLM\SYSTEm\CurrentControlSet\Services\<service>`
+- Modife imagePath для изменения ключа службы, мы можем изменить адрес службы на свой бинарник `HKLM\SYSTEM\CurrentControlSet\Services\<service>`
 - Unquoted servicepath - если ImagePath без кавычек и содержит пробелы, Windows пытается интерпретировать каждый пробел как разделитель, если у атакующего есть право на запись в одну из промежуточных каталогов то просто кладет туда файл с нужным именем 
 - UAC Bypass - с помощью fodhelper.exe который при старте читает `HKCU\Sofware\Classes\ms-settings\Shell\Open\command`, чтобы обработать протокол `ms-settings` так в `HKCU` а не в `HKLM` то мы можем его изменить заставив выполнить наш бинарник с `high` уровнем целостности
 5 Defence Evasion
