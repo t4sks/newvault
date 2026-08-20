@@ -1,12 +1,14 @@
 ---
-tags: [soc, roadmap, bizone, index]
+tags:
+  - soc
+  - roadmap
+  - index
 position: junior-soc-analyst
-company: BiZone
 city: Krasnoyarsk
 created: 2026-05-29
 ---
 
-# 🎯 SOC Junior Analyst Roadmap — BiZone (Красноярск)
+# 🎯 SOC Junior Analyst Roadmap 
 
 > Прогресс отмечать через `[ ]` → `[x]`. Каждый раздел — отдельная заметка. Связи через `[[wikilinks]]`.
 
