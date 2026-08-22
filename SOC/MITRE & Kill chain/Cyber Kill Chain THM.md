@@ -10,7 +10,7 @@ kill chain - военный концепт который структуриру
 - Command & Control - управление
 - Actions on objectives - достижение целей 
 
-![[Pasted image 20260530110558.png]]
+![[Pasted image 20260530110558.png|1579]]
 
 ![[Pasted image 20260613185515.png]]
 # Разведка 
