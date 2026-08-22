@@ -171,6 +171,7 @@ USAGE:
 > Service Host - Host Process For Windows Services - отвечает за размещение и управления службами Windows
 
 Службы работающие в этом процессе реализованы в виде DLL. DLL файл для реализации хранится в реестре для службы в подразделе Parameters в ServiceDL. Полный путь: `HKLM\SYSTEM\CurrentControlSet\Services\SERVICE NAME\Parameters`
+
 ![[Pasted image 20260620181513.png]]
 ![[Pasted image 20260620181707.png]]
 
