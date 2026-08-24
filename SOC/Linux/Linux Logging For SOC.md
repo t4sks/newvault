@@ -4,6 +4,7 @@
 Большинство Логов Linux хранятся в `/var/log`
 Пример файла `/var/log/syslog` - файла системных событий
 
+
 ```shell
 root@thm-vm:~$ cat /var/log/syslog | head 
 [...] 
