@@ -7,6 +7,6 @@
 - https://bazaar.abuse.ch - база знаний о malware
 - https://www.virustotal.com - база знаний malware
 - https://threatfox.abuse.ch/browse/ - база знаний domains
-
+- https://obf-io.deobfuscate.io - деобфускатор JS
 
 
